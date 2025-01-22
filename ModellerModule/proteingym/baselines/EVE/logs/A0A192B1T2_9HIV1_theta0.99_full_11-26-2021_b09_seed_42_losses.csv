@@ -1,0 +1,576 @@
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+|Train : Update 0. Negative ELBO : 12236.229, BCE: 3311.922, KLD_latent: 225.865, KLD_decoder_params_norm: 8698.441, Time: 3.89 |
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+|Train : Update 0. Negative ELBO : 12234.389, BCE: 3310.080, KLD_latent: 225.865, KLD_decoder_params_norm: 8698.443, Time: 2.14 |
+|Train : Update 1000. Negative ELBO : 9645.381, BCE: 1020.488, KLD_latent: 8.130, KLD_decoder_params_norm: 8616.763, Time: 62.98 |
+|Train : Update 2000. Negative ELBO : 9520.626, BCE: 980.379, KLD_latent: 10.158, KLD_decoder_params_norm: 8530.089, Time: 121.95 |
+|Train : Update 3000. Negative ELBO : 9412.165, BCE: 959.260, KLD_latent: 10.937, KLD_decoder_params_norm: 8441.968, Time: 180.95 |
+|Train : Update 4000. Negative ELBO : 9316.912, BCE: 949.522, KLD_latent: 14.296, KLD_decoder_params_norm: 8353.095, Time: 240.00 |
+|Train : Update 5000. Negative ELBO : 9217.458, BCE: 939.585, KLD_latent: 13.985, KLD_decoder_params_norm: 8263.888, Time: 299.07 |
+|Train : Update 6000. Negative ELBO : 9104.884, BCE: 912.485, KLD_latent: 17.750, KLD_decoder_params_norm: 8174.648, Time: 358.24 |
+|Train : Update 7000. Negative ELBO : 9019.890, BCE: 914.916, KLD_latent: 19.383, KLD_decoder_params_norm: 8085.591, Time: 417.50 |
+|Train : Update 8000. Negative ELBO : 8915.854, BCE: 898.396, KLD_latent: 20.647, KLD_decoder_params_norm: 7996.812, Time: 476.65 |
+|Train : Update 9000. Negative ELBO : 8822.642, BCE: 893.499, KLD_latent: 20.794, KLD_decoder_params_norm: 7908.348, Time: 535.83 |
+|Train : Update 10000. Negative ELBO : 8723.717, BCE: 882.474, KLD_latent: 20.988, KLD_decoder_params_norm: 7820.255, Time: 595.03 |
+|Train : Update 11000. Negative ELBO : 8628.976, BCE: 872.232, KLD_latent: 24.174, KLD_decoder_params_norm: 7732.569, Time: 654.11 |
+|Train : Update 12000. Negative ELBO : 8521.415, BCE: 850.649, KLD_latent: 25.465, KLD_decoder_params_norm: 7645.302, Time: 713.22 |
+|Train : Update 13000. Negative ELBO : 8438.231, BCE: 854.271, KLD_latent: 25.491, KLD_decoder_params_norm: 7558.469, Time: 772.38 |
+|Train : Update 14000. Negative ELBO : 8334.218, BCE: 835.036, KLD_latent: 27.131, KLD_decoder_params_norm: 7472.051, Time: 831.68 |
+|Train : Update 15000. Negative ELBO : 8240.203, BCE: 826.128, KLD_latent: 28.064, KLD_decoder_params_norm: 7386.012, Time: 890.86 |
+|Train : Update 16000. Negative ELBO : 8148.839, BCE: 820.201, KLD_latent: 28.311, KLD_decoder_params_norm: 7300.327, Time: 950.08 |
+|Train : Update 17000. Negative ELBO : 8069.525, BCE: 826.315, KLD_latent: 28.227, KLD_decoder_params_norm: 7214.983, Time: 1009.20 |
+|Train : Update 18000. Negative ELBO : 7968.310, BCE: 808.944, KLD_latent: 29.405, KLD_decoder_params_norm: 7129.960, Time: 1068.28 |
+|Train : Update 19000. Negative ELBO : 7877.898, BCE: 802.414, KLD_latent: 30.248, KLD_decoder_params_norm: 7045.236, Time: 1127.49 |
+|Train : Update 20000. Negative ELBO : 7794.190, BCE: 803.593, KLD_latent: 29.801, KLD_decoder_params_norm: 6960.797, Time: 1186.61 |
+|Train : Update 21000. Negative ELBO : 7686.611, BCE: 779.188, KLD_latent: 30.789, KLD_decoder_params_norm: 6876.634, Time: 1245.73 |
+|Train : Update 22000. Negative ELBO : 7597.098, BCE: 774.640, KLD_latent: 29.744, KLD_decoder_params_norm: 6792.714, Time: 1304.89 |
+|Train : Update 23000. Negative ELBO : 7519.745, BCE: 779.861, KLD_latent: 30.870, KLD_decoder_params_norm: 6709.014, Time: 1364.03 |
+|Train : Update 24000. Negative ELBO : 7445.110, BCE: 789.389, KLD_latent: 30.194, KLD_decoder_params_norm: 6625.528, Time: 1423.25 |
+|Train : Update 25000. Negative ELBO : 7351.547, BCE: 777.413, KLD_latent: 31.882, KLD_decoder_params_norm: 6542.252, Time: 1482.30 |
+|Train : Update 26000. Negative ELBO : 7272.447, BCE: 782.951, KLD_latent: 30.317, KLD_decoder_params_norm: 6459.179, Time: 1541.46 |
+|Train : Update 27000. Negative ELBO : 7189.879, BCE: 783.561, KLD_latent: 30.014, KLD_decoder_params_norm: 6376.305, Time: 1600.71 |
+|Train : Update 28000. Negative ELBO : 7084.314, BCE: 759.361, KLD_latent: 31.322, KLD_decoder_params_norm: 6293.631, Time: 1659.89 |
+|Train : Update 29000. Negative ELBO : 7009.549, BCE: 766.977, KLD_latent: 31.413, KLD_decoder_params_norm: 6211.159, Time: 1719.12 |
+|Train : Update 30000. Negative ELBO : 6919.963, BCE: 759.018, KLD_latent: 32.070, KLD_decoder_params_norm: 6128.876, Time: 1778.30 |
+|Train : Update 31000. Negative ELBO : 6846.412, BCE: 769.209, KLD_latent: 30.413, KLD_decoder_params_norm: 6046.790, Time: 1837.41 |
+|Train : Update 32000. Negative ELBO : 6764.551, BCE: 769.335, KLD_latent: 30.328, KLD_decoder_params_norm: 5964.888, Time: 1896.58 |
+|Train : Update 33000. Negative ELBO : 6669.823, BCE: 755.678, KLD_latent: 30.966, KLD_decoder_params_norm: 5883.180, Time: 1955.86 |
+|Train : Update 34000. Negative ELBO : 6594.123, BCE: 761.587, KLD_latent: 30.873, KLD_decoder_params_norm: 5801.663, Time: 2015.14 |
+|Train : Update 35000. Negative ELBO : 6523.784, BCE: 772.217, KLD_latent: 31.203, KLD_decoder_params_norm: 5720.364, Time: 2074.39 |
+|Train : Update 36000. Negative ELBO : 6435.195, BCE: 764.577, KLD_latent: 31.344, KLD_decoder_params_norm: 5639.274, Time: 2133.77 |
+|Train : Update 37000. Negative ELBO : 6346.786, BCE: 757.008, KLD_latent: 31.400, KLD_decoder_params_norm: 5558.379, Time: 2193.14 |
+|Train : Update 38000. Negative ELBO : 6256.957, BCE: 747.362, KLD_latent: 31.908, KLD_decoder_params_norm: 5477.688, Time: 2252.42 |
+|Train : Update 39000. Negative ELBO : 6185.213, BCE: 757.345, KLD_latent: 30.656, KLD_decoder_params_norm: 5397.211, Time: 2311.67 |
+|Train : Update 40000. Negative ELBO : 6097.617, BCE: 749.278, KLD_latent: 31.392, KLD_decoder_params_norm: 5316.946, Time: 2371.04 |
+|Train : Update 41000. Negative ELBO : 6014.682, BCE: 746.815, KLD_latent: 30.992, KLD_decoder_params_norm: 5236.875, Time: 2430.38 |
+|Train : Update 42000. Negative ELBO : 5932.524, BCE: 744.564, KLD_latent: 30.939, KLD_decoder_params_norm: 5157.022, Time: 2489.62 |
+|Train : Update 43000. Negative ELBO : 5867.149, BCE: 759.775, KLD_latent: 29.970, KLD_decoder_params_norm: 5077.404, Time: 2548.92 |
+|Train : Update 44000. Negative ELBO : 5791.130, BCE: 762.537, KLD_latent: 30.585, KLD_decoder_params_norm: 4998.008, Time: 2608.10 |
+|Train : Update 45000. Negative ELBO : 5709.311, BCE: 759.131, KLD_latent: 31.335, KLD_decoder_params_norm: 4918.846, Time: 2667.29 |
+|Train : Update 46000. Negative ELBO : 5632.853, BCE: 762.771, KLD_latent: 30.151, KLD_decoder_params_norm: 4839.932, Time: 2726.61 |
+|Train : Update 47000. Negative ELBO : 5555.036, BCE: 764.290, KLD_latent: 29.511, KLD_decoder_params_norm: 4761.235, Time: 2785.89 |
+|Train : Update 48000. Negative ELBO : 5452.146, BCE: 737.627, KLD_latent: 31.735, KLD_decoder_params_norm: 4682.784, Time: 2845.21 |
+|Train : Update 49000. Negative ELBO : 5385.937, BCE: 750.960, KLD_latent: 30.384, KLD_decoder_params_norm: 4604.593, Time: 2904.52 |
+|Train : Update 50000. Negative ELBO : 5304.587, BCE: 747.318, KLD_latent: 30.630, KLD_decoder_params_norm: 4526.639, Time: 2963.83 |
+|Train : Update 51000. Negative ELBO : 5230.436, BCE: 751.104, KLD_latent: 30.379, KLD_decoder_params_norm: 4448.952, Time: 3023.08 |
+|Train : Update 52000. Negative ELBO : 5153.511, BCE: 751.136, KLD_latent: 30.837, KLD_decoder_params_norm: 4371.538, Time: 3082.43 |
+|Train : Update 53000. Negative ELBO : 5066.900, BCE: 740.301, KLD_latent: 32.181, KLD_decoder_params_norm: 4294.418, Time: 3141.65 |
+|Train : Update 54000. Negative ELBO : 4980.334, BCE: 732.220, KLD_latent: 30.526, KLD_decoder_params_norm: 4217.588, Time: 3200.93 |
+|Train : Update 55000. Negative ELBO : 4917.937, BCE: 746.129, KLD_latent: 30.756, KLD_decoder_params_norm: 4141.052, Time: 3260.21 |
+|Train : Update 56000. Negative ELBO : 4842.509, BCE: 747.148, KLD_latent: 30.488, KLD_decoder_params_norm: 4064.873, Time: 3319.54 |
+|Train : Update 57000. Negative ELBO : 4779.065, BCE: 759.478, KLD_latent: 30.528, KLD_decoder_params_norm: 3989.059, Time: 3378.77 |
+|Train : Update 58000. Negative ELBO : 4687.449, BCE: 743.833, KLD_latent: 30.000, KLD_decoder_params_norm: 3913.617, Time: 3438.03 |
+|Train : Update 59000. Negative ELBO : 4618.853, BCE: 750.306, KLD_latent: 29.957, KLD_decoder_params_norm: 3838.590, Time: 3497.32 |
+|Train : Update 60000. Negative ELBO : 4526.375, BCE: 730.939, KLD_latent: 31.445, KLD_decoder_params_norm: 3763.990, Time: 3556.60 |
+Number of sequences in alignment file:	71146
+Neff:	36470.53252442049
+Alignment sequence length:	852
+|Train : Update 0. Negative ELBO : 12234.259, BCE: 3309.950, KLD_latent: 225.865, KLD_decoder_params_norm: 8698.443, Time: 1.86 |
+|Train : Update 1000. Negative ELBO : 9644.986, BCE: 1019.952, KLD_latent: 8.320, KLD_decoder_params_norm: 8616.715, Time: 59.25 |
+|Train : Update 2000. Negative ELBO : 9517.223, BCE: 976.995, KLD_latent: 10.161, KLD_decoder_params_norm: 8530.068, Time: 113.06 |
+|Train : Update 3000. Negative ELBO : 9411.190, BCE: 957.754, KLD_latent: 11.446, KLD_decoder_params_norm: 8441.990, Time: 165.19 |
+|Train : Update 4000. Negative ELBO : 9314.880, BCE: 947.961, KLD_latent: 13.764, KLD_decoder_params_norm: 8353.155, Time: 218.61 |
+|Train : Update 5000. Negative ELBO : 9219.607, BCE: 941.507, KLD_latent: 14.101, KLD_decoder_params_norm: 8263.999, Time: 271.84 |
+|Train : Update 6000. Negative ELBO : 9103.654, BCE: 911.392, KLD_latent: 17.465, KLD_decoder_params_norm: 8174.798, Time: 324.32 |
+|Train : Update 7000. Negative ELBO : 9014.863, BCE: 908.911, KLD_latent: 20.190, KLD_decoder_params_norm: 8085.762, Time: 376.70 |
+|Train : Update 8000. Negative ELBO : 8920.562, BCE: 903.037, KLD_latent: 20.538, KLD_decoder_params_norm: 7996.988, Time: 430.01 |
+|Train : Update 9000. Negative ELBO : 8822.556, BCE: 892.008, KLD_latent: 22.039, KLD_decoder_params_norm: 7908.508, Time: 482.41 |
+|Train : Update 10000. Negative ELBO : 8725.989, BCE: 884.545, KLD_latent: 21.064, KLD_decoder_params_norm: 7820.380, Time: 534.50 |
+|Train : Update 11000. Negative ELBO : 8628.244, BCE: 870.925, KLD_latent: 24.658, KLD_decoder_params_norm: 7732.661, Time: 588.06 |
+|Train : Update 12000. Negative ELBO : 8524.758, BCE: 852.412, KLD_latent: 26.992, KLD_decoder_params_norm: 7645.354, Time: 640.97 |
+|Train : Update 13000. Negative ELBO : 8442.064, BCE: 858.492, KLD_latent: 25.114, KLD_decoder_params_norm: 7558.458, Time: 693.56 |
+|Train : Update 14000. Negative ELBO : 8336.125, BCE: 837.240, KLD_latent: 26.922, KLD_decoder_params_norm: 7471.963, Time: 747.29 |
+|Train : Update 15000. Negative ELBO : 8243.697, BCE: 829.486, KLD_latent: 28.363, KLD_decoder_params_norm: 7385.849, Time: 800.90 |
+|Train : Update 16000. Negative ELBO : 8154.114, BCE: 824.319, KLD_latent: 29.695, KLD_decoder_params_norm: 7300.100, Time: 854.64 |
+|Train : Update 17000. Negative ELBO : 8075.548, BCE: 830.680, KLD_latent: 30.180, KLD_decoder_params_norm: 7214.688, Time: 909.25 |
+|Train : Update 18000. Negative ELBO : 7968.551, BCE: 808.035, KLD_latent: 30.931, KLD_decoder_params_norm: 7129.585, Time: 963.11 |
+|Train : Update 19000. Negative ELBO : 7885.031, BCE: 809.369, KLD_latent: 30.888, KLD_decoder_params_norm: 7044.775, Time: 1018.47 |
+|Train : Update 20000. Negative ELBO : 7797.226, BCE: 804.703, KLD_latent: 32.281, KLD_decoder_params_norm: 6960.241, Time: 1071.87 |
+|Train : Update 21000. Negative ELBO : 7692.744, BCE: 783.869, KLD_latent: 32.902, KLD_decoder_params_norm: 6875.973, Time: 1125.76 |
+|Train : Update 22000. Negative ELBO : 7603.135, BCE: 781.606, KLD_latent: 29.576, KLD_decoder_params_norm: 6791.952, Time: 1179.03 |
+|Train : Update 23000. Negative ELBO : 7517.300, BCE: 777.520, KLD_latent: 31.631, KLD_decoder_params_norm: 6708.149, Time: 1232.79 |
+|Train : Update 24000. Negative ELBO : 7449.740, BCE: 793.417, KLD_latent: 31.761, KLD_decoder_params_norm: 6624.562, Time: 1285.48 |
+|Train : Update 25000. Negative ELBO : 7351.129, BCE: 779.074, KLD_latent: 30.871, KLD_decoder_params_norm: 6541.185, Time: 1337.96 |
+|Train : Update 26000. Negative ELBO : 7272.413, BCE: 783.593, KLD_latent: 30.802, KLD_decoder_params_norm: 6458.019, Time: 1391.11 |
+|Train : Update 27000. Negative ELBO : 7190.592, BCE: 785.985, KLD_latent: 29.548, KLD_decoder_params_norm: 6375.060, Time: 1445.17 |
+|Train : Update 28000. Negative ELBO : 7083.590, BCE: 760.141, KLD_latent: 31.146, KLD_decoder_params_norm: 6292.303, Time: 1497.66 |
+|Train : Update 29000. Negative ELBO : 7012.918, BCE: 771.911, KLD_latent: 31.257, KLD_decoder_params_norm: 6209.750, Time: 1551.29 |
+|Train : Update 30000. Negative ELBO : 6922.416, BCE: 764.005, KLD_latent: 31.022, KLD_decoder_params_norm: 6127.389, Time: 1604.65 |
+|Train : Update 31000. Negative ELBO : 6852.400, BCE: 776.174, KLD_latent: 31.000, KLD_decoder_params_norm: 6045.227, Time: 1657.09 |
+|Train : Update 32000. Negative ELBO : 6760.767, BCE: 765.348, KLD_latent: 32.171, KLD_decoder_params_norm: 5963.247, Time: 1709.80 |
+|Train : Update 33000. Negative ELBO : 6670.683, BCE: 757.580, KLD_latent: 31.640, KLD_decoder_params_norm: 5881.463, Time: 1762.74 |
+|Train : Update 34000. Negative ELBO : 6589.785, BCE: 757.618, KLD_latent: 32.294, KLD_decoder_params_norm: 5799.873, Time: 1815.24 |
+|Train : Update 35000. Negative ELBO : 6525.281, BCE: 773.946, KLD_latent: 32.838, KLD_decoder_params_norm: 5718.498, Time: 1868.69 |
+|Train : Update 36000. Negative ELBO : 6435.354, BCE: 766.694, KLD_latent: 31.318, KLD_decoder_params_norm: 5637.342, Time: 1922.29 |
+|Train : Update 37000. Negative ELBO : 6344.996, BCE: 755.994, KLD_latent: 32.621, KLD_decoder_params_norm: 5556.380, Time: 1974.85 |
+|Train : Update 38000. Negative ELBO : 6258.409, BCE: 750.949, KLD_latent: 31.837, KLD_decoder_params_norm: 5475.623, Time: 2027.25 |
+|Train : Update 39000. Negative ELBO : 6185.398, BCE: 759.543, KLD_latent: 30.780, KLD_decoder_params_norm: 5395.076, Time: 2080.43 |
+|Train : Update 40000. Negative ELBO : 6094.759, BCE: 748.588, KLD_latent: 31.442, KLD_decoder_params_norm: 5314.729, Time: 2133.27 |
+|Train : Update 41000. Negative ELBO : 6018.361, BCE: 752.769, KLD_latent: 31.007, KLD_decoder_params_norm: 5234.585, Time: 2187.38 |
+|Train : Update 42000. Negative ELBO : 5932.887, BCE: 747.903, KLD_latent: 30.313, KLD_decoder_params_norm: 5154.671, Time: 2239.89 |
+|Train : Update 43000. Negative ELBO : 5867.311, BCE: 760.917, KLD_latent: 31.404, KLD_decoder_params_norm: 5074.990, Time: 2292.20 |
+|Train : Update 44000. Negative ELBO : 5782.277, BCE: 756.156, KLD_latent: 30.595, KLD_decoder_params_norm: 4995.526, Time: 2344.42 |
+|Train : Update 45000. Negative ELBO : 5703.177, BCE: 755.401, KLD_latent: 31.472, KLD_decoder_params_norm: 4916.304, Time: 2397.11 |
+|Train : Update 46000. Negative ELBO : 5628.227, BCE: 760.402, KLD_latent: 30.503, KLD_decoder_params_norm: 4837.322, Time: 2450.19 |
+|Train : Update 47000. Negative ELBO : 5553.719, BCE: 764.890, KLD_latent: 30.260, KLD_decoder_params_norm: 4758.569, Time: 2504.60 |
+|Train : Update 48000. Negative ELBO : 5453.528, BCE: 741.199, KLD_latent: 32.266, KLD_decoder_params_norm: 4680.063, Time: 2557.86 |
+|Train : Update 49000. Negative ELBO : 5387.324, BCE: 755.154, KLD_latent: 30.359, KLD_decoder_params_norm: 4601.811, Time: 2611.30 |
+|Train : Update 50000. Negative ELBO : 5305.037, BCE: 748.826, KLD_latent: 32.406, KLD_decoder_params_norm: 4523.805, Time: 2664.48 |
+|Train : Update 51000. Negative ELBO : 5224.522, BCE: 748.639, KLD_latent: 29.810, KLD_decoder_params_norm: 4446.073, Time: 2718.30 |
+|Train : Update 52000. Negative ELBO : 5151.194, BCE: 752.052, KLD_latent: 30.529, KLD_decoder_params_norm: 4368.613, Time: 2771.72 |
+|Train : Update 53000. Negative ELBO : 5065.324, BCE: 742.766, KLD_latent: 31.118, KLD_decoder_params_norm: 4291.439, Time: 2825.52 |
+|Train : Update 54000. Negative ELBO : 4987.105, BCE: 741.292, KLD_latent: 31.270, KLD_decoder_params_norm: 4214.543, Time: 2879.59 |
+|Train : Update 55000. Negative ELBO : 4911.565, BCE: 742.728, KLD_latent: 30.897, KLD_decoder_params_norm: 4137.941, Time: 2932.75 |
+|Train : Update 56000. Negative ELBO : 4835.166, BCE: 742.362, KLD_latent: 31.110, KLD_decoder_params_norm: 4061.693, Time: 2986.45 |
+|Train : Update 57000. Negative ELBO : 4768.472, BCE: 752.267, KLD_latent: 30.381, KLD_decoder_params_norm: 3985.824, Time: 3040.16 |
+|Train : Update 58000. Negative ELBO : 4678.347, BCE: 737.479, KLD_latent: 30.543, KLD_decoder_params_norm: 3910.325, Time: 3093.75 |
+|Train : Update 59000. Negative ELBO : 4619.772, BCE: 753.998, KLD_latent: 30.518, KLD_decoder_params_norm: 3835.256, Time: 3146.88 |
+|Train : Update 60000. Negative ELBO : 4523.492, BCE: 732.153, KLD_latent: 30.713, KLD_decoder_params_norm: 3760.626, Time: 3200.30 |
+|Train : Update 61000. Negative ELBO : 4467.080, BCE: 749.950, KLD_latent: 30.695, KLD_decoder_params_norm: 3686.435, Time: 3253.11 |
+|Train : Update 62000. Negative ELBO : 4377.985, BCE: 734.349, KLD_latent: 30.873, KLD_decoder_params_norm: 3612.764, Time: 3306.41 |
+|Train : Update 63000. Negative ELBO : 4307.647, BCE: 736.360, KLD_latent: 31.637, KLD_decoder_params_norm: 3539.650, Time: 3359.49 |
+|Train : Update 64000. Negative ELBO : 4238.195, BCE: 741.123, KLD_latent: 29.897, KLD_decoder_params_norm: 3467.174, Time: 3412.52 |
+|Train : Update 65000. Negative ELBO : 4158.818, BCE: 732.782, KLD_latent: 30.725, KLD_decoder_params_norm: 3395.311, Time: 3466.92 |
+|Train : Update 66000. Negative ELBO : 4092.784, BCE: 737.474, KLD_latent: 31.176, KLD_decoder_params_norm: 3324.134, Time: 3520.84 |
+|Train : Update 67000. Negative ELBO : 4025.538, BCE: 741.673, KLD_latent: 30.177, KLD_decoder_params_norm: 3253.688, Time: 3575.17 |
+|Train : Update 68000. Negative ELBO : 3952.002, BCE: 737.220, KLD_latent: 30.764, KLD_decoder_params_norm: 3184.017, Time: 3628.52 |
+|Train : Update 69000. Negative ELBO : 3883.821, BCE: 737.908, KLD_latent: 30.752, KLD_decoder_params_norm: 3115.162, Time: 3682.17 |
+|Train : Update 70000. Negative ELBO : 3827.848, BCE: 749.767, KLD_latent: 30.903, KLD_decoder_params_norm: 3047.178, Time: 3735.67 |
+|Train : Update 71000. Negative ELBO : 3751.783, BCE: 741.404, KLD_latent: 30.311, KLD_decoder_params_norm: 2980.069, Time: 3790.55 |
+|Train : Update 72000. Negative ELBO : 3681.572, BCE: 736.943, KLD_latent: 30.752, KLD_decoder_params_norm: 2913.877, Time: 3844.57 |
+|Train : Update 73000. Negative ELBO : 3620.682, BCE: 739.868, KLD_latent: 32.172, KLD_decoder_params_norm: 2848.641, Time: 3899.03 |
+|Train : Update 74000. Negative ELBO : 3547.316, BCE: 732.674, KLD_latent: 30.222, KLD_decoder_params_norm: 2784.420, Time: 3952.99 |
+|Train : Update 75000. Negative ELBO : 3513.074, BCE: 760.238, KLD_latent: 31.581, KLD_decoder_params_norm: 2721.255, Time: 4006.07 |
+|Train : Update 76000. Negative ELBO : 3422.147, BCE: 731.411, KLD_latent: 31.614, KLD_decoder_params_norm: 2659.122, Time: 4061.99 |
+|Train : Update 77000. Negative ELBO : 3375.084, BCE: 747.184, KLD_latent: 29.817, KLD_decoder_params_norm: 2598.084, Time: 4116.45 |
+|Train : Update 78000. Negative ELBO : 3300.640, BCE: 732.299, KLD_latent: 30.206, KLD_decoder_params_norm: 2538.136, Time: 4170.46 |
+|Train : Update 79000. Negative ELBO : 3245.857, BCE: 736.464, KLD_latent: 30.050, KLD_decoder_params_norm: 2479.343, Time: 4225.19 |
+|Train : Update 80000. Negative ELBO : 3200.149, BCE: 748.143, KLD_latent: 30.278, KLD_decoder_params_norm: 2421.729, Time: 4278.77 |
+|Train : Update 81000. Negative ELBO : 3142.996, BCE: 746.862, KLD_latent: 30.794, KLD_decoder_params_norm: 2365.340, Time: 4332.66 |
+|Train : Update 82000. Negative ELBO : 3084.158, BCE: 744.124, KLD_latent: 29.842, KLD_decoder_params_norm: 2310.192, Time: 4387.23 |
+|Train : Update 83000. Negative ELBO : 3020.879, BCE: 734.458, KLD_latent: 30.078, KLD_decoder_params_norm: 2256.344, Time: 4439.80 |
+|Train : Update 84000. Negative ELBO : 2971.053, BCE: 737.201, KLD_latent: 30.063, KLD_decoder_params_norm: 2203.789, Time: 4492.70 |
+|Train : Update 85000. Negative ELBO : 2934.619, BCE: 751.624, KLD_latent: 30.455, KLD_decoder_params_norm: 2152.540, Time: 4545.85 |
+|Train : Update 86000. Negative ELBO : 2869.779, BCE: 736.729, KLD_latent: 30.408, KLD_decoder_params_norm: 2102.643, Time: 4599.26 |
+|Train : Update 87000. Negative ELBO : 2826.063, BCE: 741.389, KLD_latent: 30.626, KLD_decoder_params_norm: 2054.049, Time: 4652.32 |
+|Train : Update 88000. Negative ELBO : 2788.583, BCE: 751.373, KLD_latent: 30.392, KLD_decoder_params_norm: 2006.818, Time: 4705.25 |
+|Train : Update 89000. Negative ELBO : 2726.363, BCE: 735.182, KLD_latent: 30.222, KLD_decoder_params_norm: 1960.959, Time: 4758.27 |
+|Train : Update 90000. Negative ELBO : 2681.773, BCE: 735.736, KLD_latent: 29.619, KLD_decoder_params_norm: 1916.418, Time: 4811.79 |
+|Train : Update 91000. Negative ELBO : 2649.241, BCE: 745.741, KLD_latent: 30.252, KLD_decoder_params_norm: 1873.248, Time: 4866.52 |
+|Train : Update 92000. Negative ELBO : 2607.536, BCE: 746.440, KLD_latent: 29.654, KLD_decoder_params_norm: 1831.442, Time: 4920.50 |
+|Train : Update 93000. Negative ELBO : 2558.157, BCE: 737.538, KLD_latent: 29.602, KLD_decoder_params_norm: 1791.017, Time: 4973.29 |
+|Train : Update 94000. Negative ELBO : 2533.058, BCE: 751.215, KLD_latent: 29.787, KLD_decoder_params_norm: 1752.056, Time: 5026.55 |
+|Train : Update 95000. Negative ELBO : 2485.201, BCE: 740.190, KLD_latent: 30.512, KLD_decoder_params_norm: 1714.498, Time: 5080.11 |
+|Train : Update 96000. Negative ELBO : 2455.009, BCE: 745.513, KLD_latent: 31.173, KLD_decoder_params_norm: 1678.322, Time: 5132.48 |
+|Train : Update 97000. Negative ELBO : 2407.303, BCE: 734.159, KLD_latent: 29.635, KLD_decoder_params_norm: 1643.508, Time: 5184.51 |
+|Train : Update 98000. Negative ELBO : 2381.260, BCE: 740.896, KLD_latent: 30.278, KLD_decoder_params_norm: 1610.086, Time: 5236.91 |
+|Train : Update 99000. Negative ELBO : 2347.911, BCE: 740.091, KLD_latent: 29.782, KLD_decoder_params_norm: 1578.038, Time: 5289.21 |
+|Train : Update 100000. Negative ELBO : 2327.292, BCE: 750.001, KLD_latent: 30.005, KLD_decoder_params_norm: 1547.287, Time: 5341.89 |
+|Train : Update 101000. Negative ELBO : 2301.468, BCE: 753.474, KLD_latent: 30.175, KLD_decoder_params_norm: 1517.819, Time: 5395.00 |
+|Train : Update 102000. Negative ELBO : 2260.620, BCE: 740.349, KLD_latent: 30.622, KLD_decoder_params_norm: 1489.649, Time: 5448.10 |
+|Train : Update 103000. Negative ELBO : 2230.073, BCE: 737.111, KLD_latent: 30.272, KLD_decoder_params_norm: 1462.690, Time: 5500.78 |
+|Train : Update 104000. Negative ELBO : 2205.637, BCE: 738.101, KLD_latent: 30.632, KLD_decoder_params_norm: 1436.904, Time: 5554.33 |
+|Train : Update 105000. Negative ELBO : 2183.188, BCE: 740.848, KLD_latent: 30.117, KLD_decoder_params_norm: 1412.223, Time: 5606.60 |
+|Train : Update 106000. Negative ELBO : 2147.649, BCE: 728.800, KLD_latent: 30.240, KLD_decoder_params_norm: 1388.609, Time: 5660.00 |
+|Train : Update 107000. Negative ELBO : 2147.249, BCE: 750.210, KLD_latent: 31.047, KLD_decoder_params_norm: 1365.992, Time: 5714.86 |
+|Train : Update 108000. Negative ELBO : 2127.102, BCE: 752.963, KLD_latent: 29.822, KLD_decoder_params_norm: 1344.317, Time: 5767.04 |
+|Train : Update 109000. Negative ELBO : 2091.557, BCE: 737.519, KLD_latent: 30.494, KLD_decoder_params_norm: 1323.544, Time: 5819.10 |
+|Train : Update 110000. Negative ELBO : 2090.252, BCE: 756.536, KLD_latent: 30.092, KLD_decoder_params_norm: 1303.624, Time: 5872.24 |
+|Train : Update 111000. Negative ELBO : 2053.502, BCE: 738.746, KLD_latent: 30.271, KLD_decoder_params_norm: 1284.485, Time: 5924.84 |
+|Train : Update 112000. Negative ELBO : 2029.450, BCE: 734.323, KLD_latent: 29.068, KLD_decoder_params_norm: 1266.059, Time: 5977.43 |
+|Train : Update 113000. Negative ELBO : 2006.359, BCE: 727.832, KLD_latent: 30.211, KLD_decoder_params_norm: 1248.315, Time: 6030.43 |
+|Train : Update 114000. Negative ELBO : 2004.324, BCE: 743.199, KLD_latent: 29.956, KLD_decoder_params_norm: 1231.169, Time: 6084.70 |
+|Train : Update 115000. Negative ELBO : 1980.988, BCE: 736.012, KLD_latent: 30.390, KLD_decoder_params_norm: 1214.586, Time: 6137.49 |
+|Train : Update 116000. Negative ELBO : 1970.589, BCE: 741.630, KLD_latent: 30.417, KLD_decoder_params_norm: 1198.542, Time: 6189.64 |
+|Train : Update 117000. Negative ELBO : 1954.005, BCE: 741.706, KLD_latent: 29.283, KLD_decoder_params_norm: 1183.017, Time: 6241.86 |
+|Train : Update 118000. Negative ELBO : 1945.100, BCE: 747.641, KLD_latent: 29.514, KLD_decoder_params_norm: 1167.945, Time: 6294.45 |
+|Train : Update 119000. Negative ELBO : 1911.696, BCE: 727.809, KLD_latent: 30.601, KLD_decoder_params_norm: 1153.286, Time: 6346.52 |
+|Train : Update 120000. Negative ELBO : 1917.615, BCE: 749.478, KLD_latent: 29.100, KLD_decoder_params_norm: 1139.036, Time: 6399.71 |
+|Train : Update 121000. Negative ELBO : 1904.175, BCE: 748.822, KLD_latent: 30.188, KLD_decoder_params_norm: 1125.164, Time: 6452.24 |
+|Train : Update 122000. Negative ELBO : 1869.108, BCE: 728.445, KLD_latent: 29.020, KLD_decoder_params_norm: 1111.642, Time: 6505.22 |
+|Train : Update 123000. Negative ELBO : 1861.538, BCE: 733.114, KLD_latent: 29.942, KLD_decoder_params_norm: 1098.482, Time: 6559.66 |
+|Train : Update 124000. Negative ELBO : 1859.756, BCE: 744.453, KLD_latent: 29.691, KLD_decoder_params_norm: 1085.612, Time: 6618.47 |
+|Train : Update 125000. Negative ELBO : 1840.485, BCE: 738.664, KLD_latent: 28.792, KLD_decoder_params_norm: 1073.029, Time: 6672.67 |
+|Train : Update 126000. Negative ELBO : 1853.912, BCE: 763.278, KLD_latent: 29.917, KLD_decoder_params_norm: 1060.718, Time: 6724.85 |
+|Train : Update 127000. Negative ELBO : 1820.089, BCE: 741.242, KLD_latent: 30.173, KLD_decoder_params_norm: 1048.674, Time: 6780.37 |
+|Train : Update 128000. Negative ELBO : 1805.462, BCE: 739.125, KLD_latent: 29.465, KLD_decoder_params_norm: 1036.872, Time: 6832.98 |
+|Train : Update 129000. Negative ELBO : 1804.295, BCE: 749.565, KLD_latent: 29.414, KLD_decoder_params_norm: 1025.317, Time: 6886.19 |
+|Train : Update 130000. Negative ELBO : 1781.527, BCE: 738.899, KLD_latent: 28.650, KLD_decoder_params_norm: 1013.978, Time: 6943.55 |
+|Train : Update 131000. Negative ELBO : 1768.605, BCE: 736.025, KLD_latent: 29.724, KLD_decoder_params_norm: 1002.855, Time: 6996.41 |
+|Train : Update 132000. Negative ELBO : 1746.566, BCE: 725.363, KLD_latent: 29.264, KLD_decoder_params_norm: 991.939, Time: 7048.67 |
+|Train : Update 133000. Negative ELBO : 1757.400, BCE: 746.646, KLD_latent: 29.546, KLD_decoder_params_norm: 981.209, Time: 7100.97 |
+|Train : Update 134000. Negative ELBO : 1757.489, BCE: 757.725, KLD_latent: 29.084, KLD_decoder_params_norm: 970.680, Time: 7153.19 |
+|Train : Update 135000. Negative ELBO : 1736.297, BCE: 746.538, KLD_latent: 29.417, KLD_decoder_params_norm: 960.342, Time: 7205.44 |
+|Train : Update 136000. Negative ELBO : 1721.834, BCE: 742.587, KLD_latent: 29.066, KLD_decoder_params_norm: 950.181, Time: 7260.77 |
+|Train : Update 137000. Negative ELBO : 1719.758, BCE: 750.490, KLD_latent: 29.065, KLD_decoder_params_norm: 940.202, Time: 7314.44 |
+|Train : Update 138000. Negative ELBO : 1701.673, BCE: 741.183, KLD_latent: 30.087, KLD_decoder_params_norm: 930.403, Time: 7366.99 |
+|Train : Update 139000. Negative ELBO : 1690.517, BCE: 740.142, KLD_latent: 29.629, KLD_decoder_params_norm: 920.745, Time: 7419.35 |
+|Train : Update 140000. Negative ELBO : 1691.968, BCE: 751.333, KLD_latent: 29.399, KLD_decoder_params_norm: 911.236, Time: 7471.41 |
+|Train : Update 141000. Negative ELBO : 1662.685, BCE: 731.690, KLD_latent: 29.112, KLD_decoder_params_norm: 901.883, Time: 7524.38 |
+|Train : Update 142000. Negative ELBO : 1664.122, BCE: 743.175, KLD_latent: 28.270, KLD_decoder_params_norm: 892.677, Time: 7578.90 |
+|Train : Update 143000. Negative ELBO : 1664.070, BCE: 751.328, KLD_latent: 29.129, KLD_decoder_params_norm: 883.613, Time: 7631.45 |
+|Train : Update 144000. Negative ELBO : 1649.202, BCE: 745.344, KLD_latent: 29.177, KLD_decoder_params_norm: 874.682, Time: 7684.42 |
+|Train : Update 145000. Negative ELBO : 1635.472, BCE: 740.521, KLD_latent: 29.069, KLD_decoder_params_norm: 865.883, Time: 7736.72 |
+|Train : Update 146000. Negative ELBO : 1638.337, BCE: 751.862, KLD_latent: 29.247, KLD_decoder_params_norm: 857.227, Time: 7789.48 |
+|Train : Update 147000. Negative ELBO : 1612.842, BCE: 734.632, KLD_latent: 29.520, KLD_decoder_params_norm: 848.690, Time: 7843.61 |
+|Train : Update 148000. Negative ELBO : 1606.733, BCE: 737.299, KLD_latent: 29.145, KLD_decoder_params_norm: 840.289, Time: 7896.16 |
+|Train : Update 149000. Negative ELBO : 1609.063, BCE: 748.099, KLD_latent: 28.955, KLD_decoder_params_norm: 832.008, Time: 7949.26 |
+|Train : Update 150000. Negative ELBO : 1596.937, BCE: 743.989, KLD_latent: 29.110, KLD_decoder_params_norm: 823.837, Time: 8001.91 |
+|Train : Update 151000. Negative ELBO : 1583.850, BCE: 739.398, KLD_latent: 28.662, KLD_decoder_params_norm: 815.790, Time: 8054.10 |
+|Train : Update 152000. Negative ELBO : 1572.377, BCE: 734.892, KLD_latent: 29.631, KLD_decoder_params_norm: 807.854, Time: 8106.06 |
+|Train : Update 153000. Negative ELBO : 1564.540, BCE: 734.655, KLD_latent: 29.861, KLD_decoder_params_norm: 800.024, Time: 8158.43 |
+|Train : Update 154000. Negative ELBO : 1565.595, BCE: 745.309, KLD_latent: 27.972, KLD_decoder_params_norm: 792.315, Time: 8210.92 |
+|Train : Update 155000. Negative ELBO : 1567.605, BCE: 754.110, KLD_latent: 28.777, KLD_decoder_params_norm: 784.719, Time: 8262.88 |
+|Train : Update 156000. Negative ELBO : 1551.874, BCE: 746.089, KLD_latent: 28.567, KLD_decoder_params_norm: 777.217, Time: 8315.27 |
+|Train : Update 157000. Negative ELBO : 1544.538, BCE: 745.445, KLD_latent: 29.272, KLD_decoder_params_norm: 769.821, Time: 8367.15 |
+|Train : Update 158000. Negative ELBO : 1533.935, BCE: 741.905, KLD_latent: 29.504, KLD_decoder_params_norm: 762.526, Time: 8419.51 |
+|Train : Update 159000. Negative ELBO : 1527.462, BCE: 743.406, KLD_latent: 28.725, KLD_decoder_params_norm: 755.330, Time: 8473.59 |
+|Train : Update 160000. Negative ELBO : 1515.738, BCE: 738.210, KLD_latent: 29.297, KLD_decoder_params_norm: 748.231, Time: 8526.37 |
+|Train : Update 161000. Negative ELBO : 1511.201, BCE: 740.425, KLD_latent: 29.544, KLD_decoder_params_norm: 741.233, Time: 8579.22 |
+|Train : Update 162000. Negative ELBO : 1511.759, BCE: 748.808, KLD_latent: 28.617, KLD_decoder_params_norm: 734.334, Time: 8632.09 |
+|Train : Update 163000. Negative ELBO : 1495.503, BCE: 738.911, KLD_latent: 29.069, KLD_decoder_params_norm: 727.522, Time: 8684.37 |
+|Train : Update 164000. Negative ELBO : 1498.232, BCE: 748.968, KLD_latent: 28.462, KLD_decoder_params_norm: 720.802, Time: 8737.28 |
+|Train : Update 165000. Negative ELBO : 1478.593, BCE: 736.377, KLD_latent: 28.049, KLD_decoder_params_norm: 714.167, Time: 8789.56 |
+|Train : Update 166000. Negative ELBO : 1494.800, BCE: 758.606, KLD_latent: 28.569, KLD_decoder_params_norm: 707.625, Time: 8842.05 |
+|Train : Update 167000. Negative ELBO : 1470.397, BCE: 740.333, KLD_latent: 28.888, KLD_decoder_params_norm: 701.176, Time: 8895.05 |
+|Train : Update 168000. Negative ELBO : 1470.007, BCE: 745.967, KLD_latent: 29.237, KLD_decoder_params_norm: 694.804, Time: 8947.22 |
+|Train : Update 169000. Negative ELBO : 1473.050, BCE: 754.860, KLD_latent: 29.686, KLD_decoder_params_norm: 688.503, Time: 8999.41 |
+|Train : Update 170000. Negative ELBO : 1451.743, BCE: 740.799, KLD_latent: 28.662, KLD_decoder_params_norm: 682.282, Time: 9053.03 |
+|Train : Update 171000. Negative ELBO : 1443.913, BCE: 738.635, KLD_latent: 29.132, KLD_decoder_params_norm: 676.146, Time: 9109.60 |
+|Train : Update 172000. Negative ELBO : 1465.736, BCE: 766.264, KLD_latent: 29.383, KLD_decoder_params_norm: 670.089, Time: 9164.24 |
+|Train : Update 173000. Negative ELBO : 1445.395, BCE: 751.933, KLD_latent: 29.350, KLD_decoder_params_norm: 664.112, Time: 9216.88 |
+|Train : Update 174000. Negative ELBO : 1432.978, BCE: 746.879, KLD_latent: 27.882, KLD_decoder_params_norm: 658.217, Time: 9271.34 |
+|Train : Update 175000. Negative ELBO : 1430.917, BCE: 750.036, KLD_latent: 28.493, KLD_decoder_params_norm: 652.388, Time: 9325.65 |
+|Train : Update 176000. Negative ELBO : 1416.354, BCE: 740.760, KLD_latent: 28.954, KLD_decoder_params_norm: 646.640, Time: 9378.60 |
+|Train : Update 177000. Negative ELBO : 1407.251, BCE: 737.189, KLD_latent: 29.098, KLD_decoder_params_norm: 640.964, Time: 9432.34 |
+|Train : Update 178000. Negative ELBO : 1416.080, BCE: 751.955, KLD_latent: 28.765, KLD_decoder_params_norm: 635.361, Time: 9485.13 |
+|Train : Update 179000. Negative ELBO : 1393.785, BCE: 735.557, KLD_latent: 28.406, KLD_decoder_params_norm: 629.823, Time: 9538.08 |
+|Train : Update 180000. Negative ELBO : 1403.536, BCE: 750.528, KLD_latent: 28.656, KLD_decoder_params_norm: 624.352, Time: 9591.42 |
+|Train : Update 181000. Negative ELBO : 1404.954, BCE: 756.869, KLD_latent: 29.141, KLD_decoder_params_norm: 618.944, Time: 9646.36 |
+|Train : Update 182000. Negative ELBO : 1378.278, BCE: 735.473, KLD_latent: 29.193, KLD_decoder_params_norm: 613.612, Time: 9700.39 |
+|Train : Update 183000. Negative ELBO : 1382.131, BCE: 745.499, KLD_latent: 28.288, KLD_decoder_params_norm: 608.343, Time: 9753.85 |
+|Train : Update 184000. Negative ELBO : 1373.365, BCE: 741.873, KLD_latent: 28.364, KLD_decoder_params_norm: 603.128, Time: 9807.92 |
+|Train : Update 185000. Negative ELBO : 1378.935, BCE: 752.799, KLD_latent: 28.152, KLD_decoder_params_norm: 597.984, Time: 9861.00 |
+|Train : Update 186000. Negative ELBO : 1377.675, BCE: 755.362, KLD_latent: 29.413, KLD_decoder_params_norm: 592.900, Time: 9914.17 |
+|Train : Update 187000. Negative ELBO : 1360.258, BCE: 744.093, KLD_latent: 28.278, KLD_decoder_params_norm: 587.887, Time: 9968.02 |
+|Train : Update 188000. Negative ELBO : 1359.104, BCE: 747.662, KLD_latent: 28.511, KLD_decoder_params_norm: 582.931, Time: 10021.22 |
+|Train : Update 189000. Negative ELBO : 1361.179, BCE: 754.705, KLD_latent: 28.440, KLD_decoder_params_norm: 578.034, Time: 10075.71 |
+|Train : Update 190000. Negative ELBO : 1350.837, BCE: 750.280, KLD_latent: 27.358, KLD_decoder_params_norm: 573.199, Time: 10129.31 |
+|Train : Update 191000. Negative ELBO : 1337.551, BCE: 740.996, KLD_latent: 28.129, KLD_decoder_params_norm: 568.426, Time: 10183.15 |
+|Train : Update 192000. Negative ELBO : 1343.725, BCE: 751.224, KLD_latent: 28.789, KLD_decoder_params_norm: 563.711, Time: 10239.07 |
+|Train : Update 193000. Negative ELBO : 1343.467, BCE: 755.805, KLD_latent: 28.608, KLD_decoder_params_norm: 559.055, Time: 10294.80 |
+|Train : Update 194000. Negative ELBO : 1322.624, BCE: 739.262, KLD_latent: 28.907, KLD_decoder_params_norm: 554.455, Time: 10348.30 |
+|Train : Update 195000. Negative ELBO : 1326.872, BCE: 748.598, KLD_latent: 28.366, KLD_decoder_params_norm: 549.907, Time: 10402.08 |
+|Train : Update 196000. Negative ELBO : 1319.221, BCE: 745.138, KLD_latent: 28.668, KLD_decoder_params_norm: 545.416, Time: 10455.67 |
+|Train : Update 197000. Negative ELBO : 1324.073, BCE: 755.479, KLD_latent: 27.613, KLD_decoder_params_norm: 540.981, Time: 10509.53 |
+|Train : Update 198000. Negative ELBO : 1324.616, BCE: 758.751, KLD_latent: 29.275, KLD_decoder_params_norm: 536.591, Time: 10563.46 |
+|Train : Update 199000. Negative ELBO : 1301.190, BCE: 741.080, KLD_latent: 27.857, KLD_decoder_params_norm: 532.253, Time: 10618.39 |
+|Train : Update 200000. Negative ELBO : 1294.662, BCE: 738.300, KLD_latent: 28.392, KLD_decoder_params_norm: 527.971, Time: 10672.73 |
+|Train : Update 201000. Negative ELBO : 1298.812, BCE: 746.786, KLD_latent: 28.290, KLD_decoder_params_norm: 523.737, Time: 10725.62 |
+|Train : Update 202000. Negative ELBO : 1301.645, BCE: 755.018, KLD_latent: 27.075, KLD_decoder_params_norm: 519.552, Time: 10778.58 |
+|Train : Update 203000. Negative ELBO : 1295.837, BCE: 752.390, KLD_latent: 28.034, KLD_decoder_params_norm: 515.413, Time: 10831.06 |
+|Train : Update 204000. Negative ELBO : 1286.191, BCE: 746.643, KLD_latent: 28.216, KLD_decoder_params_norm: 511.332, Time: 10884.28 |
+|Train : Update 205000. Negative ELBO : 1294.627, BCE: 758.852, KLD_latent: 28.478, KLD_decoder_params_norm: 507.297, Time: 10937.82 |
+|Train : Update 206000. Negative ELBO : 1279.323, BCE: 746.167, KLD_latent: 29.847, KLD_decoder_params_norm: 503.310, Time: 10992.18 |
+|Train : Update 207000. Negative ELBO : 1275.863, BCE: 748.256, KLD_latent: 28.233, KLD_decoder_params_norm: 499.373, Time: 11044.59 |
+|Train : Update 208000. Negative ELBO : 1272.174, BCE: 747.914, KLD_latent: 28.771, KLD_decoder_params_norm: 495.489, Time: 11098.24 |
+|Train : Update 209000. Negative ELBO : 1273.007, BCE: 752.721, KLD_latent: 28.645, KLD_decoder_params_norm: 491.641, Time: 11152.74 |
+|Train : Update 210000. Negative ELBO : 1275.780, BCE: 759.950, KLD_latent: 27.992, KLD_decoder_params_norm: 487.837, Time: 11206.20 |
+|Train : Update 211000. Negative ELBO : 1275.232, BCE: 762.985, KLD_latent: 28.164, KLD_decoder_params_norm: 484.083, Time: 11259.66 |
+|Train : Update 212000. Negative ELBO : 1258.505, BCE: 750.271, KLD_latent: 27.862, KLD_decoder_params_norm: 480.372, Time: 11312.72 |
+|Train : Update 213000. Negative ELBO : 1248.644, BCE: 743.426, KLD_latent: 28.515, KLD_decoder_params_norm: 476.703, Time: 11366.65 |
+|Train : Update 214000. Negative ELBO : 1251.200, BCE: 750.101, KLD_latent: 28.020, KLD_decoder_params_norm: 473.080, Time: 11420.67 |
+|Train : Update 215000. Negative ELBO : 1245.362, BCE: 747.298, KLD_latent: 28.566, KLD_decoder_params_norm: 469.498, Time: 11474.48 |
+|Train : Update 216000. Negative ELBO : 1237.845, BCE: 743.571, KLD_latent: 28.315, KLD_decoder_params_norm: 465.960, Time: 11528.37 |
+|Train : Update 217000. Negative ELBO : 1245.360, BCE: 754.895, KLD_latent: 28.005, KLD_decoder_params_norm: 462.460, Time: 11581.06 |
+|Train : Update 218000. Negative ELBO : 1243.349, BCE: 755.495, KLD_latent: 28.851, KLD_decoder_params_norm: 459.003, Time: 11633.80 |
+|Train : Update 219000. Negative ELBO : 1229.125, BCE: 745.505, KLD_latent: 28.029, KLD_decoder_params_norm: 455.591, Time: 11686.70 |
+|Train : Update 220000. Negative ELBO : 1228.702, BCE: 749.465, KLD_latent: 27.027, KLD_decoder_params_norm: 452.211, Time: 11740.73 |
+|Train : Update 221000. Negative ELBO : 1241.462, BCE: 765.101, KLD_latent: 27.491, KLD_decoder_params_norm: 448.870, Time: 11794.44 |
+|Train : Update 222000. Negative ELBO : 1218.881, BCE: 744.713, KLD_latent: 28.602, KLD_decoder_params_norm: 445.567, Time: 11848.02 |
+|Train : Update 223000. Negative ELBO : 1224.121, BCE: 754.314, KLD_latent: 27.493, KLD_decoder_params_norm: 442.314, Time: 11901.65 |
+|Train : Update 224000. Negative ELBO : 1221.203, BCE: 752.916, KLD_latent: 29.189, KLD_decoder_params_norm: 439.097, Time: 11954.76 |
+|Train : Update 225000. Negative ELBO : 1212.880, BCE: 748.458, KLD_latent: 28.505, KLD_decoder_params_norm: 435.917, Time: 12007.94 |
+|Train : Update 226000. Negative ELBO : 1224.002, BCE: 763.919, KLD_latent: 27.305, KLD_decoder_params_norm: 432.778, Time: 12060.95 |
+|Train : Update 227000. Negative ELBO : 1212.349, BCE: 754.496, KLD_latent: 28.174, KLD_decoder_params_norm: 429.679, Time: 12115.65 |
+|Train : Update 228000. Negative ELBO : 1207.439, BCE: 752.078, KLD_latent: 28.749, KLD_decoder_params_norm: 426.611, Time: 12168.85 |
+|Train : Update 229000. Negative ELBO : 1203.885, BCE: 751.974, KLD_latent: 28.326, KLD_decoder_params_norm: 423.585, Time: 12222.08 |
+|Train : Update 230000. Negative ELBO : 1203.267, BCE: 753.399, KLD_latent: 29.273, KLD_decoder_params_norm: 420.595, Time: 12275.63 |
+|Train : Update 231000. Negative ELBO : 1212.749, BCE: 767.515, KLD_latent: 27.601, KLD_decoder_params_norm: 417.633, Time: 12329.16 |
+|Train : Update 232000. Negative ELBO : 1191.636, BCE: 749.174, KLD_latent: 27.754, KLD_decoder_params_norm: 414.708, Time: 12382.48 |
+|Train : Update 233000. Negative ELBO : 1208.242, BCE: 768.871, KLD_latent: 27.558, KLD_decoder_params_norm: 411.813, Time: 12436.66 |
+|Train : Update 234000. Negative ELBO : 1188.309, BCE: 751.070, KLD_latent: 28.286, KLD_decoder_params_norm: 408.953, Time: 12490.10 |
+|Train : Update 235000. Negative ELBO : 1187.843, BCE: 753.617, KLD_latent: 28.092, KLD_decoder_params_norm: 406.135, Time: 12543.10 |
+|Train : Update 236000. Negative ELBO : 1182.815, BCE: 752.352, KLD_latent: 27.116, KLD_decoder_params_norm: 403.348, Time: 12596.25 |
+|Train : Update 237000. Negative ELBO : 1186.127, BCE: 757.625, KLD_latent: 27.911, KLD_decoder_params_norm: 400.590, Time: 12649.08 |
+|Train : Update 238000. Negative ELBO : 1193.090, BCE: 767.245, KLD_latent: 27.977, KLD_decoder_params_norm: 397.867, Time: 12703.20 |
+|Train : Update 239000. Negative ELBO : 1174.775, BCE: 751.193, KLD_latent: 28.404, KLD_decoder_params_norm: 395.178, Time: 12756.50 |
+|Train : Update 240000. Negative ELBO : 1180.851, BCE: 760.321, KLD_latent: 28.013, KLD_decoder_params_norm: 392.517, Time: 12810.19 |
+|Train : Update 241000. Negative ELBO : 1165.671, BCE: 747.693, KLD_latent: 28.090, KLD_decoder_params_norm: 389.888, Time: 12862.65 |
+|Train : Update 242000. Negative ELBO : 1163.398, BCE: 746.986, KLD_latent: 29.119, KLD_decoder_params_norm: 387.293, Time: 12915.07 |
+|Train : Update 243000. Negative ELBO : 1161.604, BCE: 748.297, KLD_latent: 28.581, KLD_decoder_params_norm: 384.726, Time: 12968.35 |
+|Train : Update 244000. Negative ELBO : 1173.394, BCE: 764.192, KLD_latent: 27.016, KLD_decoder_params_norm: 382.185, Time: 13022.71 |
+|Train : Update 245000. Negative ELBO : 1157.461, BCE: 749.824, KLD_latent: 27.963, KLD_decoder_params_norm: 379.674, Time: 13076.01 |
+|Train : Update 246000. Negative ELBO : 1166.792, BCE: 761.150, KLD_latent: 28.455, KLD_decoder_params_norm: 377.187, Time: 13129.72 |
+|Train : Update 247000. Negative ELBO : 1153.594, BCE: 750.661, KLD_latent: 28.207, KLD_decoder_params_norm: 374.727, Time: 13182.91 |
+|Train : Update 248000. Negative ELBO : 1145.390, BCE: 746.060, KLD_latent: 27.030, KLD_decoder_params_norm: 372.300, Time: 13236.64 |
+|Train : Update 249000. Negative ELBO : 1146.488, BCE: 748.666, KLD_latent: 27.922, KLD_decoder_params_norm: 369.900, Time: 13290.66 |
+|Train : Update 250000. Negative ELBO : 1145.337, BCE: 749.163, KLD_latent: 28.646, KLD_decoder_params_norm: 367.529, Time: 13345.98 |
+|Train : Update 251000. Negative ELBO : 1143.174, BCE: 750.105, KLD_latent: 27.889, KLD_decoder_params_norm: 365.181, Time: 13399.53 |
+|Train : Update 252000. Negative ELBO : 1148.870, BCE: 758.163, KLD_latent: 27.851, KLD_decoder_params_norm: 362.857, Time: 13452.48 |
+|Train : Update 253000. Negative ELBO : 1142.787, BCE: 754.755, KLD_latent: 27.474, KLD_decoder_params_norm: 360.557, Time: 13506.55 |
+|Train : Update 254000. Negative ELBO : 1153.686, BCE: 767.627, KLD_latent: 27.780, KLD_decoder_params_norm: 358.278, Time: 13559.80 |
+|Train : Update 255000. Negative ELBO : 1133.693, BCE: 749.986, KLD_latent: 27.677, KLD_decoder_params_norm: 356.031, Time: 13612.58 |
+|Train : Update 256000. Negative ELBO : 1128.358, BCE: 746.483, KLD_latent: 28.067, KLD_decoder_params_norm: 353.808, Time: 13666.20 |
+|Train : Update 257000. Negative ELBO : 1142.329, BCE: 761.965, KLD_latent: 28.758, KLD_decoder_params_norm: 351.606, Time: 13719.42 |
+|Train : Update 258000. Negative ELBO : 1145.151, BCE: 767.156, KLD_latent: 28.565, KLD_decoder_params_norm: 349.431, Time: 13774.02 |
+|Train : Update 259000. Negative ELBO : 1124.839, BCE: 749.446, KLD_latent: 28.116, KLD_decoder_params_norm: 347.278, Time: 13827.95 |
+|Train : Update 260000. Negative ELBO : 1137.184, BCE: 762.997, KLD_latent: 29.036, KLD_decoder_params_norm: 345.151, Time: 13880.49 |
+|Train : Update 261000. Negative ELBO : 1131.069, BCE: 760.296, KLD_latent: 27.726, KLD_decoder_params_norm: 343.047, Time: 13933.39 |
+|Train : Update 262000. Negative ELBO : 1117.097, BCE: 749.190, KLD_latent: 26.943, KLD_decoder_params_norm: 340.964, Time: 13987.21 |
+|Train : Update 263000. Negative ELBO : 1113.522, BCE: 746.372, KLD_latent: 28.246, KLD_decoder_params_norm: 338.904, Time: 14040.75 |
+|Train : Update 264000. Negative ELBO : 1110.231, BCE: 744.821, KLD_latent: 28.547, KLD_decoder_params_norm: 336.864, Time: 14093.48 |
+|Train : Update 265000. Negative ELBO : 1110.450, BCE: 747.493, KLD_latent: 28.113, KLD_decoder_params_norm: 334.844, Time: 14148.11 |
+|Train : Update 266000. Negative ELBO : 1113.417, BCE: 753.777, KLD_latent: 26.791, KLD_decoder_params_norm: 332.849, Time: 14202.07 |
+|Train : Update 267000. Negative ELBO : 1100.165, BCE: 741.898, KLD_latent: 27.392, KLD_decoder_params_norm: 330.874, Time: 14255.62 |
+|Train : Update 268000. Negative ELBO : 1113.972, BCE: 756.351, KLD_latent: 28.702, KLD_decoder_params_norm: 328.919, Time: 14309.79 |
+|Train : Update 269000. Negative ELBO : 1106.332, BCE: 752.203, KLD_latent: 27.139, KLD_decoder_params_norm: 326.990, Time: 14363.64 |
+|Train : Update 270000. Negative ELBO : 1111.267, BCE: 758.849, KLD_latent: 27.338, KLD_decoder_params_norm: 325.080, Time: 14417.20 |
+|Train : Update 271000. Negative ELBO : 1099.083, BCE: 747.947, KLD_latent: 27.943, KLD_decoder_params_norm: 323.192, Time: 14471.72 |
+|Train : Update 272000. Negative ELBO : 1101.819, BCE: 752.743, KLD_latent: 27.749, KLD_decoder_params_norm: 321.326, Time: 14525.24 |
+|Train : Update 273000. Negative ELBO : 1111.184, BCE: 763.959, KLD_latent: 27.741, KLD_decoder_params_norm: 319.484, Time: 14579.24 |
+|Train : Update 274000. Negative ELBO : 1091.418, BCE: 745.932, KLD_latent: 27.830, KLD_decoder_params_norm: 317.656, Time: 14631.81 |
+|Train : Update 275000. Negative ELBO : 1099.895, BCE: 757.261, KLD_latent: 26.787, KLD_decoder_params_norm: 315.847, Time: 14685.47 |
+|Train : Update 276000. Negative ELBO : 1085.004, BCE: 743.280, KLD_latent: 27.665, KLD_decoder_params_norm: 314.059, Time: 14738.63 |
+|Train : Update 277000. Negative ELBO : 1096.416, BCE: 756.584, KLD_latent: 27.537, KLD_decoder_params_norm: 312.295, Time: 14791.89 |
+|Train : Update 278000. Negative ELBO : 1093.222, BCE: 754.807, KLD_latent: 27.873, KLD_decoder_params_norm: 310.542, Time: 14845.88 |
+|Train : Update 279000. Negative ELBO : 1087.586, BCE: 751.464, KLD_latent: 27.306, KLD_decoder_params_norm: 308.815, Time: 14900.37 |
+|Train : Update 280000. Negative ELBO : 1087.805, BCE: 752.795, KLD_latent: 27.908, KLD_decoder_params_norm: 307.102, Time: 14955.41 |
+|Train : Update 281000. Negative ELBO : 1093.802, BCE: 760.447, KLD_latent: 27.945, KLD_decoder_params_norm: 305.410, Time: 15009.32 |
+|Train : Update 282000. Negative ELBO : 1073.096, BCE: 741.698, KLD_latent: 27.663, KLD_decoder_params_norm: 303.735, Time: 15063.73 |
+|Train : Update 283000. Negative ELBO : 1085.107, BCE: 755.816, KLD_latent: 27.212, KLD_decoder_params_norm: 302.079, Time: 15117.90 |
+|Train : Update 284000. Negative ELBO : 1088.673, BCE: 761.273, KLD_latent: 26.957, KLD_decoder_params_norm: 300.443, Time: 15172.67 |
+|Train : Update 285000. Negative ELBO : 1101.213, BCE: 774.519, KLD_latent: 27.868, KLD_decoder_params_norm: 298.827, Time: 15224.88 |
+|Train : Update 286000. Negative ELBO : 1072.966, BCE: 749.239, KLD_latent: 26.498, KLD_decoder_params_norm: 297.229, Time: 15278.51 |
+|Train : Update 287000. Negative ELBO : 1078.283, BCE: 754.939, KLD_latent: 27.698, KLD_decoder_params_norm: 295.646, Time: 15332.43 |
+|Train : Update 288000. Negative ELBO : 1078.039, BCE: 756.018, KLD_latent: 27.940, KLD_decoder_params_norm: 294.081, Time: 15385.47 |
+|Train : Update 289000. Negative ELBO : 1081.065, BCE: 761.667, KLD_latent: 26.860, KLD_decoder_params_norm: 292.538, Time: 15438.34 |
+|Train : Update 290000. Negative ELBO : 1077.478, BCE: 758.374, KLD_latent: 28.092, KLD_decoder_params_norm: 291.012, Time: 15491.56 |
+|Train : Update 291000. Negative ELBO : 1071.439, BCE: 754.459, KLD_latent: 27.482, KLD_decoder_params_norm: 289.497, Time: 15545.50 |
+|Train : Update 292000. Negative ELBO : 1071.711, BCE: 756.100, KLD_latent: 27.611, KLD_decoder_params_norm: 288.000, Time: 15599.44 |
+|Train : Update 293000. Negative ELBO : 1057.489, BCE: 742.925, KLD_latent: 28.045, KLD_decoder_params_norm: 286.520, Time: 15652.92 |
+|Train : Update 294000. Negative ELBO : 1074.293, BCE: 761.668, KLD_latent: 27.567, KLD_decoder_params_norm: 285.058, Time: 15707.68 |
+|Train : Update 295000. Negative ELBO : 1087.917, BCE: 777.022, KLD_latent: 27.281, KLD_decoder_params_norm: 283.613, Time: 15761.12 |
+|Train : Update 296000. Negative ELBO : 1061.196, BCE: 751.305, KLD_latent: 27.708, KLD_decoder_params_norm: 282.183, Time: 15814.21 |
+|Train : Update 297000. Negative ELBO : 1069.944, BCE: 762.403, KLD_latent: 26.773, KLD_decoder_params_norm: 280.768, Time: 15867.90 |
+|Train : Update 298000. Negative ELBO : 1056.793, BCE: 749.983, KLD_latent: 27.440, KLD_decoder_params_norm: 279.369, Time: 15920.61 |
+|Train : Update 299000. Negative ELBO : 1060.624, BCE: 754.411, KLD_latent: 28.225, KLD_decoder_params_norm: 277.987, Time: 15976.59 |
+|Train : Update 300000. Negative ELBO : 1049.124, BCE: 744.937, KLD_latent: 27.569, KLD_decoder_params_norm: 276.618, Time: 16029.34 |
+|Train : Update 301000. Negative ELBO : 1056.223, BCE: 752.696, KLD_latent: 28.256, KLD_decoder_params_norm: 275.270, Time: 16082.71 |
+|Train : Update 302000. Negative ELBO : 1053.563, BCE: 752.693, KLD_latent: 26.936, KLD_decoder_params_norm: 273.935, Time: 16135.35 |
+|Train : Update 303000. Negative ELBO : 1067.438, BCE: 766.938, KLD_latent: 27.888, KLD_decoder_params_norm: 272.611, Time: 16188.49 |
+|Train : Update 304000. Negative ELBO : 1056.272, BCE: 758.532, KLD_latent: 26.438, KLD_decoder_params_norm: 271.303, Time: 16241.80 |
+|Train : Update 305000. Negative ELBO : 1052.261, BCE: 754.794, KLD_latent: 27.458, KLD_decoder_params_norm: 270.009, Time: 16294.13 |
+|Train : Update 306000. Negative ELBO : 1061.357, BCE: 765.972, KLD_latent: 26.651, KLD_decoder_params_norm: 268.734, Time: 16347.59 |
+|Train : Update 307000. Negative ELBO : 1063.136, BCE: 767.932, KLD_latent: 27.735, KLD_decoder_params_norm: 267.469, Time: 16400.36 |
+|Train : Update 308000. Negative ELBO : 1048.337, BCE: 754.932, KLD_latent: 27.191, KLD_decoder_params_norm: 266.214, Time: 16453.60 |
+|Train : Update 309000. Negative ELBO : 1070.271, BCE: 777.354, KLD_latent: 27.943, KLD_decoder_params_norm: 264.974, Time: 16507.45 |
+|Train : Update 310000. Negative ELBO : 1047.230, BCE: 755.813, KLD_latent: 27.667, KLD_decoder_params_norm: 263.751, Time: 16563.53 |
+|Train : Update 311000. Negative ELBO : 1039.527, BCE: 749.270, KLD_latent: 27.719, KLD_decoder_params_norm: 262.537, Time: 16617.49 |
+|Train : Update 312000. Negative ELBO : 1044.325, BCE: 755.364, KLD_latent: 27.622, KLD_decoder_params_norm: 261.339, Time: 16671.16 |
+|Train : Update 313000. Negative ELBO : 1046.375, BCE: 759.005, KLD_latent: 27.218, KLD_decoder_params_norm: 260.152, Time: 16724.30 |
+|Train : Update 314000. Negative ELBO : 1045.768, BCE: 759.156, KLD_latent: 27.631, KLD_decoder_params_norm: 258.980, Time: 16777.81 |
+|Train : Update 315000. Negative ELBO : 1029.323, BCE: 743.244, KLD_latent: 28.253, KLD_decoder_params_norm: 257.827, Time: 16831.61 |
+|Train : Update 316000. Negative ELBO : 1048.288, BCE: 763.807, KLD_latent: 27.801, KLD_decoder_params_norm: 256.679, Time: 16885.89 |
+|Train : Update 317000. Negative ELBO : 1045.093, BCE: 762.484, KLD_latent: 27.067, KLD_decoder_params_norm: 255.542, Time: 16939.48 |
+|Train : Update 318000. Negative ELBO : 1032.733, BCE: 750.682, KLD_latent: 27.630, KLD_decoder_params_norm: 254.421, Time: 16993.37 |
+|Train : Update 319000. Negative ELBO : 1039.552, BCE: 758.493, KLD_latent: 27.751, KLD_decoder_params_norm: 253.308, Time: 17047.79 |
+|Train : Update 320000. Negative ELBO : 1042.813, BCE: 763.074, KLD_latent: 27.529, KLD_decoder_params_norm: 252.210, Time: 17100.80 |
+|Train : Update 321000. Negative ELBO : 1037.838, BCE: 759.214, KLD_latent: 27.501, KLD_decoder_params_norm: 251.124, Time: 17154.15 |
+|Train : Update 322000. Negative ELBO : 1024.246, BCE: 746.897, KLD_latent: 27.302, KLD_decoder_params_norm: 250.048, Time: 17207.69 |
+|Train : Update 323000. Negative ELBO : 1030.851, BCE: 754.231, KLD_latent: 27.638, KLD_decoder_params_norm: 248.982, Time: 17261.36 |
+|Train : Update 324000. Negative ELBO : 1030.549, BCE: 755.150, KLD_latent: 27.467, KLD_decoder_params_norm: 247.931, Time: 17313.80 |
+|Train : Update 325000. Negative ELBO : 1043.798, BCE: 769.242, KLD_latent: 27.667, KLD_decoder_params_norm: 246.890, Time: 17366.65 |
+|Train : Update 326000. Negative ELBO : 1032.389, BCE: 759.075, KLD_latent: 27.455, KLD_decoder_params_norm: 245.860, Time: 17419.53 |
+|Train : Update 327000. Negative ELBO : 1016.960, BCE: 744.778, KLD_latent: 27.343, KLD_decoder_params_norm: 244.840, Time: 17474.66 |
+|Train : Update 328000. Negative ELBO : 1017.077, BCE: 746.300, KLD_latent: 26.945, KLD_decoder_params_norm: 243.832, Time: 17527.06 |
+|Train : Update 329000. Negative ELBO : 1016.986, BCE: 746.307, KLD_latent: 27.844, KLD_decoder_params_norm: 242.834, Time: 17581.36 |
+|Train : Update 330000. Negative ELBO : 1039.077, BCE: 770.667, KLD_latent: 26.559, KLD_decoder_params_norm: 241.852, Time: 17635.06 |
+|Train : Update 331000. Negative ELBO : 1028.845, BCE: 761.060, KLD_latent: 26.907, KLD_decoder_params_norm: 240.878, Time: 17688.38 |
+|Train : Update 332000. Negative ELBO : 1027.002, BCE: 760.672, KLD_latent: 26.415, KLD_decoder_params_norm: 239.916, Time: 17740.81 |
+|Train : Update 333000. Negative ELBO : 1016.238, BCE: 749.778, KLD_latent: 27.495, KLD_decoder_params_norm: 238.965, Time: 17795.98 |
+|Train : Update 334000. Negative ELBO : 1030.421, BCE: 765.260, KLD_latent: 27.137, KLD_decoder_params_norm: 238.025, Time: 17849.23 |
+|Train : Update 335000. Negative ELBO : 1020.229, BCE: 756.081, KLD_latent: 27.056, KLD_decoder_params_norm: 237.092, Time: 17901.70 |
+|Train : Update 336000. Negative ELBO : 1023.445, BCE: 761.084, KLD_latent: 26.195, KLD_decoder_params_norm: 236.166, Time: 17954.97 |
+|Train : Update 337000. Negative ELBO : 1029.135, BCE: 767.846, KLD_latent: 26.038, KLD_decoder_params_norm: 235.251, Time: 18007.89 |
+|Train : Update 338000. Negative ELBO : 1025.924, BCE: 764.446, KLD_latent: 27.129, KLD_decoder_params_norm: 234.349, Time: 18062.17 |
+|Train : Update 339000. Negative ELBO : 1004.050, BCE: 743.097, KLD_latent: 27.497, KLD_decoder_params_norm: 233.457, Time: 18114.59 |
+|Train : Update 340000. Negative ELBO : 1031.431, BCE: 772.496, KLD_latent: 26.362, KLD_decoder_params_norm: 232.573, Time: 18167.94 |
+|Train : Update 341000. Negative ELBO : 1019.149, BCE: 759.926, KLD_latent: 27.525, KLD_decoder_params_norm: 231.699, Time: 18221.12 |
+|Train : Update 342000. Negative ELBO : 1024.924, BCE: 766.494, KLD_latent: 27.598, KLD_decoder_params_norm: 230.833, Time: 18273.35 |
+|Train : Update 343000. Negative ELBO : 1007.345, BCE: 750.025, KLD_latent: 27.344, KLD_decoder_params_norm: 229.976, Time: 18325.90 |
+|Train : Update 344000. Negative ELBO : 1018.506, BCE: 761.540, KLD_latent: 27.837, KLD_decoder_params_norm: 229.130, Time: 18380.19 |
+|Train : Update 345000. Negative ELBO : 1009.725, BCE: 755.109, KLD_latent: 26.323, KLD_decoder_params_norm: 228.293, Time: 18433.25 |
+|Train : Update 346000. Negative ELBO : 1003.221, BCE: 749.161, KLD_latent: 26.597, KLD_decoder_params_norm: 227.463, Time: 18486.57 |
+|Train : Update 347000. Negative ELBO : 1008.947, BCE: 755.051, KLD_latent: 27.253, KLD_decoder_params_norm: 226.643, Time: 18539.05 |
+|Train : Update 348000. Negative ELBO : 1026.484, BCE: 773.521, KLD_latent: 27.130, KLD_decoder_params_norm: 225.833, Time: 18591.89 |
+|Train : Update 349000. Negative ELBO : 1015.836, BCE: 763.265, KLD_latent: 27.542, KLD_decoder_params_norm: 225.028, Time: 18645.86 |
+|Train : Update 350000. Negative ELBO : 1002.461, BCE: 751.748, KLD_latent: 26.481, KLD_decoder_params_norm: 224.232, Time: 18701.31 |
+|Train : Update 351000. Negative ELBO : 1016.796, BCE: 766.138, KLD_latent: 27.213, KLD_decoder_params_norm: 223.445, Time: 18753.87 |
+|Train : Update 352000. Negative ELBO : 1002.050, BCE: 752.386, KLD_latent: 26.993, KLD_decoder_params_norm: 222.671, Time: 18805.92 |
+|Train : Update 353000. Negative ELBO : 1017.209, BCE: 767.733, KLD_latent: 27.573, KLD_decoder_params_norm: 221.903, Time: 18859.44 |
+|Train : Update 354000. Negative ELBO : 1021.309, BCE: 773.895, KLD_latent: 26.274, KLD_decoder_params_norm: 221.140, Time: 18912.27 |
+|Train : Update 355000. Negative ELBO : 1011.389, BCE: 764.281, KLD_latent: 26.722, KLD_decoder_params_norm: 220.385, Time: 18966.64 |
+|Train : Update 356000. Negative ELBO : 1004.298, BCE: 757.430, KLD_latent: 27.226, KLD_decoder_params_norm: 219.643, Time: 19019.50 |
+|Train : Update 357000. Negative ELBO : 1004.972, BCE: 758.656, KLD_latent: 27.411, KLD_decoder_params_norm: 218.904, Time: 19072.07 |
+|Train : Update 358000. Negative ELBO : 998.491, BCE: 752.357, KLD_latent: 27.960, KLD_decoder_params_norm: 218.174, Time: 19125.52 |
+|Train : Update 359000. Negative ELBO : 997.207, BCE: 753.158, KLD_latent: 26.600, KLD_decoder_params_norm: 217.449, Time: 19178.29 |
+|Train : Update 360000. Negative ELBO : 991.195, BCE: 747.022, KLD_latent: 27.440, KLD_decoder_params_norm: 216.734, Time: 19231.43 |
+|Train : Update 361000. Negative ELBO : 998.512, BCE: 756.072, KLD_latent: 26.411, KLD_decoder_params_norm: 216.029, Time: 19284.60 |
+|Train : Update 362000. Negative ELBO : 997.679, BCE: 755.162, KLD_latent: 27.190, KLD_decoder_params_norm: 215.327, Time: 19337.48 |
+|Train : Update 363000. Negative ELBO : 1008.694, BCE: 767.821, KLD_latent: 26.237, KLD_decoder_params_norm: 214.636, Time: 19391.39 |
+|Train : Update 364000. Negative ELBO : 1001.060, BCE: 759.905, KLD_latent: 27.206, KLD_decoder_params_norm: 213.949, Time: 19444.78 |
+|Train : Update 365000. Negative ELBO : 1011.408, BCE: 770.795, KLD_latent: 27.346, KLD_decoder_params_norm: 213.267, Time: 19499.44 |
+|Train : Update 366000. Negative ELBO : 992.200, BCE: 753.195, KLD_latent: 26.409, KLD_decoder_params_norm: 212.596, Time: 19553.29 |
+|Train : Update 367000. Negative ELBO : 1000.549, BCE: 761.611, KLD_latent: 27.010, KLD_decoder_params_norm: 211.929, Time: 19607.30 |
+|Train : Update 368000. Negative ELBO : 997.082, BCE: 758.336, KLD_latent: 27.473, KLD_decoder_params_norm: 211.273, Time: 19660.40 |
+|Train : Update 369000. Negative ELBO : 1005.125, BCE: 767.961, KLD_latent: 26.546, KLD_decoder_params_norm: 210.618, Time: 19714.50 |
+|Train : Update 370000. Negative ELBO : 994.162, BCE: 757.109, KLD_latent: 27.082, KLD_decoder_params_norm: 209.971, Time: 19767.74 |
+|Train : Update 371000. Negative ELBO : 986.754, BCE: 749.835, KLD_latent: 27.593, KLD_decoder_params_norm: 209.325, Time: 19820.27 |
+|Train : Update 372000. Negative ELBO : 998.811, BCE: 763.556, KLD_latent: 26.567, KLD_decoder_params_norm: 208.687, Time: 19874.30 |
+|Train : Update 373000. Negative ELBO : 999.117, BCE: 764.045, KLD_latent: 27.017, KLD_decoder_params_norm: 208.055, Time: 19927.69 |
+|Train : Update 374000. Negative ELBO : 986.603, BCE: 752.045, KLD_latent: 27.128, KLD_decoder_params_norm: 207.430, Time: 19979.81 |
+|Train : Update 375000. Negative ELBO : 981.384, BCE: 748.130, KLD_latent: 26.444, KLD_decoder_params_norm: 206.811, Time: 20032.47 |
+|Train : Update 376000. Negative ELBO : 995.766, BCE: 762.977, KLD_latent: 26.596, KLD_decoder_params_norm: 206.193, Time: 20085.29 |
+|Train : Update 377000. Negative ELBO : 987.018, BCE: 754.433, KLD_latent: 27.000, KLD_decoder_params_norm: 205.586, Time: 20138.81 |
+|Train : Update 378000. Negative ELBO : 1003.171, BCE: 771.616, KLD_latent: 26.574, KLD_decoder_params_norm: 204.981, Time: 20193.01 |
+|Train : Update 379000. Negative ELBO : 983.184, BCE: 752.204, KLD_latent: 26.593, KLD_decoder_params_norm: 204.386, Time: 20247.25 |
+|Train : Update 380000. Negative ELBO : 991.271, BCE: 761.030, KLD_latent: 26.448, KLD_decoder_params_norm: 203.793, Time: 20300.98 |
+|Train : Update 381000. Negative ELBO : 991.695, BCE: 761.203, KLD_latent: 27.284, KLD_decoder_params_norm: 203.208, Time: 20354.70 |
+|Train : Update 382000. Negative ELBO : 988.041, BCE: 758.592, KLD_latent: 26.824, KLD_decoder_params_norm: 202.625, Time: 20407.76 |
+|Train : Update 383000. Negative ELBO : 1012.965, BCE: 784.257, KLD_latent: 26.657, KLD_decoder_params_norm: 202.050, Time: 20462.76 |
+|Train : Update 384000. Negative ELBO : 1004.002, BCE: 775.155, KLD_latent: 27.369, KLD_decoder_params_norm: 201.479, Time: 20515.80 |
+|Train : Update 385000. Negative ELBO : 975.129, BCE: 747.824, KLD_latent: 26.391, KLD_decoder_params_norm: 200.913, Time: 20568.90 |
+|Train : Update 386000. Negative ELBO : 993.697, BCE: 765.603, KLD_latent: 27.743, KLD_decoder_params_norm: 200.351, Time: 20622.26 |
+|Train : Update 387000. Negative ELBO : 986.201, BCE: 759.329, KLD_latent: 27.077, KLD_decoder_params_norm: 199.795, Time: 20675.54 |
+|Train : Update 388000. Negative ELBO : 991.676, BCE: 766.425, KLD_latent: 26.010, KLD_decoder_params_norm: 199.240, Time: 20728.97 |
+|Train : Update 389000. Negative ELBO : 990.048, BCE: 764.978, KLD_latent: 26.377, KLD_decoder_params_norm: 198.693, Time: 20783.19 |
+|Train : Update 390000. Negative ELBO : 990.003, BCE: 764.723, KLD_latent: 27.132, KLD_decoder_params_norm: 198.148, Time: 20836.33 |
+|Train : Update 391000. Negative ELBO : 991.198, BCE: 766.394, KLD_latent: 27.196, KLD_decoder_params_norm: 197.609, Time: 20889.65 |
+|Train : Update 392000. Negative ELBO : 991.168, BCE: 766.539, KLD_latent: 27.555, KLD_decoder_params_norm: 197.073, Time: 20942.87 |
+|Train : Update 393000. Negative ELBO : 987.234, BCE: 763.681, KLD_latent: 27.007, KLD_decoder_params_norm: 196.546, Time: 20995.95 |
+|Train : Update 394000. Negative ELBO : 989.440, BCE: 766.676, KLD_latent: 26.744, KLD_decoder_params_norm: 196.020, Time: 21049.32 |
+|Train : Update 395000. Negative ELBO : 979.617, BCE: 756.820, KLD_latent: 27.301, KLD_decoder_params_norm: 195.496, Time: 21101.41 |
+|Train : Update 396000. Negative ELBO : 979.857, BCE: 757.991, KLD_latent: 26.890, KLD_decoder_params_norm: 194.977, Time: 21155.61 |
+|Train : Update 397000. Negative ELBO : 979.565, BCE: 758.629, KLD_latent: 26.474, KLD_decoder_params_norm: 194.462, Time: 21210.09 |
+|Train : Update 398000. Negative ELBO : 977.640, BCE: 756.430, KLD_latent: 27.259, KLD_decoder_params_norm: 193.952, Time: 21263.68 |
+|Train : Update 399000. Negative ELBO : 975.895, BCE: 756.504, KLD_latent: 25.948, KLD_decoder_params_norm: 193.443, Time: 21316.43 |
