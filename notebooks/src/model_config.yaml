@@ -1,0 +1,152 @@
+models:
+  - name: ESM1b
+    path: ESM1b
+    category: sequence
+    color: "#B9DFF5"
+    score_column: "esm1b_t33_650M_UR50S"
+  - name: ESM1v
+    path: ESM1v
+    category: sequence
+    color: "#5DA8D4"
+    score_column: "Ensemble_ESM1v"
+  - name: ESM-IF1
+    path: ESM-IF1
+    category: structure
+    color: "#001EB3"
+    score_column: "esmif1_ll"
+  - name: ESM2
+    path: ESM2
+    category: sequence
+    color: "#3ED3E1"
+    variants:
+      - name: 8M
+        path: ESM2/8M
+        score_column: "esm2_t6_8M_UR50D"
+      - name: 35M
+        path: ESM2/35M
+        score_column: "esm2_t12_35M_UR50D"
+      - name: 150M
+        path: ESM2/150M
+        score_column: "esm2_t30_150M_UR50D"
+      - name: 650M
+        path: ESM2/650M
+        score_column: "esm2_t33_650M_UR50D"
+      - name: 3B
+        path: ESM2/3B
+        score_column: "esm2_t36_3B_UR50D"
+  - name: GEMME
+    path: GEMME
+    category: MSA
+    color: "#000000"
+    score_column: ""
+  - name: EVE
+    path: EVE
+    category: MSA
+    color: "#009E73"
+    score_column: "evol_indices_seed_42"
+  - name: VESPA
+    path: VESPA
+    category: sequence
+    color: "#DE3163"
+    score_column: "VESPA"
+  - name: EVmutation
+    path: EVmutation
+    category: MSA
+    color: "#00cc33"
+    score_column: "prediction_epistatic"
+  - name: Tranception
+    path: Tranception
+    category: sequence
+    color: "#F7A96A"
+    variants:
+      - name: S
+        path: Tranception/Tranception_S
+        score_column: "avg_score"
+      - name: M
+        path: Tranception/Tranception_M
+        score_column: "avg_score"
+      - name: L
+        path: Tranception/Tranception_L
+        score_column: "avg_score"
+  - name: Tranception_no_ret
+    path: Tranception_no_retrieval
+    category: sequence
+    color: "#F7A96A"
+    variants:
+      - name: S
+        path: Tranception_no_retrieval/Tranception_S
+        score_column: "avg_score"
+      - name: M
+        path: Tranception_no_retrieval/Tranception_M
+        score_column: "avg_score"
+      - name: L
+        path: Tranception_no_retrieval/Tranception_L
+        score_column: "avg_score"
+  - name: TranceptEVE
+    path: TranceptEVE
+    category: MSA
+    color: "#750000"
+    variants:
+      - name: S
+        path: TranceptEVE/TranceptEVE_S
+        score_column: "avg_score"
+      - name: M
+        path: TranceptEVE/TranceptEVE_M
+        score_column: "avg_score"
+      - name: L
+        path: TranceptEVE/TranceptEVE_L
+        score_column: "avg_score"
+  - name: Progen2
+    path: Progen2
+    category: sequence
+    color: "#CC79A7"
+    variants:
+      - name: small
+        path: Progen2/small
+        score_column: "Progen2_score"
+      - name: medium
+        path: Progen2/medium
+        score_column: "Progen2_score"
+      - name: base
+        path: Progen2/base
+        score_column: "Progen2_score"
+      - name: large
+        path: Progen2/large
+        score_column: "Progen2_score"
+  - name: RITA
+    path: RITA
+    category: sequence
+    color: "#d5c711"
+    variants:
+      - name: small
+        path: RITA/small
+        score_column: "RITA_score"
+      - name: medium
+        path: RITA/medium
+        score_column: "RITA_score"
+      - name: large
+        path: RITA/large
+        score_column: "RITA_score"
+      - name: xlarge
+        path: RITA/xlarge
+        score_column: "RITA_score"
+  - name: ProteinMPNN
+    path: ProteinMPNN
+    category: structure
+    color: "darkgray"
+    score_column: "pmpnn_ll"
+  - name: ProtGPT2
+    path: ProtGPT2
+    category: sequence
+    color: "darkgreen"
+    score_column: "ProtGPT2_score"
+  - name: UniRep
+    path: UniRep
+    category: sequence
+    color: "#8b1e65"
+    score_column: "Unirep_score"
+  - name: EvUniRep
+    path: UniRep_evotuned
+    category: MSA
+    color: "#cc70e6"
+    score_column: "Unirep_score"
