@@ -175,16 +175,16 @@ class ZeroShotModellerModule:
         df = df.iloc[start:,:].reset_index(drop=True)
         return df
 
-    def load_scores(self, dataset_name: str, results_path: str, model_list: list, wt = False, dict_name: str = None) -> None:
+    def load_scores(self, dataset_name: str, model_list: list, results_path: str = '../results/', wt = False, dict_name: str = None) -> None:
         """
         Load scores for a specific dataset and models and save them in the class.
 
         Args:
             dataset_name (str): The name of the dataset to process.
-            results_path (str): The path to the results directory.
             model_list (list): A list of model names to consider.
-            wt (bool): Whether to include the wildtype score.
-            dict_name (str): The name of the dictionary to store the scores in. If None, the dataset name is used.
+            results (str): The path to the results folder. The default is '../results/'
+            wt (bool): Whether to include the wildtype score. Default is False
+            dict_name (str): The name of the dictionary to store the scores in. If None, the dataset name is used. Default is None
         """
 
         # Check if a dictionary name is provided. If not, use the dataset name
@@ -903,7 +903,7 @@ class ZeroShotModellerModule:
         return df
 
     def insilico_library(self,dataset_name: str, numb_muts: List[int], wt_seq: str = None, exclude_aa: List[str] = None, mut_sites: List[int] = None,
-                         exclude_sites: List[int] = None, ignore_large: bool = False, wt: bool = True, save_path: str = None, custom_name: str = None) -> pd.DataFrame:
+                         exclude_sites: List[int] = None, ignore_large: bool = False, wt: bool = True, save_path: str = '../data/insilico_libraries/', custom_name: str = None) -> pd.DataFrame:
         """
         Generate a list of mutated sequences by substituting amino acids at specified mutation sites. The function will save the list in a CSV file and return the DataFrame.
 
@@ -916,7 +916,7 @@ class ZeroShotModellerModule:
             exclude_sites (List): A list of sites to exclude from the mutations. Default is None.
             ignore_large (bool): A boolean indicating whether to ignore large variant numbers. Default is False.
             wt (bool): Whether to include the wildtype sequence in the library. Default is True.
-            save_path (str): The path to save the mutated sequences. Default is None.
+            save_path (str): The path to save the mutated sequences. Default is '../data/insilico_libraries/'.
             custom_name (str): A custom name to append to the saved file. Default is None.
 
         Returns:
@@ -999,14 +999,12 @@ class ZeroShotModellerModule:
             wt_row = [wildtype[0]+'1'+wildtype[0],wildtype,0]
             df.iloc[-1,:] = wt_row
 
-        # Save the DataFrame in a CSV file if save_path is provided
-        if save_path is not None:
 
-            # Insert custom specifier for the file if custom_name is provided
-            if custom_name is not None:
-                df.to_csv(save_path+f'{dataset_name}_{custom_name}_insilico_library.csv',index=False)
-            else:
-                df.to_csv(save_path+f'{dataset_name}_insilico_library.csv',index=False)
+        # Save the file; inserting a custom specifier for the file if custom_name is provided.
+        if custom_name is not None:
+            df.to_csv(save_path+f'{dataset_name}_{custom_name}_insilico_library.csv',index=False)
+        else:
+            df.to_csv(save_path+f'{dataset_name}_insilico_library.csv',index=False)
 
         return df
         
@@ -1022,7 +1020,7 @@ class PlottingModule:
     @staticmethod
     def zs_vs_exp_scatter(zsm, dataset_name: str, model_name: str, custom_zsname: str = None, custom_expname: str = None,
                           metrics: list = ['spearmanr', 'average_precision'], met1_corr_decimal: int = 2, met1_std_decimal: int = 2, met2_corr_decimal: int = 2, met2_std_decimal: int = 2,
-                      color: str = '#394280', figsize: Tuple = (9,9),size: int = 300, save_path: str = None, dpi: int = 300, format: str = 'png'):
+                      color: str = '#df9966', figsize: Tuple = (9,9),size: int = 300, save_path: str = '../figures/scatter/', dpi: int = 300, format: str = 'png'):
         """
         Generate a scatter plot comparing the experimental and predicted scores for a specific model and dataset.
         The plot will be saved as a PNG file if save_path is provided.
@@ -1038,7 +1036,7 @@ class PlottingModule:
             met1_std_decimal (int): The number of decimal places for the first metric standard deviation. Default is 2.
             met2_corr_decimal (int): The number of decimal places for the second metric correlation. Default is 2.
             met2_std_decimal (int): The number of decimal places for the second metric standard deviation. Default is 2.
-            color (str): The color of the scatter points. Default is '#394280' (dark blue).
+            color (str): The color of the scatter points. Default is '#df9966' (persian orange).
             figsize (Tuple): The figure size. Default is (9,9).
             size (int): The size of the scatter points. Default is 300.
             save_path (str): The path to save the scatter plot. Default is None.
@@ -1090,13 +1088,12 @@ class PlottingModule:
             ax.set_ylabel(model_name+' Score',fontsize=30)
         plt.tight_layout()
 
-        # Save the scatter plot if save_path is provided
-        if save_path is not None:
-            plt.savefig(save_path+f'{dataset_name}_{model_name}_scatter.{format}',dpi=dpi)
+        # Save the scatter plot
+        plt.savefig(save_path+f'{dataset_name}_{model_name}_scatter.{format}',dpi=dpi)
         plt.show()
 
     @staticmethod
-    def metrics(zsm, dataset_name: str, save_path: str = 'figures/metrics/', dpi: int = 300, custom_name: str = None,
+    def metrics(zsm, dataset_name: str, save_path: str = '../figures/metrics/', dpi: int = 300, custom_name: str = None,
                      metrics: list = ['average_precision','spearmanr'], met_labels = ['Average Precision','Absolute Spearman Correlation'], format: str = 'png'):
         """
         Generate a scatter plot with errorbars comparing two metrics for the different models. The plot will be saved as a PNG file.
@@ -1104,7 +1101,7 @@ class PlottingModule:
         Args:
             zsm (ZeroShotModeller): The ZeroShotModeller object.
             dataset_name (str): The name of the dataset to process.
-            save_path (str): The path to save the scatter plot. Default is 'figures/metrics/'.
+            save_path (str): The path to save the scatter plot. Default is '../figures/metrics/'.
             dpi (int): The resolution of the saved image. Default is 300.
             custom_name (str): A custom name for the saved file. Default is None.
             metrics (list): The metrics to display in the scatter plot. Default is ['average_precision','spearmanr'].
@@ -1177,7 +1174,7 @@ class PlottingModule:
         plt.show()
     
     @staticmethod
-    def metrics_iteration(zsm, dataset_name: str, custom_name: str = None, save_path: str = 'figures/metrics/', dpi: int = 300,
+    def metrics_iteration(zsm, dataset_name: str, custom_name: str = None, save_path: str = '../figures/metrics/', dpi: int = 300,
                                metrics: list = ['average_precision','spearmanr'], met_labels = ['Average Precision','Absolute Spearman Correlation'],format: str = 'png'):
         """
         Generate a scatter plot with errorbars comparing two metrics for the different models for each iteration. The plot will be saved as a PNG file.
@@ -1185,7 +1182,7 @@ class PlottingModule:
         Args:
             zsm (ZeroShotModeller): The ZeroShotModeller object.
             dataset_name (str): The name of the dataset to process.
-            save_path (str): The path to save the scatter plot. Default is 'figures/metrics/'.
+            save_path (str): The path to save the scatter plot. Default is '../figures/metrics/'.
             dpi (int): The resolution of the saved image. Default is 300.
             custom_name (str): A custom name for the saved file. Default is None.
             metrics (list): The metrics to display in the scatter plot. Default is ['average_precision','spearmanr'].
@@ -1271,8 +1268,8 @@ class PlottingModule:
         plt.show()
     
     @staticmethod
-    def metrics_cat(zsm, dataset_name: str, custom_name: str = None, save_path: str = 'figures/metrics/', dpi: int = 300, format: str = 'png',
-                         metrics: list = ['average_precision','spearmanr'], met_labels = ['Average Precision','Absolute Spearman Correlation']):
+    def metrics_cat(zsm, dataset_name: str, custom_name: str = None, save_path: str = '../figures/metrics/', dpi: int = 300, format: str = 'png',
+                         best_color: str = '#df9966', worst_color: str = '#516f84', metrics: list = ['average_precision','spearmanr'], met_labels = ['Average Precision','Absolute Spearman Correlation']):
         """
         Generate a scatter plot with errorbars comparing two metrics for the different models, coloring the best and worst models for each category.
         The plot will be saved as a PNG file.
@@ -1280,10 +1277,12 @@ class PlottingModule:
         Args:
             zsm (ZeroShotModeller): The ZeroShotModeller object.
             dataset_name (str): The name of the dataset to process.
-            save_path (str): The path to save the scatter plot. Default is 'figures/metrics/'.
+            save_path (str): The path to save the scatter plot. Default is '../figures/metrics/'.
             dpi (int): The resolution of the saved image. Default is 300.
             format (str): The format of the saved image. Default is 'png'.
             custom_name (str): A custom name for the saved file. Default is None.
+            best_color (str): The color for the best models. Default is '#df9966' (persian orange).
+            worst_color (str): The color for the worst models. Default is '#516f84' (slate gray).
             metrics (list): The metrics to display in the scatter plot. Default is ['average_precision','spearmanr'].
             met_labels (list): The labels for the metrics. Default is ['Average Precision','Absolute Spearman Correlation'].
         """
@@ -1326,7 +1325,7 @@ class PlottingModule:
                 marker=shape,
                 lw=0,
                 capsize=5,
-                color='lightgrey',
+                color='#dee3e8ff',
                 markeredgecolor='k',
                 zorder=1
             )
@@ -1351,7 +1350,7 @@ class PlottingModule:
                 marker=shape,
                 lw=0,
                 capsize=5,
-                color='forestgreen',
+                color=best_color,
                 markeredgecolor='k',
                 zorder=1
             )
@@ -1366,7 +1365,7 @@ class PlottingModule:
                 marker=shape,
                 lw=0,
                 capsize=5,
-                color='#800000',
+                color=worst_color,
                 markeredgecolor='k',
                 zorder=1
             )
@@ -1391,15 +1390,16 @@ class PlottingModule:
 
         # Save the scatter plot, using the custom name if provided
         if custom_name is not None:
-            output_path = save_path+f'{dataset_name}_{custom_name}_corr_cat.{format}'
+            output_path = save_path+f'corr_cat_{dataset_name}_{custom_name}.{format}'
         else:
-            output_path = save_path+dataset_name+f'_corr_cat.{format}'
+            output_path = save_path+'corr_cat_'+dataset_name+f'.{format}'
         plt.savefig(output_path, dpi=dpi)
         plt.show()
 
     @staticmethod
-    def metrics_cat_iteration(zsm, dataset_name: str, custom_name: str = None, save_path: str = 'figures/metrics/', dpi: int = 300, format: str = 'png',
-                                   metrics: list = ['average_precision','spearmanr'], met_labels = ['Average Precision','Absolute Spearman Correlation']):
+    def metrics_cat_iteration(zsm, dataset_name: str, custom_name: str = None, save_path: str = '../figures/metrics/', dpi: int = 300, format: str = 'png',
+                                   best_color: str = '#df9966', worst_color: str = '#516f84',metrics: list = ['average_precision','spearmanr'],
+                                   met_labels = ['Average Precision','Absolute Spearman Correlation']):
         """
         Generate a scatter plot with errorbars comparing two metrics for the different models for each iteration, coloring the best and worst models for each category.
         The plot will be saved as a PNG file.
@@ -1408,10 +1408,12 @@ class PlottingModule:
         Args:
             zsm (ZeroShotModeller): The ZeroShotModeller object.
             dataset_name (str): The name of the dataset to process.
-            save_path (str): The path to save the scatter plot. Default is 'figures/metrics/'.
+            custom_name (str): A custom name for the saved file. Default is None.
+            save_path (str): The path to save the scatter plot. Default is '../figures/metrics/'.
             dpi (int): The resolution of the saved image. Default is 300.
             format (str): The format of the saved image. Default is 'png'.
-            custom_name (str): A custom name for the saved file. Default is None.
+            best_color (str): The color for the best models. Default is '#df9966' (persian orange).
+            worst_color (str): The color for the worst models. Default is '#516f84' (slate gray).
             metrics (list): The metrics to display in the scatter plot. Default is ['average_precision','spearmanr'].
             met_labels (list): The labels for the metrics. Default is ['Average Precision','Absolute Spearman Correlation'].
         """
@@ -1457,7 +1459,7 @@ class PlottingModule:
                     marker=shape,
                     lw=0,
                     capsize=5,
-                    color='lightgrey',
+                    color='#dee3e8ff',
                     markeredgecolor='k',
                     zorder=1
                 )
@@ -1482,7 +1484,7 @@ class PlottingModule:
                     marker=shape,
                     lw=0,
                     capsize=5,
-                    color='forestgreen',
+                    color=best_color,
                     markeredgecolor='k',
                     zorder=1
                 )
@@ -1497,7 +1499,7 @@ class PlottingModule:
                     marker=shape,
                     lw=0,
                     capsize=5,
-                    color='#800000',
+                    color=worst_color,
                     markeredgecolor='k',
                     zorder=1
                 )
@@ -1527,16 +1529,16 @@ class PlottingModule:
 
         # Save the scatter plot, using the custom name if provided
         if custom_name is not None:
-            output_path = save_path+f'{dataset_name}_{custom_name}_corr_cat_ite.{format}'
+            output_path = save_path+f'corr_cat_ite_{dataset_name}_{custom_name}.{format}'
         else:
-            output_path = save_path+dataset_name+f'_corr_cat_ite.{format}'
+            output_path = save_path+'corr_cat_ite_'+dataset_name+f'.{format}'
         plt.savefig(output_path, dpi=dpi)
         plt.show()
 
     @staticmethod
     def bar_metrics(zsm,dataset_names: list, metric: str, ylabel: str, xlabel: str, alternative_names: list = None,
-                    cat: str='overall', ylimit: float = 1.135, figsize: Tuple = (12,9),
-                    save_path: str = 'figures/metrics/', dpi: int = 300, custom_name: str = None, format: str = 'png'):
+                    cat: str='overall', ylimit: float = 1.135, figsize: Tuple = (12,9), best_color: str = '#df9966', worst_color: str = '#516f84',
+                    save_path: str = '../figures/metrics/', dpi: int = 300, custom_name: str = None, format: str = 'png'):
         """
         Generate a bar plot comparing the full metrics of the best and worst models from the 10 iterations for different datasets.
         Require that the iteration datasets are named 'dataset_name_selection'.
@@ -1554,7 +1556,9 @@ class PlottingModule:
             cat (str): The category to extract the best and worst models from. Default is 'overall'.
             ylimit (float): The limit for the y-axis. Default is 1.135.
             figsize (Tuple): The figure size. Default is (12,9).
-            save_path (str): The path to save the bar plot. Default is 'figures/metrics/'.
+            best_color (str): The color for the best models. Default is '#df9966' (persian orange).
+            worst_color (str): The color for the worst models. Default is '#516f84' (slate gray).
+            save_path (str): The path to save the bar plot. Default is '../figures/metrics/'.
             dpi (int): The resolution of the saved image. Default is 300.
             custom_name (str): A custom name for the saved file. Default is None.
             format (str): The format of the saved image. Default is 'png'.
@@ -1580,15 +1584,15 @@ class PlottingModule:
             # Use the average metric over all iterations to create the bar plot with errorbars, coloring the best models in dark blue and the worst models in light brown
             # For the first dataset, add the legend
             if i == 0:
-                ax.bar(i-0.2,scatter_best.mean(),yerr=scatter_best.std(),color='#394280',edgecolor='k',capsize=15,width=0.4,alpha=1,label='Best Models')
-                ax.bar(i+0.2,scatter_worst.mean(),yerr=scatter_worst.std(),color='#c9976c',edgecolor='k',capsize=15,width=0.4,alpha=1,label='Worst Models')
+                ax.bar(i-0.2,scatter_best.mean(),yerr=scatter_best.std(),color=best_color,edgecolor='k',capsize=15,width=0.4,alpha=1,label='Best Models')
+                ax.bar(i+0.2,scatter_worst.mean(),yerr=scatter_worst.std(),color=worst_color,edgecolor='k',capsize=15,width=0.4,alpha=1,label='Worst Models')
 
                 # Add scatter points of the metrics for the best and worst models from the 10 iterations, with some random noise to avoid overlap
                 ax.scatter(i-0.2+np.random.uniform(low=-1,high=1,size=10)/10,scatter_best,color='darkgray',alpha=0.8,s=100,edgecolors='k')
                 ax.scatter(i+0.2+np.random.uniform(low=-1,high=1,size=10)/10,scatter_worst,color='darkgray',alpha=0.8,s=100,edgecolors='k')
             else:
-                ax.bar(i-0.2,scatter_best.mean(),yerr=scatter_best.std(),color='#394280',edgecolor='k',capsize=15,width=0.4,alpha=1)
-                ax.bar(i+0.2,scatter_worst.mean(),yerr=scatter_worst.std(),color='#c9976c',edgecolor='k',capsize=15,width=0.4,alpha=1)
+                ax.bar(i-0.2,scatter_best.mean(),yerr=scatter_best.std(),color=best_color,edgecolor='k',capsize=15,width=0.4,alpha=1)
+                ax.bar(i+0.2,scatter_worst.mean(),yerr=scatter_worst.std(),color=worst_color,edgecolor='k',capsize=15,width=0.4,alpha=1)
 
                 # Add scatter points of the metrics for the best and worst models from the 10 iterations, with some random noise to avoid overlap
                 ax.scatter(i-0.2+np.random.uniform(low=-1,high=1,size=10)/10,scatter_best,color='darkgray',alpha=0.8,s=100,edgecolors='k')
@@ -1622,7 +1626,7 @@ class PlottingModule:
 
     @staticmethod
     def heatmap(zsm, dataset_name: str, model_name: str, rows: str, cbar_label: str,
-                save_path: str = 'figures/', figsize: Tuple = (60, 25), colors: list = ['#516f84', 'white', '#df9966'], normalize = False,
+                save_path: str = '../figures/landscapes/', figsize: Tuple = (60, 25), colors: list = ['#516f84', 'white', '#df9966'], normalize = False,
                  alpha: float = 0.5, dpi: int = 300, format: str = 'png'):
         """
         Generate a heatmap of the landscape for a specific model and dataset. The plot will be saved as a PNG file.
@@ -1633,7 +1637,7 @@ class PlottingModule:
             model_name (str): The name of the model to generate the heatmap for.
             rows (int): The number of rows to split the protein sequence into.
             cbar_label (str): The label for the colorbar.
-            save_path (str): The path to save the heatmap. Default is 'figures/'.
+            save_path (str): The path to save the heatmap. Default is '../figures/landscapes'.
             figsize (Tuple): The figure size. Default is (60, 25).
             colors (list): The colors for the custom colormap. Default is ['#516f84', 'white', '#df9966'].
             normalize (bool): Whether to normalize the colors of the heatmap. Default is False.
@@ -1727,7 +1731,7 @@ class PlottingModule:
     @staticmethod
     def best_models_scatter(zsm, dataset_name: str, model_list: list,reverse: bool = False,figsize: Tuple = (9,9),
                             labels: str = None, pos_interest: list = None, pos_catalytic: list = None, colors = ['#516f84', 'white', '#df9966'], alpha: float = 0.5,
-                            save_path: str = None, dpi: int = 300, format: str = 'png'):
+                            save_path: str = '../figures/model_comp/', dpi: int = 300, format: str = 'png'):
         """
         Generate a scatter plot comparing the scores of three models for a dataset. The plot will be saved as a PNG file.
 
@@ -1742,7 +1746,7 @@ class PlottingModule:
             pos_catalytic (list): The catalytic positions to highlight. Default is None.
             colors (list): The colors for the custom colormap. Default is ['#516f84', 'white', '#df9966'].
             alpha (float): The transparency of the scatter plot. Default is 0.5.
-            save_path (str): The path to save the scatter plot. Default is None.
+            save_path (str): The path to save the scatter plot. Default is '../figures/model_comp/'.
             dpi (int): The resolution of the saved image. Default is 300.
             format (str): The format of the saved image. Default is 'png'.
         
@@ -1818,14 +1822,13 @@ class PlottingModule:
             ax.set_ylabel(model_list[1],fontsize=25,labelpad=5)
             cb.set_label(model_list[2],fontsize=25,rotation=270,labelpad=30)
 
-        # Save the scatter plot if a save path is provided
-        if save_path is not None:
-            outfile = save_path + dataset_name + '_' + '_'.join(model_list) + '_scatter'
+        # Save the scatter plot
+        outfile = save_path + 'scatter_' + dataset_name + '_' + '_'.join(model_list)
 
-            # If positions of interest or catalytic positions are provided, add the suffix to the filename
-            if pos_interest is not None or pos_catalytic is not None:
-                outfile = outfile + f'_pos.{format}'
-            else:
-                outfile = outfile + f'.{format}'
-            plt.savefig(outfile, bbox_inches='tight', dpi=dpi)
+        # If positions of interest or catalytic positions are provided, add the suffix to the filename
+        if pos_interest is not None or pos_catalytic is not None:
+            outfile = outfile + f'_pos.{format}'
+        else:
+            outfile = outfile + f'.{format}'
+        plt.savefig(outfile, bbox_inches='tight', dpi=dpi)
         plt.show()
