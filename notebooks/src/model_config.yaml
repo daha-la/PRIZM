@@ -145,7 +145,7 @@ models:
     category: sequence
     color: "#8b1e65"
     score_column: "Unirep_score"
-  - name: EvUniRep
+  - name: eUniRep
     path: UniRep_evotuned
     category: MSA
     color: "#cc70e6"
