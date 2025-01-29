@@ -6,7 +6,7 @@ ZSM provides the nescessary tools to easily implement all elements of the workfl
 Importantly, the best models identified by ZSM consistently outperforms the worst models across three different enzyme benchmark datasets. Furthermore, while ZSM was developed for enzyme engineering, the approach also exhibits improved results for a diverse selection of non-enzymatic protein properties.
 
 ## Collection of Zero-shot models.
-ZSM leverages pre-trained zero-shot models developed and published by other research groups. We do not claim any rights to their work or associated code.
+ZSM leverages pre-trained zero-shot models developed and published by other research groups and adapted in the [ProteinGym](https://github.com/OATML-Markslab/ProteinGym) workflow. We do not claim any rights to their work or associated code.
 | Model           | Model Input  | Repository URL                                                                                      | Reference                                                                                              |
 |------------------|--------------|-----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
 | ESM-1b          | Sequence     | [https://github.com/facebookresearch/esm](https://github.com/facebookresearch/esm)                 | [Rives, A. et al. (2021). Biological structure and function emerge from scaling unsupervised learning to 250 million protein sequences. PNAS, 118.](https://www.pnas.org/doi/10.1073/pnas.2016239118)                                     |
@@ -26,14 +26,15 @@ ZSM leverages pre-trained zero-shot models developed and published by other rese
 ## Validation DMS datasets
 All validation datasets were extracted from the [ProteinGym](https://github.com/OATML-Markslab/ProteinGym) benchmark library. We used the following datasets:
 | ProteinGym ID                 | Protein                                    | DMS Property                  | Reference                                                                 |
-|--------------------------------|--------------------------------------------|--------------------------------|---------------------------------------------------------------------------|
-| ANCSZ_Hobbs_2022              | Tyrosine Kinase                            | Enzyme activity               | [Hobbs, H. T. et al.](https://pubmed.ncbi.nlm.nih.gov/36173161/)          |
-| A4_HUMAN_Seuma_2022           | APP                                        | Aggregation                   | [Seuma, M et al.](https://www.nature.com/articles/s41467-022-34742-3)    |
-| ADRB2_HUMAN_Jones_2020        | ADRB2                                      | Receptor activity (Transcription) | [Jones, E. M. et al.](https://elifesciences.org/articles/54895)          |
-| ESTA_BACSU_Nutschel_2020      | estA                                       | Thermostability               | [Nutschel, C. et al.](https://pubs.acs.org/doi/10.1021/acs.jcim.9b00954) |
-| MK01_HUMAN_Brenan_2016        | MAPK1                                      | Inhibitor resistance          | [Brenan, L. et al.](https://www.sciencedirect.com/science/article/pii/S2211124716313171) |
-| Q59976_STRSQ_Romero_2015      | β-glucosidase                              | Enzyme activity               | [Romero, P. A. et al.](https://www.pnas.org/doi/10.1073/pnas.1422285112) |
-| SC6A4_HUMAN_Young_2021        | Sodium-dependent serotonin transporter     | Fluorescence                  | [Ellis, H. J. et al.](https://www.biorxiv.org/content/10.1101/2021.04.19.440442v2) |
-| SPIKE_SARS2_Starr_2020_binding| Spike RBD                                  | Receptor binding              | [Starr, T. N. et al.](https://pubmed.ncbi.nlm.nih.gov/32841599/)         |
-| YAP1_HUMAN_Araya_2012         | YAP1                                       | Peptide binding               | [Araya, C. L. et al.](https://www.pnas.org/doi/10.1073/pnas.1209751109)  |
+|-----------------------------------|--------------------------------------------|--------------------------------|---------------------------------------------------------------------------|
+| ANCSZ_Hobbs_2022                  | Tyrosine Kinase                            | Enzyme activity               | [Hobbs, H. T. et al.](https://pubmed.ncbi.nlm.nih.gov/36173161/)          |
+| A4_HUMAN_Seuma_2022               | Amyloid beta                               | Aggregation                   | [Seuma, M et al.](https://www.nature.com/articles/s41467-022-34742-3)    |
+| ADRB2_HUMAN_Jones_2020            | β<sub>2</sub>-adrenergic receptor          | Receptor activity (Transcription) | [Jones, E. M. et al.](https://elifesciences.org/articles/54895)          |
+| ESTA_BACSU_Nutschel_2020          | Lipase A                                   | Thermostability               | [Nutschel, C. et al.](https://pubs.acs.org/doi/10.1021/acs.jcim.9b00954) |
+| MK01_HUMAN_Brenan_2016            | Mitogen-activated protein kinase 1         | Inhibitor resistance          | [Brenan, L. et al.](https://www.sciencedirect.com/science/article/pii/S2211124716313171) |
+| Q59976_STRSQ_Romero_2015          | β-glucosidase                              | Enzyme activity               | [Romero, P. A. et al.](https://www.pnas.org/doi/10.1073/pnas.1422285112) |
+| SC6A4_HUMAN_Young_2021            | Sodium-dependent serotonin transporter     | Fluorescence                  | [Ellis, H. J. et al.](https://www.biorxiv.org/content/10.1101/2021.04.19.440442v2) |
+| SPIKE_SARS2_Starr_2020_binding    | SARS-CoV-2 spike receptor binding domain   | Receptor binding              | [Starr, T. N. et al.](https://pubmed.ncbi.nlm.nih.gov/32841599/)         |
+| VKOR1_HUMAN_Chiasson_2020_activity| Epoxide reductase                          | Enzyme activity               | [Chiasson, M. A. et al.](https://elifesciences.org/articles/58026)       |
+| YAP1_HUMAN_Araya_2012             | Human Yes-associated protein               | Peptide binding               | [Araya, C. L. et al.](https://www.pnas.org/doi/10.1073/pnas.1209751109)  |
 
