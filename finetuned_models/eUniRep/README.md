@@ -1,1 +1,1 @@
-# All evotuned UniRep models will be saved in this folder
+All evotuned UniRep models will be saved in this folder

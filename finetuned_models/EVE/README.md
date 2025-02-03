@@ -1,1 +1,1 @@
-# All EVE models will be saved in this folder
+All EVE models will be saved in this folder
