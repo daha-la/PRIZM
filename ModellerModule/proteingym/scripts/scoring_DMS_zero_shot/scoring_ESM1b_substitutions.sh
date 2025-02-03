@@ -1,9 +1,8 @@
 #!/bin/bash 
 
 source ../zero_shot_config.sh
-#source activate proteingym_env
 
-export model_checkpoint="/data/checkpoints/esm/esm1b_t33_650M_UR50S.pt"
+export model_checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/esm/esm1b_t33_650M_UR50S.pt"
 
 export dms_output_folder="${DMS_output_score_folder_subs}/ESM1b/"
 
@@ -17,7 +16,6 @@ for ((i=$1; i<=$2; i++))
 do
     echo "Evaluating DMS index $i"
     export DMS_index=$i
-#"Experiment index to run (e.g. 0,1,2,...216)" >216 = Inhouse
 
     start_time=$(date +%s.%N)
 

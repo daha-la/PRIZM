@@ -5,7 +5,7 @@ source ../zero_shot_config.sh
 ## Regression weights are at: https://dl.fbaipublicfiles.com/fair-esm/regression/esm2_t33_650M_UR50S-contact-regression.pt
 #https://dl.fbaipublicfiles.com/fair-esm/regression/esm2_t33_650M_UR50S-contact-regression.pt
 
-export model_checkpoint="/data/checkpoints/esm/esm_if1_gvp4_t16_142M_UR50.pt"
+export model_checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/esm/esm_if1_gvp4_t16_142M_UR50.pt"
 export DMS_output_score_folder=${DMS_output_score_folder_subs}/ESM-IF1/
 
 cd ../../proteingym
@@ -14,7 +14,6 @@ for ((i=$1; i<=$2; i++))
 do
     echo "Evaluating DMS index $i"
     export DMS_index=$i
-#"Experiment index to run (e.g. 0,1,2,...216)" >216 = Inhouse
 
     start_time=$(date +%s.%N)
     
