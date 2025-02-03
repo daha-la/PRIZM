@@ -2,17 +2,15 @@
 
 source ../zero_shot_config.sh
 
-cd ../../proteingym/
-
+cd ../../
 
 for ((i=$1; i<=$2; i++))
 do
     echo "Evaluating DMS index $i"
     export DMS_index=$i
-#"Experiment index to run (e.g. 0,1,2,...216)" >216 = Inhouse
 
     start_time=$(date +%s.%N)
-    export checkpoint="/data/checkpoints/Tranception/Tranception_Small"
+    export checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/Tranception/Tranception_Small"
     export output_scores_folder=${DMS_output_score_folder_subs}/Tranception_no_retrieval/Tranception_S
     
     python baselines/tranception/score_tranception_proteingym.py \
@@ -26,7 +24,7 @@ do
     echo "Time taken for $i with Small: $elapsed_time seconds"
 
     start_time=$(date +%s.%N) 
-    export checkpoint="/data/checkpoints/Tranception/Tranception_Medium"
+    export checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/Tranception/Tranception_Medium"
     export output_scores_folder=${DMS_output_score_folder_subs}/Tranception_no_retrieval/Tranception_M
     
     python baselines/tranception/score_tranception_proteingym.py \
@@ -38,10 +36,10 @@ do
     
     end_time=$(date +%s.%N)
     elapsed_time=$(echo "$end_time - $start_time" | bc)
-    #echo "Time taken for $i with Medium: $elapsed_time seconds"
+    echo "Time taken for $i with Medium: $elapsed_time seconds"
 
     start_time=$(date +%s.%N)
-    export checkpoint="/data/checkpoints/Tranception/Tranception_Large"
+    export checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/Tranception/Tranception_Large"
     export output_scores_folder=${DMS_output_score_folder_subs}/Tranception_no_retrieval/Tranception_L
     
     python baselines/tranception/score_tranception_proteingym.py \

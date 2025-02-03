@@ -1,7 +1,6 @@
 #!/bin/bash 
 
 source ../zero_shot_config.sh
-#source activate protein_fitness_prediction_hsu
 
 export OMP_NUM_THREADS=1
 
@@ -10,7 +9,7 @@ export initial_weights_dir="$PRIZM_PATH/ModellerModule/checkpoints/UniRep/1900_w
 export DMS_reference_file_path=$DMS_reference_file_path_subs
 export steps=13000 #Same as Unirep paper
 
-cd ../../proteingym/
+cd ../../
 
 for ((i=$1; i<=$2; i++))
 do

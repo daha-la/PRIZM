@@ -1,14 +1,13 @@
 #!/bin/bash 
 
 source ../zero_shot_config.sh
-#source activate proteingym_env
 
 export output_scores_folder=${DMS_output_score_folder_subs}/ProteinMPNN
 
 # Vanilla Models
 #export model_checkpoint="/home/dahala/mnt/ZeroShot/checkpoints/ProteinMPNN/vanilla_model_weights/v_48_002.pt"
 #export model_checkpoint="/home/dahala/mnt/ZeroShot/checkpoints/ProteinMPNN/vanilla_model_weights/v_48_010.pt"
-export model_checkpoint="/data/checkpoints/ProteinMPNN/vanilla_model_weights/v_48_020.pt"
+export model_checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/ProteinMPNN/vanilla_model_weights/v_48_020.pt"
 #export model_checkpoint="/home/dahala/mnt/ZeroShot/checkpoints/ProteinMPNN/vanilla_model_weights/v_48_030.pt"
 
 #Soluble Models
@@ -17,15 +16,12 @@ export model_checkpoint="/data/checkpoints/ProteinMPNN/vanilla_model_weights/v_4
 #export model_checkpoint="/home/dahala/mnt/ZeroShot/checkpoints/ProteinMPNN/soluble_model_weights/v_48_020.pt"
 #export model_checkpoint="/home/dahala/mnt/ZeroShot/checkpoints/ProteinMPNN/soluble_model_weights/v_48_030.pt"
 
-
-
-cd ../../proteingym/
+cd ../../
 
 for ((i=$1; i<=$2; i++))
 do
     echo "Evaluating DMS index $i"
     export DMS_index=$i
-#"Experiment index to run (e.g. 0,1,2,...216)" >216 = Inhouse
 
     start_time=$(date +%s.%N)
 

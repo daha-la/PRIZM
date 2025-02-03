@@ -5,7 +5,7 @@ source ../zero_shot_config.sh
 export model_type="ESM2"
 export scoring_strategy="masked-marginals"
 
-cd ../../proteingym
+cd ../../
 
 for ((i=$1; i<=$2; i++))
 do

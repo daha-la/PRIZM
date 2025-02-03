@@ -2,23 +2,21 @@
 
 source ../zero_shot_config.sh
 
-export seed=42
-#"random seed value"
+export seed=42 #"random seed value"
 
-export model_parameters_location='/home/dahala/mnt/ZeroShot/ProteinGym_code/proteingym/baselines/EVE/EVE/default_model_params.json'
-export training_logs_location='/home/dahala/mnt/ZeroShot/ProteinGym_code/proteingym/baselines/EVE/logs'
+export model_parameters_location="$PRIZM_PATH/ModellerModule/proteingym/baselines/EVE/EVE/default_model_params.json"
+export training_logs_location="$PRIZM_PATH/ModellerModule/proteingym/baselines/EVE/logs"
 export DMS_reference_file_path=$DMS_reference_file_path_subs
-# export DMS_reference_file_path=$DMS_reference_file_path_indels
+
 export overwrite=True
 echo $DMS_reference_file_path_subs
 
-cd ../../proteingym/
+cd ../../
 
 for ((i=$1; i<=$2; i++))
 do
     echo "Training on DMS index $i"
     export DMS_index=$i
-#"Experiment index to run (e.g. 0,1,2,...216)" >216 = Inhouse
 
     start_time=$(date +%s.%N)
 
@@ -40,5 +38,5 @@ do
     end_time=$(date +%s.%N)
     elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i: $elapsed_time seconds"
-done
 
+done

@@ -2,13 +2,10 @@
 
 source ../zero_shot_config.sh
 
-## Regression weights are at: https://dl.fbaipublicfiles.com/fair-esm/regression/esm2_t33_650M_UR50S-contact-regression.pt
-#https://dl.fbaipublicfiles.com/fair-esm/regression/esm2_t33_650M_UR50S-contact-regression.pt
-
 export model_checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/esm/esm_if1_gvp4_t16_142M_UR50.pt"
 export DMS_output_score_folder=${DMS_output_score_folder_subs}/ESM-IF1/
 
-cd ../../proteingym
+cd ../../
 
 for ((i=$1; i<=$2; i++))
 do

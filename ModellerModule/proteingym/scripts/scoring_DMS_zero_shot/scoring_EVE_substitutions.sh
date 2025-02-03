@@ -1,10 +1,9 @@
 #!/bin/bash
 
 source ../zero_shot_config.sh
-#source activate proteingym_env
 
-export model_parameters_location='/home/dahala/mnt/ZeroShot/ProteinGym_code/proteingym/baselines/EVE/EVE/default_model_params.json'
-export training_logs_location='/home/dahala/mnt/ZeroShot/ProteinGym_code/proteingym/baselines/EVE/logs/'
+export model_parameters_location="$PRIZM_PATH/ModellerModule/proteingym/baselines/EVE/EVE/default_model_params.json"
+export training_logs_location="$PRIZM_PATH/ModellerModule/baselines/EVE/logs/"
 export computation_mode='DMS'
 export output_score_folder="${DMS_output_score_folder_subs}/EVE/"
 export num_samples_compute_evol_indices=20000
@@ -12,13 +11,12 @@ export batch_size=1024  # Pushing batch size to limit of GPU memory
 export random_seeds="42"
 #"0 1 2 3 4"
 
-cd ../../proteingym/
+cd ../../
 
 for ((i=$1; i<=$2; i++))
 do
     echo "Evaluating DMS index $i"
     export DMS_index=$i
-#"Experiment index to run (e.g. 0,1,2,...216)" >216 = Inhouse
 
     start_time=$(date +%s.%N)
 
@@ -38,10 +36,10 @@ do
         --threshold_focus_cols_frac_gaps 1 \
         --MSA_weights_location ${DMS_MSA_weights_folder} \
         --random_seeds ${random_seeds} 
-    #changed from --output_evol_indices_location
 
     end_time=$(date +%s.%N)
     elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i: $elapsed_time seconds"
+
 done
 

@@ -6,19 +6,18 @@ FIRST_INDEX=184  # Adjust as needed
 LAST_INDEX=184   # Adjust as needed
 
 # Output files based on model and indices, saved in the existing logfiles directory
-OUTFILE="/home/dahala/mnt/ZeroShot/submissions/logfiles/${MODEL}_${FIRST_INDEX}-${LAST_INDEX}_$(date +'%Y%m%d_%H%M%S').out"
-ERRFILE="/home/dahala/mnt/ZeroShot/submissions/logfiles/${MODEL}_${FIRST_INDEX}-${LAST_INDEX}_$(date +'%Y%m%d_%H%M%S').err"
+OUTFILE="logfiles/${MODEL}_${FIRST_INDEX}-${LAST_INDEX}_$(date +'%Y%m%d_%H%M%S').out"
+ERRFILE="logfiles/${MODEL}_${FIRST_INDEX}-${LAST_INDEX}_$(date +'%Y%m%d_%H%M%S').err"
 
 # Print start date
 date
 
 # Set environment variables
-export LANG=C.UTF-8
 export first_index=$FIRST_INDEX
 export last_index=$LAST_INDEX
 
-# Commands to execute
-cd /home/dahala/mnt/ZeroShot/ProteinGym_code/scripts/scoring_DMS_zero_shot/
+# Change to the scoring script directory
+cd ../proteingym/scripts/scoring_DMS_zero_shot/
 
 # Run the scoring script with nohup, redirecting both stdout and stderr
 nohup bash scoring_TranceptEVE_substitutions.sh $first_index $last_index > "$OUTFILE" 2> "$ERRFILE" &

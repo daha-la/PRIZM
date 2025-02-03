@@ -1,19 +1,18 @@
 #!/bin/bash 
 
 source ../zero_shot_config.sh
-#source activate protein_fitness_prediction_hsu
 
 export OMP_NUM_THREADS=1
 
-export model_path="/home/dahala/mnt/ZeroShot/results/DMS_EvoUniRep_models"
+export model_path="$PRIZM_PATH/finetuned_models/eUniRep"
 export output_dir=${DMS_output_score_folder_subs}/UniRep_evotuned
 
-cd ../../proteingym/
+cd ../../
+
 for ((i=$1; i<=$2; i++))
 do
     echo "Evaluating DMS index $i"
     export DMS_index=$i
-#"Experiment index to run (e.g. 0,1,2,...216)" >216 = Inhouse
 
     start_time=$(date +%s.%N)
 
@@ -29,4 +28,5 @@ do
     end_time=$(date +%s.%N)
     elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i: $elapsed_time seconds"
+
 done

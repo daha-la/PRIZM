@@ -10,7 +10,7 @@ export model_type="ESM1b"
 export scoring_strategy="wt-marginals"
 export scoring_window="overlapping"
 
-cd ../../proteingym
+cd ../../
 
 for ((i=$1; i<=$2; i++))
 do

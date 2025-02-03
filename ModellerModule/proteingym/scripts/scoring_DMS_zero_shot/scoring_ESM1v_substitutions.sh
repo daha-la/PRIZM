@@ -17,7 +17,7 @@ export model_type="ESM1v"
 export scoring_strategy="masked-marginals"
 export scoring_window="optimal"
 
-cd ../../proteingym
+cd ../../
 
 echo $DMS_reference_file_path_subs
 for ((i=$1; i<=$2; i++))

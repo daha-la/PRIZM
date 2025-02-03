@@ -1,23 +1,24 @@
 #!/bin/bash 
 
 source ../zero_shot_config.sh
-#source activate proteingym_env
 
 export inference_time_retrieval_type="TranceptEVE"
 export EVE_num_samples_log_proba=200000 
-export EVE_model_parameters_location="/home/dahala/mnt/ZeroShot/ProteinGym_code/proteingym/baselines/trancepteve/trancepteve/utils/eve_model_default_params.json"
+export EVE_model_parameters_location="$PRIZM_PATH/ModellerModule/proteingym/baselines/trancepteve/trancepteve/utils/eve_model_default_params.json"
 export EVE_seeds="42"
 #"0 1 2 3 4"
+
 export scoring_window="optimal" 
-cd ../../proteingym/
+
+cd ../../
+
 for ((i=$1; i<=$2; i++))
 do
     echo "Evaluating DMS index $i"
     export DMS_index=$i
-#"Experiment index to run (e.g. 0,1,2,...216)" >216 = Inhouse
 
     start_time=$(date +%s.%N)
-    export checkpoint="/data/checkpoints/Tranception/Tranception_Small"
+    export checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/Tranception/Tranception_Small"
     export output_scores_folder=${DMS_output_score_folder_subs}/TranceptEVE/TranceptEVE_S
     
     python baselines/trancepteve/score_trancepteve.py \
@@ -40,7 +41,7 @@ do
     echo "Time taken for $i with Small: $elapsed_time seconds"
 
     start_time=$(date +%s.%N)
-    export checkpoint="/data/checkpoints/Tranception/Tranception_Medium"
+    export checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/Tranception/Tranception_Medium"
     export output_scores_folder=${DMS_output_score_folder_subs}/TranceptEVE/TranceptEVE_M
     
     python baselines/trancepteve/score_trancepteve.py \
@@ -63,7 +64,7 @@ do
     echo "Time taken for $i with Medium: $elapsed_time seconds"
 
     start_time=$(date +%s.%N)
-    export checkpoint="/data/checkpoints/Tranception/Tranception_Large"
+    export checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/Tranception/Tranception_Large"
     export output_scores_folder=${DMS_output_score_folder_subs}/TranceptEVE/TranceptEVE_L
     
     python baselines/trancepteve/score_trancepteve.py \
@@ -85,4 +86,5 @@ do
     end_time=$(date +%s.%N)
     elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i with Large: $elapsed_time seconds"
+    
 done
