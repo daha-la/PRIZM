@@ -2,7 +2,7 @@
 
 source ../zero_shot_config.sh
 
-export model_checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/esm/esm1b_t33_650M_UR50S.pt"
+export model_checkpoint="$checkpoint_folder/esm/esm1b_t33_650M_UR50S.pt"
 
 export dms_output_folder="${DMS_output_score_folder_subs}/ESM1b/"
 

@@ -4,11 +4,11 @@ source ../zero_shot_config.sh
 
 # ESM-1v parameters 
 # Five checkpoints for ESM-1v
-export model_checkpoint1="$PRIZM_PATH/ModellerModule/checkpoints//esm/esm1v_t33_650M_UR90S_1.pt"
-export model_checkpoint2="$PRIZM_PATH/ModellerModule/checkpoints/esm/esm1v_t33_650M_UR90S_2.pt"
-export model_checkpoint3="$PRIZM_PATH/ModellerModule/checkpoints/esm/esm1v_t33_650M_UR90S_3.pt"
-export model_checkpoint4="$PRIZM_PATH/ModellerModule/checkpoints/esm/esm1v_t33_650M_UR90S_4.pt"
-export model_checkpoint5="$PRIZM_PATH/ModellerModule/checkpoints/esm/esm1v_t33_650M_UR90S_5.pt"
+export model_checkpoint1="$checkpoint_folder/esm/esm1v_t33_650M_UR90S_1.pt"
+export model_checkpoint2="$checkpoint_folder/esm/esm1v_t33_650M_UR90S_2.pt"
+export model_checkpoint3="$checkpoint_folder/esm/esm1v_t33_650M_UR90S_3.pt"
+export model_checkpoint4="$checkpoint_folder/esm/esm1v_t33_650M_UR90S_4.pt"
+export model_checkpoint5="$checkpoint_folder/esm/esm1v_t33_650M_UR90S_5.pt"
 # combine all five into one string 
 export model_checkpoint="${model_checkpoint1} ${model_checkpoint2} ${model_checkpoint3} ${model_checkpoint4} ${model_checkpoint5}"
 export dms_output_folder="${DMS_output_score_folder_subs}/ESM1v/"

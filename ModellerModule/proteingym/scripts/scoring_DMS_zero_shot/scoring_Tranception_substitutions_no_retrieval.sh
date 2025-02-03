@@ -10,7 +10,7 @@ do
     export DMS_index=$i
 
     start_time=$(date +%s.%N)
-    export checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/Tranception/Tranception_Small"
+    export checkpoint="$checkpoint_folder/Tranception/Tranception_Small"
     export output_scores_folder=${DMS_output_score_folder_subs}/Tranception_no_retrieval/Tranception_S
     
     python baselines/tranception/score_tranception_proteingym.py \
@@ -24,7 +24,7 @@ do
     echo "Time taken for $i with Small: $elapsed_time seconds"
 
     start_time=$(date +%s.%N) 
-    export checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/Tranception/Tranception_Medium"
+    export checkpoint="$checkpoint_folder/Tranception/Tranception_Medium"
     export output_scores_folder=${DMS_output_score_folder_subs}/Tranception_no_retrieval/Tranception_M
     
     python baselines/tranception/score_tranception_proteingym.py \
@@ -39,7 +39,7 @@ do
     echo "Time taken for $i with Medium: $elapsed_time seconds"
 
     start_time=$(date +%s.%N)
-    export checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/Tranception/Tranception_Large"
+    export checkpoint="$checkpoint_folder/Tranception/Tranception_Large"
     export output_scores_folder=${DMS_output_score_folder_subs}/Tranception_no_retrieval/Tranception_L
     
     python baselines/tranception/score_tranception_proteingym.py \

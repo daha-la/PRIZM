@@ -5,7 +5,7 @@ source ../zero_shot_config.sh
 export OMP_NUM_THREADS=1
 
 export savedir="$PRIZM_PATH/finetuned_models/eUniRep"
-export initial_weights_dir="$PRIZM_PATH/ModellerModule/checkpoints/UniRep/1900_weights_random"
+export initial_weights_dir="$checkpoint_folder/UniRep/1900_weights_random"
 export DMS_reference_file_path=$DMS_reference_file_path_subs
 export steps=13000 #Same as Unirep paper
 

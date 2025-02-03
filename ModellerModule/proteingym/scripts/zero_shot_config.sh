@@ -1,9 +1,12 @@
 # This file has all general filepaths and directories used in the scoring pipeline. The individual scripts may have 
 # additional parameters specific to each method 
 
-PRIZM_PATH="INSERT_PATH_TO_PRIZM"
-export PRIZM_PATH
-# DMS zero-shot parameters
+# Path to the PRIZM directory
+export PRIZM_PATH="INSERT_PATH_TO_PRIZM"
+
+# Checkpoint folder
+#export checkpoint_folder="$PRIZM_PATH/ModellerModule/checkpoints"
+export checkpoint_folder="/data/checkpoints"
 
 # Folder containing the dataset csvs
 export DMS_data_folder_subs="$PRIZM_PATH/data/lowN"

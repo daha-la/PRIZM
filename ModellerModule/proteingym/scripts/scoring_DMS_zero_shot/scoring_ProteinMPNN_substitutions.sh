@@ -5,16 +5,16 @@ source ../zero_shot_config.sh
 export output_scores_folder=${DMS_output_score_folder_subs}/ProteinMPNN
 
 # Vanilla Models
-#export model_checkpoint="/home/dahala/mnt/ZeroShot/checkpoints/ProteinMPNN/vanilla_model_weights/v_48_002.pt"
-#export model_checkpoint="/home/dahala/mnt/ZeroShot/checkpoints/ProteinMPNN/vanilla_model_weights/v_48_010.pt"
-export model_checkpoint="$PRIZM_PATH/ModellerModule/checkpoints/ProteinMPNN/vanilla_model_weights/v_48_020.pt"
-#export model_checkpoint="/home/dahala/mnt/ZeroShot/checkpoints/ProteinMPNN/vanilla_model_weights/v_48_030.pt"
+#export model_checkpoint="$checkpoint_folder/ProteinMPNN/vanilla_model_weights/v_48_002.pt"
+#export model_checkpoint="$checkpoint_folder/ProteinMPNN/vanilla_model_weights/v_48_010.pt"
+export model_checkpoint="$checkpoint_folder/ProteinMPNN/vanilla_model_weights/v_48_020.pt"
+#export model_checkpoint="$checkpoint_folder/ProteinMPNN/vanilla_model_weights/v_48_030.pt"
 
 #Soluble Models
-#export model_checkpoint="/home/dahala/mnt/ZeroShot/checkpoints/ProteinMPNN/soluble_model_weights/v_48_002.pt"
-#export model_checkpoint="/home/dahala/mnt/ZeroShot/checkpoints/ProteinMPNN/soluble_model_weights/v_48_010.pt"
-#export model_checkpoint="/home/dahala/mnt/ZeroShot/checkpoints/ProteinMPNN/soluble_model_weights/v_48_020.pt"
-#export model_checkpoint="/home/dahala/mnt/ZeroShot/checkpoints/ProteinMPNN/soluble_model_weights/v_48_030.pt"
+#export model_checkpoint="$checkpoint_folder/ProteinMPNN/soluble_model_weights/v_48_002.pt"
+#export model_checkpoint="$checkpoint_folder/ProteinMPNN/soluble_model_weights/v_48_010.pt"
+#export model_checkpoint="$checkpoint_folder/ProteinMPNN/soluble_model_weights/v_48_020.pt"
+#export model_checkpoint="$checkpoint_folder/ProteinMPNN/soluble_model_weights/v_48_030.pt"
 
 cd ../../
 

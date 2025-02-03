@@ -4,7 +4,7 @@ source ../zero_shot_config.sh
 
 export OMP_NUM_THREADS=1
 
-export model_path="$PRIZM_PATH/ModellerModule/checkpoints/UniRep/1900_weights"
+export model_path="$checkpoint_folder/UniRep/1900_weights"
 export output_dir=${DMS_output_score_folder_subs}/UniRep
 
 cd ../../

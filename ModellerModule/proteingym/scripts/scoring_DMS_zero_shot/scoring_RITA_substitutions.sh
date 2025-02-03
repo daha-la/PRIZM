@@ -11,7 +11,7 @@ do
 
     start_time=$(date +%s.%N)
 
-    export RITA_model_path="$PRIZM_PATH/ModellerModule/checkpoints/RITA/RITA_s"
+    export RITA_model_path="$checkpoint_folder/RITA/RITA_s"
     export output_scores_folder="${DMS_output_score_folder_subs}/RITA/small"
     
     python baselines/rita/compute_fitness.py \
@@ -25,7 +25,7 @@ do
     echo "Time taken for $i with Small: $elapsed_time seconds"
  
     start_time=$(date +%s.%N)
-    export RITA_model_path="$PRIZM_PATH/ModellerModule/checkpoints/RITA/RITA_m"
+    export RITA_model_path="$checkpoint_folder/RITA/RITA_m"
     export output_scores_folder="${DMS_output_score_folder_subs}/RITA/medium"
     
     python baselines/rita/compute_fitness.py \
@@ -39,7 +39,7 @@ do
     echo "Time taken for $i with Medium: $elapsed_time seconds"
 
     start_time=$(date +%s.%N)
-    export RITA_model_path="$PRIZM_PATH/ModellerModule/checkpoints/RITA/RITA_l"
+    export RITA_model_path="$checkpoint_folder/RITA/RITA_l"
     export output_scores_folder="${DMS_output_score_folder_subs}/RITA/large"
     
     python baselines/rita/compute_fitness.py \
@@ -53,7 +53,7 @@ do
     echo "Time taken for $i with Large: $elapsed_time seconds"
 
     start_time=$(date +%s.%N)
-    export RITA_model_path="$PRIZM_PATH/ModellerModule/checkpoints/RITA/RITA_xl"
+    export RITA_model_path="$checkpoint_folder/RITA/RITA_xl"
     export output_scores_folder="${DMS_output_score_folder_subs}/RITA/xlarge"
     
     python baselines/rita/compute_fitness.py \

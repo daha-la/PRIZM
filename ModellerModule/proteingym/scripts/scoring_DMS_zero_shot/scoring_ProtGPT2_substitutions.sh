@@ -2,7 +2,7 @@
 
 source ../zero_shot_config.sh
 
-export ProtGPT2_model_name_or_path="$PRIZM_PATH/ModellerModule/checkpoints/ProtGPT2"
+export ProtGPT2_model_name_or_path="$checkpoint_folder/ProtGPT2"
 export output_scores_folder="${DMS_output_score_folder_subs}/ProtGPT2"
 
 cd ../../
