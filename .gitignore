@@ -1,2 +1,4 @@
-finetuned_models/eUniRep/
-finetuned_models/EVE/
+finetuned_models/eUniRep/*
+!finetuned_models/eUniRep/README.md
+finetuned_models/EVE/*
+!finetuned_models/eUniRep/README.md
