@@ -1,3 +1,3 @@
 DMS_id,DMS_filename,target_seq,seq_len,DMS_binarization_cutoff,MSA_filename,MSA_start,MSA_end,MSA_len,MSA_num_seqs,weight_file_name,pdb_file
-protein1_custom_id1,protein1_custom_id1.csv,APRTEINSEQEVNCE,15,0.5,msa_file1.a2m,1,14,13,100,msa_file1_weights.npy,pdb_file1.pdb
-protein2,protein2.csv,YPRTEINSEQEVNCE,15,0.5,msa_file2.a2m,1,14,13,200,msa_file2_weights.npy,pdb_file2.pdb
+protein1_custom_id1,protein1_custom_id1.csv,APRTEINSEQEVNCE,15,0.5,msa_file1.a2m,1,14,14,100,msa_file1_weights.npy,pdb_file1.pdb
+protein2,protein2.csv,YPRTEINSEQEVNCE,15,0.5,msa_file2.a2m,1,14,14,200,msa_file2_weights.npy,pdb_file2.pdb

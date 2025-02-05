@@ -107,7 +107,7 @@ def reference_builder(numb_prot: list[str], protein_name: list[str], wt_sequence
             'MSA_filename': MSA_name[i]+'.a2m',
             'MSA_start': MSA_start[i],
             'MSA_end': MSA_end[i],
-            'MSA_len': MSA_end[i] - MSA_start[i],
+            'MSA_len': MSA_end[i] - MSA_start[i] + 1,
             'MSA_num_seqs': MSA_num_seqs[i],
             'weight_file_name': f"{msa_}_weights.npy",
             'pdb_file': pdb_file[i]
