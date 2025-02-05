@@ -1,0 +1,9 @@
+Evaluating DMS index 2
+Arguments: Namespace(model_type=['ESM1b'], model_location=['/data/checkpoints/esm/esm1b_t33_650M_UR50S.pt'], sequence=None, dms_input=PosixPath('/home/dahala/mnt/PRIZM/data/insilico_libraries'), dms_index=2, dms_mapping='/home/dahala/mnt/PRIZM/ModellerModule/reference_files/FlA_reference.csv', mutation_col='mutant', dms_output=PosixPath('/home/dahala/mnt/PRIZM/results/ESM1b'), offset_idx=1, scoring_strategy='wt-marginals', msa_path=None, msa_sampling_strategy='sequence-reweighting', msa_samples=400, msa_weights_folder=None, seeds=1, filter_msa=False, hhfilter_min_cov=75, hhfilter_max_seq_id=90, hhfilter_min_seq_id=0, path_to_hhfilter='/n/groups/marks/software/hhsuite/hhsuite-3.3.0', scoring_window='overlapping', overwrite_prior_scores=False, nogpu=False)
+Compute scores for DMS: FlA_HIM_RelAct_DM_combi_insilico_library
+df shape: (32851, 3)
+Starting model scoring
+Transferred model to GPU
+Batch Converter Inspect
+FullArgSpec(args=['self', 'raw_batch'], varargs=None, varkw=None, defaults=None, kwonlyargs=[], kwonlydefaults=None, annotations={'raw_batch': typing.Sequence[typing.Tuple[str, str]]})
+Time taken for 2: 37.361274518 seconds

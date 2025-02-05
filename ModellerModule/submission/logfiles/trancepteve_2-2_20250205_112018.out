@@ -1,0 +1,37 @@
+Evaluating DMS index 2
+Namespace(checkpoint='/data/checkpoints/Tranception/Tranception_Small', model_framework='pytorch', batch_size_inference=20, DMS_reference_file_path='/home/dahala/mnt/PRIZM/ModellerModule/reference_files/FlA_reference.csv', DMS_index=2, target_seq=None, DMS_file_name=None, MSA_filename=None, MSA_weight_file_name=None, MSA_start=None, MSA_end=None, UniprotID=None, MSA_threshold_sequence_frac_gaps=None, MSA_threshold_focus_cols_frac_gaps=None, DMS_data_folder='/home/dahala/mnt/PRIZM/data/insilico_libraries', output_scores_folder='/home/dahala/mnt/PRIZM/results/TranceptEVE/TranceptEVE_S', deactivate_scoring_mirror=False, indel_mode=False, scoring_window='optimal', num_workers=8, inference_time_retrieval_type='TranceptEVE', retrieval_weights_manual=False, retrieval_inference_MSA_weight=0.5, retrieval_inference_EVE_weight=0.5, MSA_folder='/home/dahala/mnt/PRIZM/data/protein_information/msa/files', MSA_weights_folder='/home/dahala/mnt/PRIZM/data/protein_information/msa/weights', clustal_omega_location=None, EVE_model_folder='/home/dahala/mnt/PRIZM/finetuned_models/EVE', EVE_seeds=['42'], EVE_num_samples_log_proba=200000, EVE_model_parameters_location='/home/dahala/mnt/PRIZM/ModellerModule/proteingym/baselines/trancepteve/trancepteve/utils/eve_model_default_params.json', MSA_recalibrate_probas=False, EVE_recalibrate_probas=True, clinvar_scoring=False)
+Compute scores for DMS: FlA_HIM_RelAct_DM_combi_insilico_library
+Sequence (fragment) gap threshold: 0.5
+Focus column gap threshold: 1.0
+Number of distinct EVE models to be leveraged: 1
+/home/dahala/mnt/PRIZM/finetuned_models/EVE/FlA_HIM_alignment_seed_42
+Model leverages both autoregressive and retrieval inference (Type: TranceptEVE)
+Target seq len is 299, MSA length is 299, start position is 0, end position is 299 and vocab size is 25
+Num sequences in MSA pre filtering: 9519
+Num sequences in MSA post filtering: 7057
+Using weights in /home/dahala/mnt/PRIZM/data/protein_information/msa/weights/FlA_HIM_alignment_weights.npy for sequences in MSA.
+Time taken for 2 with Small: 27.637306531 seconds
+Namespace(checkpoint='/data/checkpoints/Tranception/Tranception_Medium', model_framework='pytorch', batch_size_inference=20, DMS_reference_file_path='/home/dahala/mnt/PRIZM/ModellerModule/reference_files/FlA_reference.csv', DMS_index=2, target_seq=None, DMS_file_name=None, MSA_filename=None, MSA_weight_file_name=None, MSA_start=None, MSA_end=None, UniprotID=None, MSA_threshold_sequence_frac_gaps=None, MSA_threshold_focus_cols_frac_gaps=None, DMS_data_folder='/home/dahala/mnt/PRIZM/data/insilico_libraries', output_scores_folder='/home/dahala/mnt/PRIZM/results/TranceptEVE/TranceptEVE_M', deactivate_scoring_mirror=False, indel_mode=False, scoring_window='optimal', num_workers=8, inference_time_retrieval_type='TranceptEVE', retrieval_weights_manual=False, retrieval_inference_MSA_weight=0.5, retrieval_inference_EVE_weight=0.5, MSA_folder='/home/dahala/mnt/PRIZM/data/protein_information/msa/files', MSA_weights_folder='/home/dahala/mnt/PRIZM/data/protein_information/msa/weights', clustal_omega_location=None, EVE_model_folder='/home/dahala/mnt/PRIZM/finetuned_models/EVE', EVE_seeds=['42'], EVE_num_samples_log_proba=200000, EVE_model_parameters_location='/home/dahala/mnt/PRIZM/ModellerModule/proteingym/baselines/trancepteve/trancepteve/utils/eve_model_default_params.json', MSA_recalibrate_probas=False, EVE_recalibrate_probas=True, clinvar_scoring=False)
+Compute scores for DMS: FlA_HIM_RelAct_DM_combi_insilico_library
+Sequence (fragment) gap threshold: 0.5
+Focus column gap threshold: 1.0
+Number of distinct EVE models to be leveraged: 1
+/home/dahala/mnt/PRIZM/finetuned_models/EVE/FlA_HIM_alignment_seed_42
+Model leverages both autoregressive and retrieval inference (Type: TranceptEVE)
+Target seq len is 299, MSA length is 299, start position is 0, end position is 299 and vocab size is 25
+Num sequences in MSA pre filtering: 9519
+Num sequences in MSA post filtering: 7057
+Using weights in /home/dahala/mnt/PRIZM/data/protein_information/msa/weights/FlA_HIM_alignment_weights.npy for sequences in MSA.
+Time taken for 2 with Medium: 19.527713235 seconds
+Namespace(checkpoint='/data/checkpoints/Tranception/Tranception_Large', model_framework='pytorch', batch_size_inference=10, DMS_reference_file_path='/home/dahala/mnt/PRIZM/ModellerModule/reference_files/FlA_reference.csv', DMS_index=2, target_seq=None, DMS_file_name=None, MSA_filename=None, MSA_weight_file_name=None, MSA_start=None, MSA_end=None, UniprotID=None, MSA_threshold_sequence_frac_gaps=None, MSA_threshold_focus_cols_frac_gaps=None, DMS_data_folder='/home/dahala/mnt/PRIZM/data/insilico_libraries', output_scores_folder='/home/dahala/mnt/PRIZM/results/TranceptEVE/TranceptEVE_L', deactivate_scoring_mirror=False, indel_mode=False, scoring_window='optimal', num_workers=8, inference_time_retrieval_type='TranceptEVE', retrieval_weights_manual=False, retrieval_inference_MSA_weight=0.5, retrieval_inference_EVE_weight=0.5, MSA_folder='/home/dahala/mnt/PRIZM/data/protein_information/msa/files', MSA_weights_folder='/home/dahala/mnt/PRIZM/data/protein_information/msa/weights', clustal_omega_location=None, EVE_model_folder='/home/dahala/mnt/PRIZM/finetuned_models/EVE', EVE_seeds=['42'], EVE_num_samples_log_proba=200000, EVE_model_parameters_location='/home/dahala/mnt/PRIZM/ModellerModule/proteingym/baselines/trancepteve/trancepteve/utils/eve_model_default_params.json', MSA_recalibrate_probas=False, EVE_recalibrate_probas=True, clinvar_scoring=False)
+Compute scores for DMS: FlA_HIM_RelAct_DM_combi_insilico_library
+Sequence (fragment) gap threshold: 0.5
+Focus column gap threshold: 1.0
+Number of distinct EVE models to be leveraged: 1
+/home/dahala/mnt/PRIZM/finetuned_models/EVE/FlA_HIM_alignment_seed_42
+Model leverages both autoregressive and retrieval inference (Type: TranceptEVE)
+Target seq len is 299, MSA length is 299, start position is 0, end position is 299 and vocab size is 25
+Num sequences in MSA pre filtering: 9519
+Num sequences in MSA post filtering: 7057
+Using weights in /home/dahala/mnt/PRIZM/data/protein_information/msa/weights/FlA_HIM_alignment_weights.npy for sequences in MSA.
+Time taken for 2 with Large: 30.549535896 seconds

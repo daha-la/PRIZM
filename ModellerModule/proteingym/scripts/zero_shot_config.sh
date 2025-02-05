@@ -11,7 +11,7 @@ export checkpoint_folder="/data/checkpoints"
 # Folder containing the dataset csvs. Comment out the one you are not using
 #export DMS_data_folder_subs="$PRIZM_PATH/data/lowN"
 #export DMS_data_folder_subs="$PRIZM_PATH/data/validation"
-export DMS_data_folder_subs="$PRIZM_PATH/data/inisilico_libraries"
+export DMS_data_folder_subs="$PRIZM_PATH/data/insilico_libraries"
 
 # Folders containing MSA and MSA weights
 export DMS_MSA_data_folder="$PRIZM_PATH/data/protein_information/msa/files"

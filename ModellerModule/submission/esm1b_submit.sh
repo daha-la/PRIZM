@@ -2,8 +2,8 @@
 
 # Set the model name and indices
 MODEL="esm1b"
-FIRST_INDEX=6  # Replace as needed
-LAST_INDEX=6   # Replace as needed
+FIRST_INDEX=2  # Replace as needed
+LAST_INDEX=2   # Replace as needed
 
 # Save path to current directory
 CURRENT_DIR=$(pwd)
