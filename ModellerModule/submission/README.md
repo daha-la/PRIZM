@@ -1,0 +1,10 @@
+# Zero-shot Model Submissions
+This folder contains all the submission scripts for the different models available in PRIZM. Before running any models, please adapt [zero-shot configuration file](../proteingym/scripts/zero_shot_config.sh) to reflect your folder structure and desired PRIZM phase. Also ensure that you have downloaded all model checkpoints (see the [checkpoint folder](../checkpoints/) for more information).
+
+All submission scripts are setup up using "nohup" to execute the scoring scripts in the background, with the log information being fed to the [log file folder](logfiles). If your remote server uses a specific submission approach - such as qsub or slurm - then please adapt all submission scripts to this approach before running them.
+
+When running the submission scripts, please specify the DMS index of your dataset in the reference file. The reference file uses zero-indexing, meaning that the index of the low-N dataset will most likely be 0. You can also run multiple indexes by setting the "LAST_INDEX" variable to the last index desired.
+
+It should be noted that many scoring scripts have additional parameters, so if you wish to change these please do this in the individual scripts in the [scoring scripts folder](../proteingym/scripts/scoring_DMS_zero_shot/).
+
+While most models can be run in arbitrary order, the MSA models require a specific order of execution to work properly, as the [EVE training script](eve_train_submit.sh) script must first be run to obtain both trained EVE models and correct MSA weights. Afterwards, TranceptEVE can be used to score the datasets. Furthermore, to use the evotuned UniRep model (eUniRep), please first fine-tune the UniRep model using the [UniRep evotuning script](unirep_evotune.sh), afterwhich the eUniRep model can be used to score the dataets. As the MSA is the same between the low-N dataset and the _in silico_ libraries, the analysis in the **Exploitation Phase** does not require any new MSA models to be trained/fine-tuned.
