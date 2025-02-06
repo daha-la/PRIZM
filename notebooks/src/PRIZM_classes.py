@@ -702,9 +702,10 @@ class ZeroShotModellerModule:
         if categories:
             for cat in ['sequence', 'structure', 'MSA']:
 
-                # Load the models for the specific category
+                # Load the models for the specific category, making sure only to use the best variants
                 models_cat = self.load_specific_models(model_names=self.name_list[dataset_name],categories=[cat])
-
+                models_cat = [model for model in models_cat if model in best_variants]
+                
                 # Skip the category if no models are found
                 if models_cat == []:
                     print(f'No models found for {cat} for {dataset_name}.')
@@ -784,8 +785,9 @@ class ZeroShotModellerModule:
             # Determine best and worst models for all three categories if categories is True
             for cat in ['sequence', 'structure', 'MSA']:
 
-                # Load the models for the specific category
+                # Load the models for the specific category, making sure only to use the best variants
                 models_cat = self.load_specific_models(model_names=self.name_list[dataset_name],categories=[cat])
+                models_cat = [model for model in models_cat if model in best_variants]
 
                 # Skip the category if no models are found
                 if models_cat == []:
