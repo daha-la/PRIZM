@@ -2,15 +2,15 @@
 
 # Set the model name and indices
 MODEL="protgpt2"
-FIRST_INDEX=0  # Adjust as needed
-LAST_INDEX=1   # Adjust as needed
+FIRST_INDEX=3  # Adjust as needed
+LAST_INDEX=3   # Adjust as needed
 
 # Save path to current directory
 CURRENT_DIR=$(pwd)
 
 # Output files based on model and indices, saved in the existing logfiles directory
 OUTFILE="$CURRENT_DIR/logfiles/${MODEL}_${FIRST_INDEX}-${LAST_INDEX}_$(date +'%Y%m%d_%H%M%S').out"
-ERRFILE="$CURRENT_DIR/logfiles/${MODEL}_${FIRST_INDEX}-${LAST_INDEX}_$(date +'%Y%m%d_%H%M%S').err""
+ERRFILE="$CURRENT_DIR/logfiles/${MODEL}_${FIRST_INDEX}-${LAST_INDEX}_$(date +'%Y%m%d_%H%M%S').err"
 
 # Print start date
 date

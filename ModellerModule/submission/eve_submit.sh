@@ -2,8 +2,8 @@
 
 # Set the model name and indices
 MODEL="eve_score"
-FIRST_INDEX=2  # Adjust as needed
-LAST_INDEX=2   # Adjust as needed
+FIRST_INDEX=3  # Adjust as needed
+LAST_INDEX=3   # Adjust as needed
 
 # Save path to current directory
 CURRENT_DIR=$(pwd)

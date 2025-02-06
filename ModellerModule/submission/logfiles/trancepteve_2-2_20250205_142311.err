@@ -1,100 +1,0 @@
-2025-02-05 14:23:13.693591: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2025-02-05 14:23:13.900799: E tensorflow/stream_executor/cuda/cuda_blas.cc:2981] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
-2025-02-05 14:23:14.745994: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda/lib64
-2025-02-05 14:23:14.746129: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda/lib64
-2025-02-05 14:23:14.746147: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
-/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/Bio/Application/__init__.py:39: BiopythonDeprecationWarning: The Bio.Application modules and modules relying on it have been deprecated.
-
-Due to the on going maintenance burden of keeping command line application
-wrappers up to date, we have decided to deprecate and eventually remove these
-modules.
-
-We instead now recommend building your command line and invoking it directly
-with the subprocess module.
-  warnings.warn(
-/home/dahala/mnt/PRIZM/ModellerModule/proteingym/baselines/trancepteve/trancepteve/utils/msa_utils.py:310: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
-  self.seq_name_to_sequence[msa_df.index[seq_idx]] = msa_df.sequence[seq_idx]
-Sampling EVE log probabilities:   0%|          | 0/200000 [00:00<?, ?it/s]Sampling EVE log probabilities:   2%|▏         | 3015/200000 [00:10<10:53, 301.46it/s]Sampling EVE log probabilities:   3%|▎         | 6030/200000 [00:20<10:48, 299.17it/s]Sampling EVE log probabilities:   5%|▍         | 9039/200000 [00:30<10:36, 299.93it/s]Sampling EVE log probabilities:   6%|▌         | 12051/200000 [00:40<10:25, 300.42it/s]Sampling EVE log probabilities:   8%|▊         | 15069/200000 [00:50<10:14, 300.89it/s]Sampling EVE log probabilities:   9%|▉         | 18087/200000 [01:00<10:05, 300.47it/s]Sampling EVE log probabilities:  11%|█         | 21084/200000 [01:10<09:58, 299.14it/s]Sampling EVE log probabilities:  12%|█▏        | 24085/200000 [01:20<09:47, 299.43it/s]Sampling EVE log probabilities:  14%|█▎        | 27141/200000 [01:30<09:33, 301.34it/s]Sampling EVE log probabilities:  15%|█▌        | 30197/200000 [01:40<09:25, 300.40it/s]Sampling EVE log probabilities:  17%|█▋        | 33207/200000 [01:50<09:14, 300.56it/s]Sampling EVE log probabilities:  18%|█▊        | 36217/200000 [02:00<09:05, 300.17it/s]Sampling EVE log probabilities:  20%|█▉        | 39232/200000 [02:10<08:54, 300.55it/s]Sampling EVE log probabilities:  21%|██        | 42256/200000 [02:20<08:43, 301.08it/s]Sampling EVE log probabilities:  23%|██▎       | 45284/200000 [02:30<08:32, 301.59it/s]Sampling EVE log probabilities:  24%|██▍       | 48312/200000 [02:40<08:22, 301.76it/s]Sampling EVE log probabilities:  26%|██▌       | 51334/200000 [02:50<08:12, 301.89it/s]Sampling EVE log probabilities:  27%|██▋       | 54356/200000 [03:00<08:02, 301.82it/s]Sampling EVE log probabilities:  29%|██▊       | 57373/200000 [03:10<07:54, 300.84it/s]Sampling EVE log probabilities:  30%|███       | 60440/200000 [03:20<07:41, 302.59it/s]Sampling EVE log probabilities:  32%|███▏      | 63507/200000 [03:30<07:32, 301.90it/s]Sampling EVE log probabilities:  33%|███▎      | 66578/200000 [03:40<07:19, 303.43it/s]Sampling EVE log probabilities:  35%|███▍      | 69649/200000 [03:51<07:10, 302.85it/s]Sampling EVE log probabilities:  36%|███▋      | 72668/200000 [04:01<07:00, 302.55it/s]Sampling EVE log probabilities:  38%|███▊      | 75688/200000 [04:11<06:51, 302.38it/s]Sampling EVE log probabilities:  39%|███▉      | 78708/200000 [04:21<06:42, 301.65it/s]Sampling EVE log probabilities:  41%|████      | 81746/200000 [04:31<06:31, 302.27it/s]Sampling EVE log probabilities:  42%|████▏     | 84784/200000 [04:41<06:21, 302.35it/s]Sampling EVE log probabilities:  44%|████▍     | 87810/200000 [04:51<06:12, 301.46it/s]Sampling EVE log probabilities:  45%|████▌     | 90835/200000 [05:01<06:01, 301.75it/s]Sampling EVE log probabilities:  47%|████▋     | 93866/200000 [05:11<05:51, 302.15it/s]Sampling EVE log probabilities:  48%|████▊     | 96897/200000 [05:21<05:41, 302.31it/s]Sampling EVE log probabilities:  50%|████▉     | 99956/200000 [05:31<05:29, 303.37it/s]Sampling EVE log probabilities:  52%|█████▏    | 103015/200000 [05:41<05:19, 303.29it/s]Sampling EVE log probabilities:  53%|█████▎    | 106046/200000 [05:51<05:10, 302.73it/s]Sampling EVE log probabilities:  55%|█████▍    | 109061/200000 [06:01<05:00, 302.28it/s]Sampling EVE log probabilities:  56%|█████▌    | 112074/200000 [06:11<04:51, 301.37it/s]Sampling EVE log probabilities:  58%|█████▊    | 115096/200000 [06:21<04:41, 301.60it/s]Sampling EVE log probabilities:  59%|█████▉    | 118204/200000 [06:31<04:28, 304.32it/s]Sampling EVE log probabilities:  61%|██████    | 121311/200000 [06:42<04:19, 302.99it/s]Sampling EVE log probabilities:  62%|██████▏   | 124345/200000 [06:52<04:09, 303.10it/s]Sampling EVE log probabilities:  64%|██████▎   | 127380/200000 [07:02<03:59, 303.19it/s]Sampling EVE log probabilities:  65%|██████▌   | 130430/200000 [07:12<03:49, 303.72it/s]Sampling EVE log probabilities:  67%|██████▋   | 133480/200000 [07:22<03:39, 303.24it/s]Sampling EVE log probabilities:  68%|██████▊   | 136541/200000 [07:32<03:28, 304.06it/s]Sampling EVE log probabilities:  70%|██████▉   | 139615/200000 [07:42<03:17, 305.02it/s]Sampling EVE log probabilities:  71%|███████▏  | 142688/200000 [07:52<03:08, 303.78it/s]Sampling EVE log probabilities:  73%|███████▎  | 145743/200000 [08:02<02:58, 304.26it/s]Sampling EVE log probabilities:  74%|███████▍  | 148797/200000 [08:12<02:48, 303.35it/s]Sampling EVE log probabilities:  76%|███████▌  | 151826/200000 [08:22<02:38, 303.21it/s]Sampling EVE log probabilities:  77%|███████▋  | 154867/200000 [08:32<02:28, 303.46it/s]Sampling EVE log probabilities:  79%|███████▉  | 157908/200000 [08:42<02:18, 303.39it/s]Sampling EVE log probabilities:  81%|████████  | 161027/200000 [08:52<02:07, 305.92it/s]Sampling EVE log probabilities:  82%|████████▏ | 164146/200000 [09:02<01:57, 305.82it/s]Sampling EVE log probabilities:  84%|████████▎ | 167202/200000 [09:12<01:47, 304.87it/s]Sampling EVE log probabilities:  85%|████████▌ | 170241/200000 [09:22<01:37, 304.56it/s]Sampling EVE log probabilities:  87%|████████▋ | 173294/200000 [09:32<01:27, 304.77it/s]Sampling EVE log probabilities:  88%|████████▊ | 176347/200000 [09:42<01:17, 303.89it/s]Sampling EVE log probabilities:  90%|████████▉ | 179399/200000 [09:52<01:07, 304.24it/s]Sampling EVE log probabilities:  91%|█████████ | 182450/200000 [10:02<00:57, 304.43it/s]Sampling EVE log probabilities:  93%|█████████▎| 185505/200000 [10:12<00:47, 304.74it/s]Sampling EVE log probabilities:  94%|█████████▍| 188560/200000 [10:23<00:37, 304.37it/s]Sampling EVE log probabilities:  96%|█████████▌| 191606/200000 [10:33<00:27, 304.40it/s]Sampling EVE log probabilities:  97%|█████████▋| 194659/200000 [10:43<00:17, 304.65it/s]Sampling EVE log probabilities:  99%|█████████▉| 197712/200000 [10:53<00:07, 303.73it/s]Sampling EVE log probabilities: 100%|██████████| 200000/200000 [11:00<00:00, 302.71it/s]
-Traceback (most recent call last):
-  File "/home/dahala/mnt/PRIZM/ModellerModule/proteingym/baselines/trancepteve/score_trancepteve.py", line 209, in <module>
-    main()
-  File "/home/dahala/mnt/PRIZM/ModellerModule/proteingym/baselines/trancepteve/score_trancepteve.py", line 175, in main
-    DMS_data = pd.read_csv(args.DMS_data_folder + os.sep + DMS_file_name, low_memory=False)
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
-    return _read(filepath_or_buffer, kwds)
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 620, in _read
-    parser = TextFileReader(filepath_or_buffer, **kwds)
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
-    self._engine = self._make_engine(f, self.engine)
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
-    self.handles = get_handle(
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/common.py", line 873, in get_handle
-    handle = open(
-FileNotFoundError: [Errno 2] No such file or directory: '/home/dahala/mnt/PRIZM/data/insilico_libraries/FlA_HIM_RelAct_DMscan_combi_insilico_library.csv'
-2025-02-05 14:34:40.148371: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2025-02-05 14:34:40.352308: E tensorflow/stream_executor/cuda/cuda_blas.cc:2981] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
-2025-02-05 14:34:41.188629: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda/lib64
-2025-02-05 14:34:41.188752: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda/lib64
-2025-02-05 14:34:41.188767: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
-/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/Bio/Application/__init__.py:39: BiopythonDeprecationWarning: The Bio.Application modules and modules relying on it have been deprecated.
-
-Due to the on going maintenance burden of keeping command line application
-wrappers up to date, we have decided to deprecate and eventually remove these
-modules.
-
-We instead now recommend building your command line and invoking it directly
-with the subprocess module.
-  warnings.warn(
-/home/dahala/mnt/PRIZM/ModellerModule/proteingym/baselines/trancepteve/trancepteve/utils/msa_utils.py:310: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
-  self.seq_name_to_sequence[msa_df.index[seq_idx]] = msa_df.sequence[seq_idx]
-Traceback (most recent call last):
-  File "/home/dahala/mnt/PRIZM/ModellerModule/proteingym/baselines/trancepteve/score_trancepteve.py", line 209, in <module>
-    main()
-  File "/home/dahala/mnt/PRIZM/ModellerModule/proteingym/baselines/trancepteve/score_trancepteve.py", line 175, in main
-    DMS_data = pd.read_csv(args.DMS_data_folder + os.sep + DMS_file_name, low_memory=False)
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
-    return _read(filepath_or_buffer, kwds)
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 620, in _read
-    parser = TextFileReader(filepath_or_buffer, **kwds)
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
-    self._engine = self._make_engine(f, self.engine)
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
-    self.handles = get_handle(
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/common.py", line 873, in get_handle
-    handle = open(
-FileNotFoundError: [Errno 2] No such file or directory: '/home/dahala/mnt/PRIZM/data/insilico_libraries/FlA_HIM_RelAct_DMscan_combi_insilico_library.csv'
-2025-02-05 14:35:03.906435: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2025-02-05 14:35:04.114206: E tensorflow/stream_executor/cuda/cuda_blas.cc:2981] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
-2025-02-05 14:35:04.985294: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda/lib64
-2025-02-05 14:35:04.985412: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda/lib64
-2025-02-05 14:35:04.985427: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
-/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/Bio/Application/__init__.py:39: BiopythonDeprecationWarning: The Bio.Application modules and modules relying on it have been deprecated.
-
-Due to the on going maintenance burden of keeping command line application
-wrappers up to date, we have decided to deprecate and eventually remove these
-modules.
-
-We instead now recommend building your command line and invoking it directly
-with the subprocess module.
-  warnings.warn(
-/home/dahala/mnt/PRIZM/ModellerModule/proteingym/baselines/trancepteve/trancepteve/utils/msa_utils.py:310: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
-  self.seq_name_to_sequence[msa_df.index[seq_idx]] = msa_df.sequence[seq_idx]
-Traceback (most recent call last):
-  File "/home/dahala/mnt/PRIZM/ModellerModule/proteingym/baselines/trancepteve/score_trancepteve.py", line 209, in <module>
-    main()
-  File "/home/dahala/mnt/PRIZM/ModellerModule/proteingym/baselines/trancepteve/score_trancepteve.py", line 175, in main
-    DMS_data = pd.read_csv(args.DMS_data_folder + os.sep + DMS_file_name, low_memory=False)
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
-    return _read(filepath_or_buffer, kwds)
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 620, in _read
-    parser = TextFileReader(filepath_or_buffer, **kwds)
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
-    self._engine = self._make_engine(f, self.engine)
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
-    self.handles = get_handle(
-  File "/data/miniconda3/envs/proteingym_env/lib/python3.10/site-packages/pandas/io/common.py", line 873, in get_handle
-    handle = open(
-FileNotFoundError: [Errno 2] No such file or directory: '/home/dahala/mnt/PRIZM/data/insilico_libraries/FlA_HIM_RelAct_DMscan_combi_insilico_library.csv'
