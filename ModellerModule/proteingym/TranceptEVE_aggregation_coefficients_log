@@ -1,0 +1,4 @@
+DMS_id,num_mutants_scored,num_mutants_scored_no_na,processed_MSA_depth,retrieval_inference_MSA_weight,retrieval_inference_EVE_weight
+FlA_HIM_RelAct_DM_combi_insilico_library,32851,32851,7027,9452,0.4,0.7
+FlA_HIM_RelAct_DM_combi_insilico_library,32851,32851,7027,9452,0.4,0.7
+FlA_HIM_RelAct_DM_combi_insilico_library,32851,32851,7027,9452,0.4,0.7
