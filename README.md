@@ -5,6 +5,32 @@ PRIZM provides the nescessary tools to easily implement all elements of the work
 
 Importantly, the best models identified by PRIZM consistently outperforms the worst models across three different enzyme benchmark datasets. Furthermore, while PRIZM was developed for enzyme engineering, the approach also exhibits improved results for a diverse selection of non-enzymatic protein properties.
 
+## Installation
+Before installing PRIZM, make sure either Anaconda or Miniconda is installed, as this will be used to control environment. To install PRIZM, clone the github:
+```bash
+git clone https://github.com/daha-la/PRIZM.git
+```
+To run the notebooks found in the [notebook folder](environments/), please create the following environment:
+```bash
+conda env create -f PRIZM_notebook.yaml
+```
+To run the zero-shot models in the [Modeller Module](ModellerModule/), we recommend installing PRIZM on a remote server, as some of the models require significant computational power. On the remote server, please create the full PRIZM environment:
+```bash
+conda env create -f PRIZM_notebook.yaml
+```
+Please note that this environment require a Linux-based system.
+
+## Run
+PRIZM in ran in multiple phase. In the pre-setup, first ensure that your low-N dataset is formatted correctly and saved in the [low-N folder](data/lowN/). The file should contain three columns:
+- "mutant", a column containing all the mutants in the variant the the format of {WT}{POS}{MUT}, separated by a colon such as M1A:S10A
+- "mutated_sequence", a column containing the sequence of the variant
+- "DMS_score", a column containing the experimental values of the variants
+Secondly, save an AlphaFold structure (or crystal structure without gaps) in the [structure folder](data/protein_information/structure/), and an MSA in the a2m format in the [MSA folder](data/protein_information/msa/files/) (can be created using the [EVcouplings website](https://v2.evcouplings.org/)). Lastly, create a reference file using the Reference Builder in the [notebook folder](notebooks/).
+
+For the **Exploration Phase** of PRIZM, all zero-shot model submission scripts can be found in the [submission folder](/ModellerModule/submission/). Please see the [README file](ModellerModule/submission/README.md) in the submission folder for a more in-depth description. After running all models, please run the **Exploration Phase** part of the [PRIZM notebook](/notebooks/PRIZM.ipynb) to identify the best models that has the highest correlation with your low-N dataset.
+
+In the **Exploitation Phase**, a large _in silico_ library can be created. This dataset is saved in the [_in silico_ library folder](data/insilico_libraries/). This large dataset can then be run using the best model identified in the previous phase. The resulting ranked dataset can be examined using the [PRIZM notebook](/notebooks/PRIZM.ipynb) to select mutants for experimental validation.
+
 ## Collection of Zero-shot models.
 PRIZM leverages pre-trained zero-shot models developed and published by other research groups and adapted in the [ProteinGym](https://github.com/OATML-Markslab/ProteinGym) workflow. We do not claim any rights to their work or associated code.
 | Model           | Model Input  | Repository URL                                                                                      | Reference                                                                                              |
