@@ -16,9 +16,11 @@ conda env create -f PRIZM_notebook.yaml
 ```
 To run the zero-shot models in the [Modeller Module](ModellerModule/), we recommend installing PRIZM on a remote server, as some of the models require significant computational power. On the remote server, please create the full PRIZM environment:
 ```bash
-conda env create -f PRIZM_notebook.yaml
+conda env create -f PRIZM.yaml
+conda activate PRIZM
+pip install evcouplings
 ```
-Please note that this environment require a Linux-based system.
+Please note that the full PRIZM environment require a Linux-based system.
 
 ## Run
 PRIZM in ran in multiple phase. In the pre-setup, first ensure that your low-N dataset is formatted correctly and saved in the [low-N folder](data/lowN/). The file should contain three columns:
