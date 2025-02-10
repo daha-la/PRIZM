@@ -12,7 +12,11 @@ git clone https://github.com/daha-la/PRIZM.git
 ```
 To run the notebooks found in the [notebook folder](environments/), please create the following environment:
 ```bash
-conda env create -f PRIZM_notebook.yaml
+conda env create -f PRIZM_notebook_Mac.yaml
+```
+or
+```bash
+conda env create -f PRIZM_notebook_Windows.yaml
 ```
 To run the zero-shot models in the [Modeller Module](ModellerModule/), we recommend installing PRIZM on a remote server, as some of the models require significant computational power. On the remote server, please create the full PRIZM environment:
 ```bash
@@ -23,7 +27,7 @@ pip install evcouplings
 Please note that the full PRIZM environment require a Linux-based system.
 
 ## Run
-PRIZM in ran in multiple phase. In the pre-setup, first ensure that your low-N dataset is formatted correctly and saved in the [low-N folder](data/lowN/). The file should contain three columns:
+PRIZM consists of multiple phase. In the pre-setup, first ensure that your low-N dataset is formatted correctly and saved in the [low-N folder](data/lowN/). The file should contain three columns:
 - "mutant", a column containing all the mutants in the variant the the format of {WT}{POS}{MUT}, separated by a colon such as M1A:S10A
 - "mutated_sequence", a column containing the sequence of the variant
 - "DMS_score", a column containing the experimental values of the variants
@@ -66,3 +70,5 @@ All validation datasets were extracted from the [ProteinGym](https://github.com/
 | VKOR1_HUMAN_Chiasson_2020_activity| Epoxide reductase                          | Enzyme activity               | [Chiasson, M. A. et al.](https://elifesciences.org/articles/58026)       |
 | YAP1_HUMAN_Araya_2012             | Human Yes-associated protein               | Peptide binding               | [Araya, C. L. et al.](https://www.pnas.org/doi/10.1073/pnas.1209751109)  |
 
+## License
+This project is available under the MIT license found in the [LICENSE file](LICENSE).
