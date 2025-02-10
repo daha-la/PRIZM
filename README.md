@@ -1,12 +1,12 @@
 # PRIZM
-Protein Ranking using Informed Zero-shot Modelling (PRIZM) is a two-phased approach that efficiently examines the mutant space using machine learning (ML) guidance without requiring high-throughput methods. PRIZM combines the specific information of small datasets with the general knowledge of pretrained zero-shot predictors to discover enhanced protein variants, thereby removing the need large datasets common for traditional ML techniques.
+Protein Ranking using Informed Zero-shot Modelling (PRIZM) is a two-phased approach that efficiently examines the mutational space using machine learning (ML) guidance without requiring high-throughput methods. PRIZM combines the specific information of small datasets with the general knowledge of pretrained zero-shot predictors to discover enhanced protein variants, thereby removing the need for large datasets common for traditional ML techniques.
 
-PRIZM provides the nescessary tools to easily implement all elements of the workflow. In the **Exploration Phase**, the protein information of an experimental low-N dataset is parsed through a diverse collection of zero-shot models based on the [ProteinGym](https://github.com/OATML-Markslab/ProteinGym) code. The resulting predicted scores are correlated with the original experimental values, identifying the model most suitable for predicting better mutants. In the **Exploitation Phase**, PRIZM can be used to create, predict, and rank a large _in silico_ mutant dataset using the models identified as most suitable in the previous phase. Importantly, visualization tools are also provided, such as the plotting of individual correlations, comparisons of model performances, or the construction of single-mutant landscapes. For more information on all tools available in PRIZM, please see the example notebook.
+PRIZM provides the necessary tools to easily implement all elements of the workflow. In the **Exploration Phase**, the protein information of an experimental low-N dataset is parsed through a diverse collection of zero-shot models based on the [ProteinGym](https://github.com/OATML-Markslab/ProteinGym) code. The resulting predicted scores are correlated with the original experimental values, identifying the model most suitable for predicting better mutants. In the **Exploitation Phase**, PRIZM can be used to create, predict, and rank a large _in silico_ mutant dataset using the models identified as most suitable in the previous phase. Visualization tools are also provided, such as the plotting of individual correlations, comparisons of model performances, or the construction of single-mutant landscapes. For more information on all tools available in PRIZM, please see the example notebook.
 
-Importantly, the best models identified by PRIZM consistently outperforms the worst models across three different enzyme benchmark datasets. Furthermore, while PRIZM was developed for enzyme engineering, the approach also exhibits improved results for a diverse selection of non-enzymatic protein properties.
+Importantly, the best models identified by PRIZM consistently outperform the worst models across three different enzyme benchmark datasets. Furthermore, while PRIZM was developed for enzyme engineering, the approach also exhibits improved results for a diverse selection of non-enzymatic protein properties.
 
 ## Installation
-Before installing PRIZM, make sure either Anaconda or Miniconda is installed, as this will be used to control environment. To install PRIZM, clone the github:
+Before installing PRIZM, make sure either Anaconda or Miniconda is installed, as this will be used to manage the environments. To install PRIZM, clone the github:
 ```bash
 git clone https://github.com/daha-la/PRIZM.git
 ```
@@ -24,10 +24,10 @@ conda env create -f PRIZM.yaml
 conda activate PRIZM
 pip install evcouplings
 ```
-Please note that the full PRIZM environment require a Linux-based system.
+Please note that the full PRIZM environment requires a Linux-based system.
 
 ## Run
-PRIZM consists of multiple phase. In the pre-setup, first ensure that your low-N dataset is formatted correctly and saved in the [low-N folder](data/lowN/). The file should contain three columns:
+PRIZM consists of multiple phases. In the pre-setup, first ensure that your low-N dataset is formatted correctly and saved in the [low-N folder](data/lowN/). Your dataset file should contain three columns:
 - "mutant", a column containing all the mutants in the variant the the format of {WT}{POS}{MUT}, separated by a colon such as M1A:S10A
 - "mutated_sequence", a column containing the sequence of the variant
 - "DMS_score", a column containing the experimental values of the variants
@@ -69,6 +69,9 @@ All validation datasets were extracted from the [ProteinGym](https://github.com/
 | SPIKE_SARS2_Starr_2020_binding    | SARS-CoV-2 spike receptor binding domain   | Receptor binding              | [Starr, T. N. et al.](https://pubmed.ncbi.nlm.nih.gov/32841599/)         |
 | VKOR1_HUMAN_Chiasson_2020_activity| Epoxide reductase                          | Enzyme activity               | [Chiasson, M. A. et al.](https://elifesciences.org/articles/58026)       |
 | YAP1_HUMAN_Araya_2012             | Human Yes-associated protein               | Peptide binding               | [Araya, C. L. et al.](https://www.pnas.org/doi/10.1073/pnas.1209751109)  |
+
+## Acknowledgments
+PRIZM was developed based on multiple open-source zero-shot models and builds on code from the [ProteinGym repository](https://github.com/OATML-Markslab/ProteinGym). We thank the authors of ProteinGym for making their framework publicly available under the MIT License.
 
 ## License
 This project is available under the MIT license found in the [LICENSE file](LICENSE).
