@@ -37,6 +37,14 @@ For the **Exploration Phase** of PRIZM, all zero-shot model submission scripts c
 
 In the **Exploitation Phase**, a large _in silico_ library can be created. This dataset is saved in the [_in silico_ library folder](data/insilico_libraries/), and this large dataset can then be run using the best model identified in the previous phase. Please remember to update the reference file using the [Reference Builder notebook](notebooks/Reference_builder.ipynb) and change the data location variable in the [zero-shot configuration file](ModellerModule/proteingym/scripts/zero_shot_config.sh). The resulting ranked dataset can be examined using the [PRIZM notebook](/notebooks/PRIZM.ipynb) to select mutants for experimental validation.
 
+## Installation
+To install PRIZM:
+- Make sure Anaconda or Miniconda is installed
+- Clone this GitHub repository
+- Make the following two conda environments
+```bash
+conda 
+
 ## Collection of Zero-shot models.
 PRIZM leverages pre-trained zero-shot models developed and published by other research groups and adapted in the [ProteinGym](https://github.com/OATML-Markslab/ProteinGym) workflow. We do not claim any rights to their work or associated code.
 | Model           | Model Input  | Repository URL                                                                                      | Reference                                                                                              |

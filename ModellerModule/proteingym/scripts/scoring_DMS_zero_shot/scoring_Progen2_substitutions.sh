@@ -10,7 +10,7 @@ do
     export DMS_index=$i
 
     start_time=$(date +%s.%N)
-    export Progen2_model_name_or_path="$$checkpoint_folder/Progen2/progen2-small"
+    export Progen2_model_name_or_path="$checkpoint_folder/Progen2/progen2-small"
     export output_scores_folder="${DMS_output_score_folder_subs}/Progen2/small"
     
     python baselines/progen2/compute_fitness.py \
