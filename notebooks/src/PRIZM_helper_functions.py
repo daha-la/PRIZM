@@ -56,7 +56,7 @@ def varnumb(n: int,k: int) -> int:
     numb=combi*(20**k-1)
     return numb
 
-def reference_builder(numb_prot: list[str], protein_name: list[str], wt_sequence: list[str], DMS_binarization_cutoff: list[float], MSA_name: list[str], MSA_start: list[int], MSA_end: list[int], MSA_num_seqs: list[float], pdb_file: list[str],
+def reference_builder(numb_prot: list[str], protein_name: list[str], wt_sequence: list[str], DMS_binarization_cutoff: list[float], MSA_name: list[str], MSA_num_seqs: list[float], pdb_file: list[str],
                       reference_name: list[str], custom_identifier: list[str]):
     """
     This function builds a reference file that contains all relevant information about the proteins of interest. This reference file
@@ -68,8 +68,6 @@ def reference_builder(numb_prot: list[str], protein_name: list[str], wt_sequence
         wt_sequence (list[str]): The wild-type sequences of the proteins of interest
         DMS_binarization_cutoff (list[float]): The cutoffs for binarizing DMS data, often just WT experimental value
         MSA_name (list[str]): The names of the MSA files without the file extension
-        MSA_start (list[int]): The starting positions of the proteins of interest in the MSAs
-        MSA_end (list[int]): The ending positions of the proteins of interest in the MSAs
         MSA_num_seqs (list[float]): The numbers of sequences in the MSAs
         pdb_file (list[str]): The names of the pdb files
         custom_identifier (list[str]): Custom identifiers for the proteins of interest
@@ -105,9 +103,9 @@ def reference_builder(numb_prot: list[str], protein_name: list[str], wt_sequence
             'seq_len': len(wt_sequence[i]),
             'DMS_binarization_cutoff': DMS_binarization_cutoff[i],
             'MSA_filename': MSA_name[i]+'.a2m',
-            'MSA_start': MSA_start[i],
-            'MSA_end': MSA_end[i],
-            'MSA_len': MSA_end[i] - MSA_start[i] + 1,
+            'MSA_start': 1,
+            'MSA_end': len(wt_sequence[i]),
+            'MSA_len': len(wt_sequence[i]),
             'MSA_num_seqs': MSA_num_seqs[i],
             'weight_file_name': f"{msa_}_weights.npy",
             'pdb_file': pdb_file[i]

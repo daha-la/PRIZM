@@ -28,7 +28,7 @@ do
 
     start_time=$(date +%s.%N)
     
-    export checkpoint="$checkpoint_folders/Tranception/Tranception_Medium"
+    export checkpoint="$checkpoint_folder/Tranception/Tranception_Medium"
     export output_scores_folder=${DMS_output_score_folder_subs}/Tranception/Tranception_M
     
     python baselines/tranception/score_tranception_proteingym.py \
