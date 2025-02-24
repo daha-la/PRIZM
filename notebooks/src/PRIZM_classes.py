@@ -520,7 +520,7 @@ class ZeroShotModellerModule:
 
         # Save the DataFrame in the class for the specified dataset
         self.metric_results[dataset_name] = metric_results_df
-        self.best_variants[dataset_name] = self.get_best_variants_iteration(dataset_name = dataset_name, metrics = best_metrics, met_extremas = best_met_extremas)
+        self.best_variants[dataset_name] = self.get_best_variants_iteration(dataset_name = dataset_name, metrics = best_metrics, met_extremas = best_met_extremas,iterations=iterations,ite_size=ite_size)
 
 
     def get_best_variants(self, dataset_name: str,
@@ -584,7 +584,7 @@ class ZeroShotModellerModule:
         
         return best_variants
     
-    def get_best_variants_iteration(self, dataset_name: str, iterations: int = 10,
+    def get_best_variants_iteration(self, dataset_name: str, iterations: int = 10,ite_size: int = 40,
                           metrics: list = ['spearmanr', 'average_precision'], met_extremas: list = [[0,0],[1,1]]) -> dict:
         """
         Select the best variant for each model based on normalized metrics and save them in the class.
@@ -593,6 +593,7 @@ class ZeroShotModellerModule:
         Args:
             dataset_name (str): The name of the dataset to process.
             iterations (int): The number of iterations for the dataset. Default is 10.
+            ite_size (int): The data size of each iteration. Default is 40.
             metrics (list): The metrics to use for determining the best and worst models. Default is ['spearmanr', 'average_precision'].
             met_extremas (list): The extremas for the metrics. First list is the minimums, second list is the maximums. Default is [[0,0],[1,1]].
 
@@ -611,10 +612,10 @@ class ZeroShotModellerModule:
 
             # Correct the minimum for average precision, as a random model would have an average precision equal to the mean of the binary scores
             if 'average_precision' == metrics[0]:
-                ap_random = self.datasets[dataset_name]['exp_data'].iloc[i*40:(i+1)*40].DMS_score_bin.mean()
+                ap_random = self.datasets[dataset_name]['exp_data'].iloc[i*ite_size:(i+1)*ite_size].DMS_score_bin.mean()
                 met_extremas[0] = [ap_random,0]
             if 'average_precision' == metrics[1]:
-                ap_random = self.datasets[dataset_name]['exp_data'].iloc[i*40:(i+1)*40].DMS_score_bin.mean()
+                ap_random = self.datasets[dataset_name]['exp_data'].iloc[i*ite_size:(i+1)*ite_size].DMS_score_bin.mean()
                 met_extremas[0] = [0,ap_random]
 
             # Iterate over all models initialized for the dataset
@@ -1539,12 +1540,12 @@ class PlottingModule:
         plt.show()
 
     @staticmethod
-    def bar_metrics(zsm,dataset_names: list, metric: str, ylabel: str, xlabel: str, alternative_names: list = None,
+    def bar_metrics(zsm,dataset_names: list, metric: str, ylabel: str, xlabel: str, alternative_names: list = None, suffix: str = '_selection',
                     cat: str='overall', ylimit: float = 1.135, figsize: Tuple = (12,9), best_color: str = '#df9966', worst_color: str = '#516f84',
                     save_path: str = '../figures/metrics/', dpi: int = 300, custom_name: str = None, format: str = 'png'):
         """
         Generate a bar plot comparing the full metrics of the best and worst models from the 10 iterations for different datasets.
-        Require that the iteration datasets are named 'dataset_name_selection'.
+        Require that the iteration datasets are named 'dataset_name_{suffix}'.
         Will use the best and worst models from the 'overall' category to extract the metrics from the metric_results dictionary of the full dataset.
         Currently only supports 10 iterations.
         The plot will be saved as a PNG file.
@@ -1556,6 +1557,7 @@ class PlottingModule:
             ylabel (str): The label for metric property used to compare the models.
             xlabel (str): The label for the x-axis, denoting the property used to group the datasets.
             alternative_names (list): The alternative names for the datasets. Default is None.
+            suffix (str): The suffix for the iteration datasets. Default is '_selection'.
             cat (str): The category to extract the best and worst models from. Default is 'overall'.
             ylimit (float): The limit for the y-axis. Default is 1.135.
             figsize (Tuple): The figure size. Default is (12,9).
@@ -1579,8 +1581,8 @@ class PlottingModule:
 
             # Iterate over the 10 iterations
             for j in range(10):
-                best_model = zsm.best_models[name+'_selection'][f'ite{j}'][cat]
-                worst_model = zsm.worst_models[name+'_selection'][f'ite{j}'][cat]
+                best_model = zsm.best_models[name+suffix][f'ite{j}'][cat]
+                worst_model = zsm.worst_models[name+suffix][f'ite{j}'][cat]
                 scatter_best[j] = zsm.metric_results[name][(f'{metric}','avg')][best_model]
                 scatter_worst[j] = zsm.metric_results[name][(f'{metric}','avg')][worst_model]
 
