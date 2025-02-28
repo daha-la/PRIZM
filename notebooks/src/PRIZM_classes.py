@@ -1540,7 +1540,7 @@ class PlottingModule:
         plt.show()
 
     @staticmethod
-    def bar_metrics(zsm,dataset_names: list, metric: str, ylabel: str, xlabel: str, alternative_names: list = None, suffix: str = '_selection',
+    def bar_metrics(zsm,dataset_names: list, metric: str, ylabel: str, xlabel: str, alternative_names: list = None, suffix: str = '_selection',iteration_names: str = None,
                     cat: str='overall', ylimit: float = 1.135, figsize: Tuple = (12,9), best_color: str = '#df9966', worst_color: str = '#516f84',
                     save_path: str = '../figures/metrics/', dpi: int = 300, custom_name: str = None, format: str = 'png'):
         """
@@ -1558,6 +1558,7 @@ class PlottingModule:
             xlabel (str): The label for the x-axis, denoting the property used to group the datasets.
             alternative_names (list): The alternative names for the datasets. Default is None.
             suffix (str): The suffix for the iteration datasets. Default is '_selection'.
+            iteration_names (str): The name of the iteration datasets. Default is None.
             cat (str): The category to extract the best and worst models from. Default is 'overall'.
             ylimit (float): The limit for the y-axis. Default is 1.135.
             figsize (Tuple): The figure size. Default is (12,9).
@@ -1579,10 +1580,16 @@ class PlottingModule:
             scatter_best = np.zeros(10)
             scatter_worst = np.zeros(10)
 
+            # Set the iteration name
+            if iteration_names is None:
+                iteration_name = name+suffix
+            else:
+                iteration_name = iteration_names[i]
+                
             # Iterate over the 10 iterations
             for j in range(10):
-                best_model = zsm.best_models[name+suffix][f'ite{j}'][cat]
-                worst_model = zsm.worst_models[name+suffix][f'ite{j}'][cat]
+                best_model = zsm.best_models[iteration_name][f'ite{j}'][cat]
+                worst_model = zsm.worst_models[iteration_name][f'ite{j}'][cat]
                 scatter_best[j] = zsm.metric_results[name][(f'{metric}','avg')][best_model]
                 scatter_worst[j] = zsm.metric_results[name][(f'{metric}','avg')][worst_model]
 
