@@ -56,8 +56,8 @@ models:
     score_column: "prediction_epistatic"
   - name: Tranception
     path: Tranception
-    category: sequence
-    color: "#F7A96A"
+    category: MSA
+    color: "#e0863d"
     variants:
       - name: S
         path: Tranception/Tranception_S
@@ -68,7 +68,7 @@ models:
       - name: L
         path: Tranception/Tranception_L
         score_column: "avg_score"
-  - name: Tranception_no_ret
+  - name: TranceptionNoRet #Tranception_no_ret
     path: Tranception_no_retrieval
     category: sequence
     color: "#F7A96A"
