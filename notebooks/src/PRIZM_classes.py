@@ -11,8 +11,9 @@ import itertools
 from scipy.stats import spearmanr, pearsonr
 from sklearn.metrics import roc_auc_score, average_precision_score, ndcg_score
 
+
 # Import the necessary functions from PRIZM_helper_functions.py
-from .PRIZM_helper_functions import extract_mutant_info, varnumb, hit_rate
+from .PRIZM_helper_functions import extract_mutant_info, varnumb, hit_rate, one_sided_ttest
 
 # Define the amino acids, their order, and a dictionary to map amino acids to indices
 amino_acids = ['A','R','N','D','C','E','Q','G','H','I','L','K','M','F','P','S','T','W','Y','V']
@@ -1592,6 +1593,10 @@ class PlottingModule:
                 worst_model = zsm.worst_models[iteration_name][f'ite{j}'][cat]
                 scatter_best[j] = zsm.metric_results[name][(f'{metric}','avg')][best_model]
                 scatter_worst[j] = zsm.metric_results[name][(f'{metric}','avg')][worst_model]
+            
+            # Examine whether the performance best and worst models is significantly different
+            significant_, p_val = one_sided_ttest(scatter_best, scatter_worst)
+            print(f'Significant difference between best and worst models for {name}: {significant_} (p-value: {p_val})')
 
             # Use the average metric over all iterations to create the bar plot with errorbars, coloring the best models in dark blue and the worst models in light brown
             # For the first dataset, add the legend
@@ -1609,6 +1614,17 @@ class PlottingModule:
                 # Add scatter points of the metrics for the best and worst models from the 10 iterations, with some random noise to avoid overlap
                 ax.scatter(i-0.2+np.random.uniform(low=-1,high=1,size=10)/10,scatter_best,color='darkgray',alpha=0.8,s=100,edgecolors='k')
                 ax.scatter(i+0.2+np.random.uniform(low=-1,high=1,size=10)/10,scatter_worst,color='darkgray',alpha=0.8,s=100,edgecolors='k')
+
+            # Add a horizontal line and star to indicate the significance threshold
+            if significant_:
+                y_star = max(scatter_best.mean()+scatter_best.std(), scatter_worst.mean()+scatter_worst.std()) + 0.08
+                y_hline = max(scatter_best.mean()+scatter_best.std(), scatter_worst.mean()+scatter_worst.std()) + 0.05
+                y_vline = max(scatter_best.mean()+scatter_best.std(), scatter_worst.mean()+scatter_worst.std()) + 0.02
+                ax.plot([i-0.2,i+0.2],[y_hline,y_hline],color='black',linestyle='-',linewidth=2,zorder=2)
+                ax.plot([i-0.2,i-0.2],[y_vline,y_hline],color='black',linestyle='-',linewidth=2,zorder=2)
+                ax.plot([i+0.2,i+0.2],[y_vline,y_hline],color='black',linestyle='-',linewidth=2,zorder=2)
+                ax.scatter(i, y_star, color='grey', s=200, edgecolor='black', marker='*', zorder=3)
+
             
 
         # Set the x-ticks and labels, using the alternative names if provided

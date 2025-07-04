@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import os
+from scipy.stats import ttest_1samp, ttest_ind
+from typing import Literal
 
 def hit_rate(true_bin: np.ndarray, predicted_labels: np.ndarray, k: int = 10) -> float:
     """
@@ -114,3 +116,82 @@ def reference_builder(numb_prot: list[str], protein_name: list[str], wt_sequence
     reference_df = pd.DataFrame.from_dict(reference, orient='index')
     reference_df.to_csv(f"../ModellerModule/reference_files/"+reference_name, index=False)
     return reference_df
+
+def one_sided_ttest_grouped(
+    df: pd.DataFrame,
+    group_col: str,
+    value_col: str,
+    popmean: float = 1.0,
+    sig_threshold: float = 0.05,
+    alternative: str = "greater"
+) -> pd.DataFrame:
+    """
+    Perform one-sided t-tests on groups in a DataFrame.
+
+    Args:
+        df (pd.DataFrame): DataFrame containing the data
+        group_col (str): Column to group by (e.g., 'Protein')
+        value_col (str): Column with measurement values (e.g., 'Relative_Activity')
+        popmean (float): Population mean to test against (default 1.0)
+        sig_threshold (float): Significance threshold (default 0.05)
+        alternative (str): "greater" or "less", defining direction of alternative hypothesis
+
+    Returns:
+        pd.DataFrame: DataFrame with t-statistics, one-sided p-values, and significance flags
+    """
+    results = []
+
+    for name, group in df.groupby(group_col):
+        values = group[value_col].values
+        t_stat, p_val = ttest_1samp(values, popmean=popmean)
+
+        # Adjust for one-sided test
+        if alternative == "greater":
+            p_val = p_val / 2 if t_stat > 0 else 1.0
+        elif alternative == "less":
+            p_val = p_val / 2 if t_stat < 0 else 1.0
+        else:
+            raise ValueError("alternative must be 'greater' or 'less'")
+
+        results.append({
+            group_col: name,
+            "t_stat": t_stat,
+            "p_val_one_sided": p_val,
+            "Significant": p_val < sig_threshold
+        })
+
+    return pd.DataFrame(results)
+
+
+def one_sided_ttest(
+    sample1: np.ndarray,
+    sample2: np.ndarray,
+    sig_threshold: float = 0.05,
+    equal_var: bool = False,
+    alternative: Literal["greater", "less"] = "greater"
+) -> bool:
+    """
+    Perform a one-sided two-sample t-test.
+
+    Args:
+        sample1 (np.ndarray): Sample from test group
+        sample2 (np.ndarray): Sample from control group
+        sig_threshold (float): Significance threshold (default 0.05)
+        equal_var (bool): Assume equal variance (default False for Welch's t-test)
+        alternative (str): 'greater' or 'less', direction of test: 
+                           - 'greater': sample1 > sample2
+                           - 'less': sample1 < sample2
+
+    Returns:
+        bool: True if difference is statistically significant in specified direction
+    """
+    t_stat, p_val_two_sided = ttest_ind(sample1, sample2, equal_var=equal_var)
+
+    if alternative == "greater":
+        p_val = p_val_two_sided / 2 if t_stat > 0 else 1.0
+    elif alternative == "less":
+        p_val = p_val_two_sided / 2 if t_stat < 0 else 1.0
+    else:
+        raise ValueError("alternative must be 'greater' or 'less'")
+
+    return p_val < sig_threshold, p_val
