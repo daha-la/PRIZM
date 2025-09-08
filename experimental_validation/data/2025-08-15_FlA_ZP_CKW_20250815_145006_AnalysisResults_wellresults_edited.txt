@@ -1,0 +1,97 @@
+#	Well	Buffer	Salt	Ligand	Protein	Task	Tm B	dTm B	B Fit	Tm B Start	Tm B End	Flag Indicator	Single/Multiple	Analysis Mode	Tm D	dTm D	High Background	High NPC	Algorithm Failure	Sparse Data	Low Signal	Poor Fit	Replicate Mismatch	Multiple Melts	Reference Mismatch	Analysis Group	Experiment File Name
+1	A01			C2	FlA_WT	Sample	56.387486		1.2063617	47.0605	63.781456	0	Single	Manual	56.858227											AG 1	2025-08-15_FlA_ZP_CKW.eds
+2	A02			C2	FlA_WT	Sample	56.914474		1.0283378	47.0605	63.781456	0	Single	Manual	57.30324											AG 1	2025-08-15_FlA_ZP_CKW.eds
+3	A03			C2	FlA_WT	Sample	56.75261		1.0608602	47.0605	63.781456	0	Single	Manual	57.153755											AG 1	2025-08-15_FlA_ZP_CKW.eds
+4	A04			rxn	FlA_WT	Sample	56.69321		1.0236524	49.089146	62.55197	0	Single	Manual	56.856976											AG 1	2025-08-15_FlA_ZP_CKW.eds
+5	A05			rxn	FlA_WT	Sample	56.846786		1.0539249	48.597355	61.261017	0	Single	Manual	57.406975											AG 1	2025-08-15_FlA_ZP_CKW.eds
+6	A06			rxn	FlA_WT	Sample	56.82812		1.0537437	48.597355	61.261017	0	Single	Manual	57.258793											AG 1	2025-08-15_FlA_ZP_CKW.eds
+7	A07			SAM	FlA_WT	Sample	56.829678		1.0625452	48.720303	63.719982	0	Single	Manual	57.725056											AG 1	2025-08-15_FlA_ZP_CKW.eds
+8	A08			SAM	FlA_WT	Sample	56.654064		1.1042917	48.720303	63.719982	0	Single	Manual	57.576786											AG 1	2025-08-15_FlA_ZP_CKW.eds
+9	A09			SAM	FlA_WT	Sample	56.701138		1.0481926	48.720303	63.719982	0	Single	Manual	57.593994											AG 1	2025-08-15_FlA_ZP_CKW.eds
+10	A10											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+11	A11											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+12	A12											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+13	B01			C2	FlA_H191E	Sample	56.85472		1.2392895	41.847435	66.32125	0	Single	Auto	57.154903											AG 1	2025-08-15_FlA_ZP_CKW.eds
+14	B02			C2	FlA_H191E	Sample	57.260105		1.1918566	43.64551	66.92061	0	Single	Auto	57.45158											AG 1	2025-08-15_FlA_ZP_CKW.eds
+15	B03			C2	FlA_H191E	Sample	57.128147		1.0140358	43.439743	66.822975	0	Single	Auto	57.302147											AG 1	2025-08-15_FlA_ZP_CKW.eds
+16	B04			rxn	FlA_H191E	Sample	58.751034		1.1678214	44.938667	69.92075	0	Single	Auto	57.89571											AG 1	2025-08-15_FlA_ZP_CKW.eds
+17	B05			rxn	FlA_H191E	Sample	57.71637		1.0380032	45.112072	67.16554	0	Single	Auto	57.999714											AG 1	2025-08-15_FlA_ZP_CKW.eds
+18	B06			rxn	FlA_H191E	Sample	58.158592		1.07886	45.61102	68.06365	0	Single	Auto	58.147896											AG 1	2025-08-15_FlA_ZP_CKW.eds
+19	B07			SAM	FlA_H191E	Sample	57.237003		1.0291394	43.628635	67.09299	0	Single	Auto	57.725056											AG 1	2025-08-15_FlA_ZP_CKW.eds
+20	B08			SAM	FlA_H191E	Sample	57.165985		1.0503873	43.229244	67.09299	0	Single	Auto	57.87333											AG 1	2025-08-15_FlA_ZP_CKW.eds
+21	B09			SAM	FlA_H191E	Sample	57.123356		1.097711	42.438698	66.51639	0	Single	Auto	57.74235											AG 1	2025-08-15_FlA_ZP_CKW.eds
+22	B10											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+23	B11											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+24	B12											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+25	C01			C2	FlA_H32L	Sample	57.73408		1.2624377	42.147114	67.71975	0	Single	Auto	58.34161											AG 1	2025-08-15_FlA_ZP_CKW.eds
+26	C02			C2	FlA_H32L	Sample	57.898357		1.2549095	42.3469	67.91954	0	Single	Auto	58.638287											AG 1	2025-08-15_FlA_ZP_CKW.eds
+27	C03			C2	FlA_H32L	Sample	57.88912		1.2072577	42.44046	67.52248	0	Single	Auto	58.63766											AG 1	2025-08-15_FlA_ZP_CKW.eds
+28	C04			rxn	FlA_H32L	Sample	59.348347		1.0456153	37.943684	71.119896	0	Single	Auto	56.411804											AG 1	2025-08-15_FlA_ZP_CKW.eds
+29	C05			rxn	FlA_H32L	Sample	59.27314		1.0202348	43.814808	70.35881	0	Single	Auto	59.481556											AG 1	2025-08-15_FlA_ZP_CKW.eds
+30	C06			rxn	FlA_H32L	Sample	58.834667		1.0147169	44.01439	69.06155	0	Single	Auto	59.62974											AG 1	2025-08-15_FlA_ZP_CKW.eds
+31	C07			SAM	FlA_H32L	Sample	57.254883		1.0149356	43.32909	68.29117	0	Single	Auto	57.576786											AG 1	2025-08-15_FlA_ZP_CKW.eds
+32	C08			SAM	FlA_H32L	Sample	57.18175		1.0260106	42.430454	68.19132	0	Single	Auto	57.87333											AG 1	2025-08-15_FlA_ZP_CKW.eds
+33	C09			SAM	FlA_H32L	Sample	57.015778		1.1032991	41.53953	66.916016	0	Single	Auto	57.890713											AG 1	2025-08-15_FlA_ZP_CKW.eds
+34	C10											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+35	C11											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+36	C12											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+37	D01			C2	FlA_G37D	Sample	56.08604		1.0206127	39.849575	66.02157	0	Single	Auto	56.264874											AG 1	2025-08-15_FlA_ZP_CKW.eds
+38	D02			C2	FlA_G37D	Sample	56.13585		1.0300174	42.047222	65.821785	0	Single	Auto	56.41321											AG 1	2025-08-15_FlA_ZP_CKW.eds
+39	D03			C2	FlA_G37D	Sample	55.46212		1.2778742	24.953	65.02426	0	Single	Auto	55.81824											AG 1	2025-08-15_FlA_ZP_CKW.eds
+40	D04			rxn	FlA_G37D	Sample	56.51189		1.0167085	33.14712	66.723045	0	Single	Auto	56.560192											AG 1	2025-08-15_FlA_ZP_CKW.eds
+41	D05			rxn	FlA_G37D	Sample	57.1465		1.0505182	41.320072	67.96386	0	Single	Auto	56.2215											AG 1	2025-08-15_FlA_ZP_CKW.eds
+42	D06			rxn	FlA_G37D	Sample	57.12099		1.0917782	38.32639	68.66239	0	Single	Auto	55.925133											AG 1	2025-08-15_FlA_ZP_CKW.eds
+43	D07			SAM	FlA_G37D	Sample	55.72722		1.0294524	42.130913	65.59527	0	Single	Auto	56.538883											AG 1	2025-08-15_FlA_ZP_CKW.eds
+44	D08			SAM	FlA_G37D	Sample	55.8405		1.0405301	42.23076	65.29572	0	Single	Auto	56.687157											AG 1	2025-08-15_FlA_ZP_CKW.eds
+45	D09			SAM	FlA_G37D	Sample	55.766796		1.0407352	42.538605	64.81796	0	Single	Auto	56.555477											AG 1	2025-08-15_FlA_ZP_CKW.eds
+46	D10											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+47	D11											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+48	D12											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+49	E01			C2	FlA_S166A	Sample	55.35573		1.018743	40.64872	65.42221	0	Single	Auto	55.374847											AG 1	2025-08-15_FlA_ZP_CKW.eds
+50	E02			C2	FlA_S166A	Sample	55.52722		1.1774397	41.248077	66.02157	0	Single	Auto	55.523186											AG 1	2025-08-15_FlA_ZP_CKW.eds
+51	E03			C2	FlA_S166A	Sample	55.316788		1.2576939	40.54182	66.223404	0	Single	Auto	55.224678											AG 1	2025-08-15_FlA_ZP_CKW.eds
+52	E04			rxn	FlA_S166A	Sample	56.04931		1.1418402	42.34053	66.922905	0	Single	Auto	56.263412											AG 1	2025-08-15_FlA_ZP_CKW.eds
+53	E05			rxn	FlA_S166A	Sample	55.73566		1.1056973	42.816914	66.16765	0	Single	Auto	55.925133											AG 1	2025-08-15_FlA_ZP_CKW.eds
+54	E06			rxn	FlA_S166A	Sample	55.636982		1.2911032	41.81902	64.37144	0	Single	Auto	55.925133											AG 1	2025-08-15_FlA_ZP_CKW.eds
+55	E07			SAM	FlA_S166A	Sample	55.75745		1.1191972	40.43349	66.19436	0	Single	Auto	56.24234											AG 1	2025-08-15_FlA_ZP_CKW.eds
+56	E08			SAM	FlA_S166A	Sample	55.954453		1.1567419	42.430454	65.79496	0	Single	Auto	56.39061											AG 1	2025-08-15_FlA_ZP_CKW.eds
+57	E09			SAM	FlA_S166A	Sample	56.600082		1.0797223	40.340645	66.11676	0	Single	Auto	57.000557											AG 1	2025-08-15_FlA_ZP_CKW.eds
+58	E10											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+59	E11											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+60	E12											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+61	F01			C2	FlA_Quad	Sample	57.318443		1.2675039	42.446796	66.620926	0	Single	Auto	57.45158											AG 1	2025-08-15_FlA_ZP_CKW.eds
+62	F02			C2	FlA_Quad	Sample	57.90059		1.0350329	43.345833	67.81965	0	Single	Auto	57.748257											AG 1	2025-08-15_FlA_ZP_CKW.eds
+63	F03			C2	FlA_Quad	Sample	56.98161		1.3029791	41.84089	66.42326	0	Single	Auto	57.302147											AG 1	2025-08-15_FlA_ZP_CKW.eds
+64	F04			rxn	FlA_Quad	Sample	57.564102		1.3628815	44.838737	66.42326	0	Single	Auto	57.74732											AG 1	2025-08-15_FlA_ZP_CKW.eds
+65	F05			rxn	FlA_Quad	Sample	57.485916		1.3515714	43.814808	66.76639	0	Single	Auto	57.703342											AG 1	2025-08-15_FlA_ZP_CKW.eds
+66	F06			rxn	FlA_Quad	Sample	57.361465		1.3372284	43.31586	66.06786	0	Single	Auto	57.703342											AG 1	2025-08-15_FlA_ZP_CKW.eds
+67	F07			SAM	FlA_Quad	Sample	57.858498		1.199689	43.82833	68.69056	0	Single	Auto	57.87333											AG 1	2025-08-15_FlA_ZP_CKW.eds
+68	F08			SAM	FlA_Quad	Sample	57.805313		1.2251055	42.73	67.29269	0	Single	Auto	58.0216											AG 1	2025-08-15_FlA_ZP_CKW.eds
+69	F09			SAM	FlA_Quad	Sample	58.3768		1.1501381	44.237034	67.71528	0	Single	Auto	58.78087											AG 1	2025-08-15_FlA_ZP_CKW.eds
+70	F10											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+71	F11											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+72	F12											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+73	G01			C2	FlA_K237R	Sample	58.170216		1.2184707	43.64551	67.519966	0	Single	Auto	58.34161											AG 1	2025-08-15_FlA_ZP_CKW.eds
+74	G02			C2	FlA_K237R	Sample	58.345463		1.0533581	43.8453	68.319115	0	Single	Auto	58.34161											AG 1	2025-08-15_FlA_ZP_CKW.eds
+75	G03			C2	FlA_K237R	Sample	57.96242		1.1010257	43.139957	68.12204	0	Single	Auto	58.19249											AG 1	2025-08-15_FlA_ZP_CKW.eds
+76	G04			rxn	FlA_K237R	Sample	59.011707		1.360156	45.138523	67.92219	0	Single	Auto	59.231224											AG 1	2025-08-15_FlA_ZP_CKW.eds
+77	G05			rxn	FlA_K237R	Sample	58.97318		1.4810377	44.712914	67.46491	0	Single	Auto	59.18519											AG 1	2025-08-15_FlA_ZP_CKW.eds
+78	G06			rxn	FlA_K237R	Sample	59.011574		1.4962733	45.51123	67.66449	0	Single	Auto	59.18519											AG 1	2025-08-15_FlA_ZP_CKW.eds
+79	G07			SAM	FlA_K237R	Sample	58.942444		1.3721527	43.728485	68.39102	0	Single	Auto	59.50432											AG 1	2025-08-15_FlA_ZP_CKW.eds
+80	G08			SAM	FlA_K237R	Sample	58.944653		1.3366058	38.236828	67.89178	0	Single	Auto	59.50432											AG 1	2025-08-15_FlA_ZP_CKW.eds
+81	G09			SAM	FlA_K237R	Sample	59.070107		1.4119762	41.53953	68.11491	0	Single	Auto	59.522667											AG 1	2025-08-15_FlA_ZP_CKW.eds
+82	G10											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+83	G11											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+84	G12											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+85	H01											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+86	H02											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+87	H03											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+88	H04											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+89	H05											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+90	H06											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+91	H07											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+92	H08											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+93	H09											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+94	H10											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+95	H11											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
+96	H12											0	Single	Auto													2025-08-15_FlA_ZP_CKW.eds
