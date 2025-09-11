@@ -91,7 +91,7 @@ def reference_builder(numb_prot: list[str], protein_name: list[str], wt_sequence
         else:
             DMS_id = protein_name[i]
 
-        # Initializing and save weights for MSA if they do not already exist. Will be changed in future pipelines: 
+        # Initializing and save weights for MSA if they do not already exist. Will be changed in future pipelines to use weight file if provided
         msa_ = MSA_name[i]
         if f"{msa_}_weights.npy" not in os.listdir("../data/protein_information/msa/weights/"):
             weights = np.ones(len(wt_sequence[i]))

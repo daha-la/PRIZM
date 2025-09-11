@@ -1,5 +1,5 @@
 # Checkpoints
-As model checkpoint files can be large, ZSM does not come with all of these pre-downloaded. To run ZSM, please download the following checkpoint files and save them in their respective folders
+As model checkpoint files can be large, PRIZM does not come with all of these pre-downloaded. To run PRIZM, please download the following checkpoint files and save them in their respective folders.
 
 ## ESM
 Checkpoint files can be found at the [ESM Github](https://github.com/facebookresearch/esm). Please download checkpoints for the following models:
@@ -12,6 +12,7 @@ Checkpoint files can be found at the [ESM Github](https://github.com/facebookres
     - 150M
     - 650M
     - 3B
+
 
 ## Progen2
 Checkpoint files can be found at the [ProGen2 Github](https://github.com/enijkamp/progen2). Please download checkpoints for the following models:
