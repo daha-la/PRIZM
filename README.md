@@ -34,7 +34,7 @@ We recommend also running the scoring scripts for the UniRep models using this e
 PRIZM requires both the sequence, structure, and MSA of the wildtype enzyme to function. For the structure, we recommend either using a high-quality crystal structure with no gaps or a _in silico_ predicted structure using the [AlphaFold3 web server](https://alphafoldserver.com/). For the MSA, PRIZM requires the MSA to be in a specific format (A2M, with no gaps/deletions in the query sequence), and we therefore recommend using the [EVcouplings web server](https://v2.evcouplings.org/).
 
 ## Run
-PRIZM consists of multiple phases. In the pre-setup, first ensure that your low-N dataset is formatted correctly and saved in the [low-N folder](data/lowN/). Your dataset file should contain three columns:
+PRIZM consists of multiple phases. In the pre-setup, first ensure that your low-N dataset is formatted correctly and saved in the [low-N data folder](data/lowN/). Your dataset file should contain three columns:
 - "mutant", a column containing all the mutants in the variant the format of {WT}{POS}{MUT}, separated by a colon, such as M1A:S10A
 - "mutated_sequence", a column containing the sequence of the variant
 - "DMS_score", a column containing the experimental values of the variants
@@ -42,7 +42,7 @@ Secondly, save an AlphaFold structure (or crystal structure without gaps) in the
 
 For the **Model Selection Phase** of PRIZM, all zero-shot model submission scripts can be found in the [submission folder](/ModellerModule/submission/). Please see the [README file](ModellerModule/submission/README.md) in the submission folder for a more in-depth description. After running all models, please run the **Model Selection Phase** part of the [PRIZM notebook](/notebooks/PRIZM.ipynb) to identify the best models that have the highest correlation with your low-N dataset.
 
-In the **Variant Ranking Phase**, a large _in silico_ library can be created. This dataset is saved in the [_in silico_ library folder](data/insilico_libraries/), and this large dataset can then be run using the best model identified in the previous phase. Please remember to update the reference file using the [Reference Builder notebook](notebooks/Reference_builder.ipynb) and change the data location variable in the [zero-shot configuration file](ModellerModule/proteingym/scripts/zero_shot_config.sh). The resulting ranked dataset can be examined using the [PRIZM notebook](/notebooks/PRIZM.ipynb) to select mutants for experimental validation.
+In the **Variant Ranking Phase**, a large _in silico_ library can be created. This dataset is saved in the [_in silico_ library data folder](data/insilico_libraries/), and this large dataset can then be run using the best model identified in the previous phase. Please remember to update the reference file using the [Reference Builder notebook](notebooks/Reference_builder.ipynb) and change the data location variable in the [zero-shot configuration file](ModellerModule/proteingym/scripts/zero_shot_config.sh). The resulting ranked dataset can be examined using the [PRIZM notebook](/notebooks/PRIZM.ipynb) to select mutants for experimental validation.
 
 ## Collection of Zero-shot models.
 PRIZM leverages pre-trained zero-shot models developed and published by other research groups and adapted in the [ProteinGym](https://github.com/OATML-Markslab/ProteinGym) workflow. We do not claim any rights to their work or associated code.

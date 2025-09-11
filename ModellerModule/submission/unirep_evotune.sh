@@ -3,7 +3,7 @@
 # Set the model name and indices
 MODEL="unirep"
 FIRST_INDEX=0  # Replace as needed
-LAST_INDEX=1   # Replace as needed
+LAST_INDEX=0   # Replace as needed
 
 # Save path to current directory
 CURRENT_DIR=$(pwd)

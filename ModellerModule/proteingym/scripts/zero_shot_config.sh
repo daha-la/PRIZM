@@ -2,11 +2,11 @@
 # additional parameters specific to each method 
 
 # Please adapt the following variables to fit your folder structure.
-export PRIZM_PATH="/home/dahala/mnt/PRIZM" # Path to the PRIZM directory, 
-export checkpoint_folder="/data/checkpoints" # Checkpoint folder, adapt this to reflect your folder structure. We recommen using "$PRIZM_PATH/ModellerModule/checkpoints"
+export PRIZM_PATH="/path/to/PRIZM" # Path to the PRIZM directory, 
+export checkpoint_folder="$PRIZM_PATH/data/checkpoints" # Checkpoint folder, adapt this to reflect your folder structure. We recommen using "$PRIZM_PATH/ModellerModule/checkpoints"
 
 # Please adapt the following variables to fit your objectives
-export data_location="insilico_libraries" # Data location, can be "lowN", "validation" or "insilico_libraries"
+export data_location="lowN" # Data location, can be "lowN", "validation" or "insilico_libraries"
 export reference_file="FlA_reference.csv" # Name of reference file. For validation analysis, please use "DMS_substitutions.csv" or "DMS_substitutions_validation.csv"
 
 # Please do not change the following variables unless you want to adapt the folder structure for input/output files

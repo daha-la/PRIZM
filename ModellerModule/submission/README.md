@@ -5,6 +5,6 @@ All submission scripts are setup up using "nohup" to execute the scoring scripts
 
 When running the submission scripts, please specify the DMS index of your dataset in the reference file. The reference file uses zero-indexing, meaning that the index of the low-N dataset will most likely be 0. You can also run multiple indexes by setting the "LAST_INDEX" variable to the last index desired.
 
-It should be noted that many scoring scripts have additional parameters, so if you wish to change these please do this in the individual scripts in the [scoring scripts folder](../proteingym/scripts/scoring_DMS_zero_shot/).s
+It should be noted that many scoring scripts have additional parameters, so if you wish to change these please do this in the individual scripts in the [scoring scripts folder](../proteingym/scripts/scoring_DMS_zero_shot/).
 
 While most models can be run in arbitrary order, the MSA models require a specific order of execution to work properly, as the [EVE training script](eve_train_submit.sh) script must first be run to obtain both trained EVE models and correct MSA weights. Afterwards, TranceptEVE can be used to score the datasets. Furthermore, to use the evotuned UniRep model (eUniRep), please first fine-tune the UniRep model using the [UniRep evotuning script](unirep_evotune.sh), afterwhich the eUniRep model can be used to score the dataets. As the MSA is the same between the low-N dataset and the _in silico_ libraries, the analysis in the **Variant Ranking Phase** does not require any new MSA models to be trained/fine-tuned.
