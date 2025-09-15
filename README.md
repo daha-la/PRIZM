@@ -8,7 +8,7 @@ PRIZM provides the necessary tools to implement all elements of the workflow eas
 Importantly, the best models identified by PRIZM consistently outperform the worst models across three different enzyme benchmark datasets.
 
 ## Installation
-Before installing PRIZM, make sure either Anaconda or Miniconda is installed, as this will be used to manage the environments. To install PRIZM, clone the github:
+Before installing PRIZM, make sure either Anaconda or Miniconda is installed, as this will be used to manage the environments. To install PRIZM, clone the GitHub:
 ```bash
 git clone https://github.com/daha-la/PRIZM.git
 ```
@@ -30,7 +30,7 @@ Please note that the full PRIZM environment requires a Linux-based system. To co
 ```bash
 conda env create -f environments/unirep_evotune.yaml
 ```
-We recommend also running the scoring scripts for the UniRep models using this environment.
+We also recommend running the scoring scripts for the UniRep models using this environment.
 
 ## Protein Information
 PRIZM requires both the sequence, structure, and MSA of the wildtype enzyme to function. For the structure, we recommend either using a high-quality crystal structure with no gaps or a _in silico_ predicted structure using the [AlphaFold3 web server](https://alphafoldserver.com/). For the MSA, PRIZM requires the MSA to be in a specific format (A2M, with no gaps/deletions in the query sequence), and we therefore recommend using the [EVcouplings web server](https://v2.evcouplings.org/).
@@ -77,11 +77,7 @@ All validation datasets were extracted from the [ProteinGym](https://github.com/
 | VKOR1_HUMAN_Chiasson_2020_activity| Epoxide reductase                          | Enzyme activity               | [Chiasson, M. A. et al.](https://elifesciences.org/articles/58026)       |
 
 ## Reproduction of Publication Figures
-To reproduce all figures found in the PRIZM publication for FlA engineering, please run the notebooks in the [notebooks folder](notebooks/) or the [experimental validation folder](experimental_validation/). For the PRIZM analysis of the FlA, please see the [PRIZM notebook](notebooks/PRIZM.ipynb), while the PRIZM validation analysis can be found in the [validation notebook](notebooks/PRIZM_validation.ipynb). The experimental analysis is split up into the characterization of [relative activity](experimental_validation/RelAct_analysis.ipynb), [kinetic parameters](experimental_validation/Kin_analysis.ipynb), and [thermal stability](experimental_validation/Tm_analysis.ipynb). All experimental validation data is also located in the [experimental validation folder](experimental_validation/).
-
-## Reference
-If you use PRIZM in your work, please cite the following paper:
-** INSERT PAPER REFERENCE HERE **
+To reproduce all figures found in the PRIZM publication for FlA engineering, please run the notebooks in the [notebooks folder](notebooks/) or the [experimental validation folder](experimental_validation/). For the PRIZM analysis of the FlA, please see the [PRIZM notebook](notebooks/PRIZM.ipynb), while the PRIZM validation analysis can be found in the [validation notebook](notebooks/PRIZM_validation.ipynb). The experimental analysis is divided into the characterization of [relative activity](experimental_validation/RelAct_analysis.ipynb), [kinetic parameters](experimental_validation/Kin_analysis.ipynb), and [thermal stability](experimental_validation/Tm_analysis.ipynb). All experimental validation data is also located in the [experimental validation folder](experimental_validation/).
 
 ## Contact
 For any questions regarding PRIZM, please forward them to David Harding-Larsen at [dahala@dtu.dk](mailto:dahala@dtu.dk). For any collaboration proposals, please refer to Dr. Ditte Hededam Welner at [diwel@dtu.dk](mailto:diwel@dtu.dk).
