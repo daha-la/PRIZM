@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="PRIZM_logo.png" alt="PRIZM logo" width="250"/>
-</p>
+<img src="PRIZM_logo.png" alt="PRIZM logo" width="250"/>
 # Protein Ranking using Informed Zero-shot Modelling
 Protein Ranking using Informed Zero-shot Modelling (PRIZM) is a two-phased approach that efficiently examines the mutational space using machine learning (ML) guidance without requiring high-throughput methods. PRIZM combines the specific information of small datasets with the general knowledge of pretrained zero-shot predictors to discover enhanced protein variants, thereby removing the need for large datasets common for traditional ML techniques.
 
