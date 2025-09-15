@@ -1,4 +1,5 @@
-# PRIZM
+![PRIZM](PRIZM_logo.png)
+# Protein Ranking using Informed Zero-shot Modelling
 Protein Ranking using Informed Zero-shot Modelling (PRIZM) is a two-phased approach that efficiently examines the mutational space using machine learning (ML) guidance without requiring high-throughput methods. PRIZM combines the specific information of small datasets with the general knowledge of pretrained zero-shot predictors to discover enhanced protein variants, thereby removing the need for large datasets common for traditional ML techniques.
 
 PRIZM provides the necessary tools to implement all elements of the workflow easily. In the **Model Selection Phase**, the protein information of an experimental low-N dataset is parsed through a diverse collection of zero-shot models based on the [ProteinGym](https://github.com/OATML-Markslab/ProteinGym) code. The resulting predicted scores are correlated with the original experimental values, identifying the model most suitable for predicting better mutants. In the **Variant Ranking Phase**, PRIZM can be used to create, predict, and rank a large _in silico_ mutant dataset using the models identified as most suitable in the previous phase. Visualization tools are also provided, such as the plotting of individual correlations, comparisons of model performances, or the construction of single-mutant landscapes. For more information on all tools available in PRIZM, please see the example notebook.
@@ -41,8 +42,10 @@ PRIZM consists of multiple phases. In the pre-setup, first ensure that your low-
 Secondly, save an AlphaFold structure (or crystal structure without gaps) in the [structure folder](data/protein_information/structure/), and an MSA in the a2m format in the [MSA folder](data/protein_information/msa/files/) (can be created using the [EVcouplings website](https://v2.evcouplings.org/)). Lastly, create a reference file using the [Reference Builder notebook](notebooks/Reference_builder.ipynb).
 
 For the **Model Selection Phase** of PRIZM, all zero-shot model submission scripts can be found in the [submission folder](/ModellerModule/submission/). Please see the [README file](ModellerModule/submission/README.md) in the submission folder for a more in-depth description. After running all models, please run the **Model Selection Phase** part of the [PRIZM notebook](/notebooks/PRIZM.ipynb) to identify the best models that have the highest correlation with your low-N dataset.
+![Model Selection](PRIZM_ModelSelection.png)
 
 In the **Variant Ranking Phase**, a large _in silico_ library can be created. This dataset is saved in the [_in silico_ library data folder](data/insilico_libraries/), and this large dataset can then be run using the best model identified in the previous phase. Please remember to update the reference file using the [Reference Builder notebook](notebooks/Reference_builder.ipynb) and change the data location variable in the [zero-shot configuration file](ModellerModule/proteingym/scripts/zero_shot_config.sh). The resulting ranked dataset can be examined using the [PRIZM notebook](/notebooks/PRIZM.ipynb) to select mutants for experimental validation.
+![Variant Ranking](PRIZM_VariantRanking.png)
 
 ## Collection of Zero-shot models.
 PRIZM leverages pre-trained zero-shot models developed and published by other research groups and adapted in the [ProteinGym](https://github.com/OATML-Markslab/ProteinGym) workflow. We do not claim any rights to their work or associated code.
