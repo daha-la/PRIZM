@@ -29,7 +29,7 @@ do
         --max_seq_len 500
 
     end_time=$(date +%s.%N)
-    elapsed_time=$(echo "$end_time - $start_time" | bc)
+    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
     echo "Time taken for $i: $elapsed_time seconds"
 done
 

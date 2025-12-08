@@ -44,7 +44,7 @@ Secondly, save an AlphaFold structure (or crystal structure without gaps) in the
 
 ![Model Selection](PRIZM_ModelSelection.png)
 
-For the **Model Selection Phase** of PRIZM, all zero-shot model submission scripts can be found in the [submission folder](/ModellerModule/submission/). Please see the [README file](ModellerModule/submission/README.md) in the submission folder for a more in-depth description. After running all models, please run the **Model Selection Phase** part of the [PRIZM notebook](/notebooks/PRIZM.ipynb) to identify the best models that have the highest correlation with your low-N dataset.
+For the **Model Selection Phase** of PRIZM, all zero-shot model submission scripts can be found in the [submission folder](/ModellerModule/submission/), and all submission scripts should be run directly from this folder. Please see the [README file](ModellerModule/submission/README.md) in the folder for a more in-depth description. After running all models, please run the **Model Selection Phase** part of the [PRIZM notebook](/notebooks/PRIZM.ipynb) to identify the best models that have the highest correlation with your low-N dataset.
 
 ![Variant Ranking](PRIZM_VariantRanking.png)
 

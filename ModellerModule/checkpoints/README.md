@@ -1,5 +1,13 @@
 # Checkpoints
-As model checkpoint files can be large, PRIZM does not come with all of these pre-downloaded. To run PRIZM, please download the following checkpoint files and save them in their respective folders.
+As model checkpoint files can be large, PRIZM does not come with all of these pre-downloaded. To run PRIZM, please download the following checkpoint files and save them in their respective folders. This can either be done manually (see below), or by using the [download_checkpoints.sh](./download_checkpoints.sh) script:
+```bash
+bash download_checkpoints.sh
+```
+or, if a separate checkpoint folder is utilized:
+```bash
+bash download_checkpoints.sh /path/to/custom/checkpoint
+```
+The If a separate folder is utilized, remember to also copy the content of the [ProteinMPNN](./ProteinMPNN/) folder and the "contact-regression" files from the [esm](./esm/) folder.
 
 ## ESM
 Checkpoint files can be found at the [ESM Github](https://github.com/facebookresearch/esm). Please download checkpoints for the following models:
@@ -42,4 +50,3 @@ Directions for how to download all checkpoint files can be found at the [Trancep
 Directions for how to download all checkpoint files can be found at the [UniRep Github](https://github.com/churchlab/UniRep). Please download the following weights:
 - 1900_weights
 - 1900_weights_random
-

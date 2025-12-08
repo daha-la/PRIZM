@@ -21,7 +21,7 @@ do
                 --output_scores_folder ${output_scores_folder} 
     
     end_time=$(date +%s.%N)
-    elapsed_time=$(echo "$end_time - $start_time" | bc)
+    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
     echo "Time taken for $i with Small: $elapsed_time seconds"
     
     start_time=$(date +%s.%N)
@@ -36,7 +36,7 @@ do
                 --output_scores_folder ${output_scores_folder} 
     
     end_time=$(date +%s.%N)
-    elapsed_time=$(echo "$end_time - $start_time" | bc)
+    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
     echo "Time taken for $i with Medium: $elapsed_time seconds"
 
     start_time=$(date +%s.%N)
@@ -51,7 +51,7 @@ do
                 --output_scores_folder ${output_scores_folder} 
     
     end_time=$(date +%s.%N)
-    elapsed_time=$(echo "$end_time - $start_time" | bc)
+    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
     echo "Time taken for $i with Base: $elapsed_time seconds"
 
     start_time=$(date +%s.%N)
@@ -66,7 +66,7 @@ do
                 --output_scores_folder ${output_scores_folder} 
     
     end_time=$(date +%s.%N)
-    elapsed_time=$(echo "$end_time - $start_time" | bc)
+    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
     echo "Time taken for $i with Large: $elapsed_time seconds"
 
 done
