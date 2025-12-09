@@ -17,6 +17,10 @@ def hit_rate(true_bin: np.ndarray, predicted_labels: np.ndarray, k: int = 10) ->
         float: The hit rate as the ratio of hits in the top k entries.
     """
 
+    # Ensure we are working with pure NumPy arrays for indexing
+    true_bin = np.asarray(true_bin)
+    predicted_labels = np.asarray(predicted_labels)
+
     # Get the top k positions in the predicted_labels array
     top_k_positions = np.argsort(predicted_labels)[-k:]
     
