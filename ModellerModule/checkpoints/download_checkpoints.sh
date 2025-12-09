@@ -84,49 +84,57 @@ done
 
 # -------- ProGen2 --------
 echo ""
-echo "== Downloading ProGen2 checkpoints (Small / Medium / Base / Large) =="
+echo "== Downloading ProGen2 checkpoints (Small / Medium / Base / Large / XLarge) =="
 
+# Official URLs from ProGen2 README
 declare -A PROGEN2_URLS
-PROGEN2_URLS[progen2-small]="https://storage.googleapis.com/anon-progen-research/checkpoints/progen2-small.tar.gz"
-PROGEN2_URLS[progen2-medium]="https://storage.googleapis.com/anon-progen-research/checkpoints/progen2-medium.tar.gz"
-PROGEN2_URLS[progen2-base]="https://storage.googleapis.com/anon-progen-research/checkpoints/progen2-base.tar.gz"
-PROGEN2_URLS[progen2-large]="https://storage.googleapis.com/anon-progen-research/checkpoints/progen2-large.tar.gz"
+PROGEN2_URLS[progen2-small]="https://storage.googleapis.com/sfr-progen-research/checkpoints/progen2-small.tar.gz"
+PROGEN2_URLS[progen2-medium]="https://storage.googleapis.com/sfr-progen-research/checkpoints/progen2-medium.tar.gz"
+PROGEN2_URLS[progen2-base]="https://storage.googleapis.com/sfr-progen-research/checkpoints/progen2-base.tar.gz"
+PROGEN2_URLS[progen2-large]="https://storage.googleapis.com/sfr-progen-research/checkpoints/progen2-large.tar.gz"
+PROGEN2_URLS[progen2-xlarge]="https://storage.googleapis.com/sfr-progen-research/checkpoints/progen2-xlarge.tar.gz"
 
-for model in progen2-small progen2-medium progen2-base progen2-large; do
+for model in progen2-small progen2-medium progen2-base progen2-large progen2-xlarge; do
     url="${PROGEN2_URLS[$model]}"
-    tmp_tar="$PROGEN2_DIR/${model}.tar.gz"
+    model_dir="$PROGEN2_DIR/${model}"
+
+    # If model directory already contains a checkpoint, skip
+    if [ -d "$model_dir" ] && [ -f "$model_dir/pytorch_model.bin" ]; then
+        echo "  - $model already present in $model_dir, skipping download."
+        continue
+    fi
+
+    mkdir -p "$model_dir"
+    tmp_tar="$model_dir/${model}.tar.gz"
 
     download "$url" "$tmp_tar"
 
-    echo "  - Extracting $model"
-    # Extract into Progen2 directory; tar contains its own subfolder.
-    tar -xzf "$tmp_tar" -C "$PROGEN2_DIR"
-    # You can delete the tarballs if you like:
-    # rm -f "$tmp_tar"
+    echo "  - Extracting $model into $model_dir"
+    tar -xzf "$tmp_tar" -C "$model_dir"
+    # Optionally remove the tarball:
+    rm -f "$tmp_tar"
 done
 
 # -------- ProtGPT2 --------
 echo ""
-echo "== Downloading ProtGPT2 from Hugging Face (git-lfs clone) =="
+echo "== Downloading ProtGPT2 files from Hugging Face =="
 
-if ! have_cmd git; then
-    echo "ERROR: git is required for ProtGPT2 download." >&2
-else
-    if ! have_cmd git-lfs; then
-        echo "WARNING: git-lfs not found; large files may not download correctly."
-        echo "         Install git-lfs for a full clone."
-    else
-        git lfs install >/dev/null 2>&1 || true
-    fi
+mkdir -p "$PROTGPT2_DIR"
 
-    if [ -d "$PROTGPT2_DIR/.git" ]; then
-        echo "  - ProtGPT2 repo already present, skipping clone."
-    else
-        rm -rf "$PROTGPT2_DIR"
-        echo "  - Cloning nferruz/ProtGPT2 into $PROTGPT2_DIR"
-        git clone https://huggingface.co/nferruz/ProtGPT2 "$PROTGPT2_DIR"
-    fi
-fi
+PROTGPT2_FILES=(
+  "config.json"
+  "merges.txt"
+  "pytorch_model.bin"
+  "special_tokens_map.json"
+  "tokenizer.json"
+  "vocab.json"
+)
+
+for f in "${PROTGPT2_FILES[@]}"; do
+    url="https://huggingface.co/nferruz/ProtGPT2/resolve/main/${f}"
+    dest="$PROTGPT2_DIR/${f}"
+    download "$url" "$dest"
+done
 
 # -------- RITA --------
 echo ""
@@ -164,30 +172,54 @@ for size in Small Medium Large; do
     zip_name="Tranception_${size}_checkpoint.zip"
     url="${TRANCEPTION_BASE}/${zip_name}"
 
+    # If the final folder already exists with a config and model, skip
+    if [ -d "Tranception_${size}" ] && [ -f "Tranception_${size}/pytorch_model.bin" ]; then
+        echo "  - Tranception_${size} already present, skipping download."
+        continue
+    fi
+
     download "$url" "$zip_name"
 
     echo "  - Extracting Tranception $size"
     unzip -o "$zip_name"
-    # rm -f "$zip_name"   # uncomment to remove zip files after extraction
+    rm -f "$zip_name"
 done
 
 popd >/dev/null
 
 # -------- UniRep --------
 echo ""
-echo "== Downloading UniRep weights (1900_weights / 1900_weights_random) =="
+echo "== Downloading UniRep weights =="
 
-if ! have_cmd aws; then
-    echo "ERROR: aws CLI is required for UniRep weights (anonymous S3 sync)." >&2
-    echo "       Install awscli or download UniRep weights manually."
-else
-    pushd "$UNIREP_DIR" >/dev/null
-    echo "  - Syncing 1900_weights"
-    aws s3 sync --no-sign-request s3://unirep-public/1900_weights 1900_weights
-    echo "  - Syncing 1900_weights_random"
-    aws s3 sync --no-sign-request s3://unirep-public/1900_weights_random 1900_weights_random
-    popd >/dev/null
-fi
+UNIREP_FILES=(
+  "embed_matrix:0.npy"
+  "fully_connected_biases:0.npy"
+  "fully_connected_weights:0.npy"
+  "mlstm_layer_norm:0.npy"
+  "rnn_mlstm_mlstm_b:0.npy"
+  "rnn_mlstm_mlstm_b_norm:0.npy"
+  "rnn_mlstm_mlstm_wmh:0.npy"
+  "rnn_mlstm_mlstm_wmh_norm:0.npy"
+  "rnn_mlstm_mlstm_wmx:0.npy"
+  "rnn_mlstm_mlstm_wmx_norm:0.npy"
+)
+
+download_unirep_folder() {
+    local folder="$1"
+    local target="$UNIREP_DIR/$folder"
+    mkdir -p "$target"
+
+    echo "  - Downloading UniRep $folder"
+    for f in "${UNIREP_FILES[@]}"; do
+        url="https://unirep-public.s3.amazonaws.com/${folder}/${f}"
+        dest="${target}/${f}"
+
+        download "$url" "$dest"
+    done
+}
+
+download_unirep_folder "1900_weights"
+download_unirep_folder "1900_weights_random"
 
 
 # -------- .gitignore --------
@@ -201,7 +233,6 @@ CHECKPOINT_DIRS=(
   "Tranception/"
   "UniRep/"
 )
-
 
 # ESM: ignore only the large model checkpoints downloaded by this script,
 # but NOT the contact-regression files you already ship with the repo.
@@ -252,3 +283,4 @@ echo "Updated .gitignore at: $GITIGNORE_FILE"
 echo ""
 echo "All requested checkpoints processed."
 echo "If any step failed (missing tools, etc.), you can rerun the script after fixing it."
+
