@@ -1098,7 +1098,7 @@ class PlottingModule:
         plt.show()
 
     @staticmethod
-    def metrics(zsm, dataset_name: str, save_path: str = '../figures/metrics/', dpi: int = 300, custom_name: str = None,
+    def metrics(zsm, dataset_name: str, save_path: str = '../figures/metrics/', dpi: int = 300, custom_name: str = None, legend_fontsize: int = 25, figsize: Tuple = (12,9),
                      metrics: list = ['average_precision','spearmanr'], met_labels = ['Average Precision','Absolute Spearman Correlation'], format: str = 'png'):
         """
         Generate a scatter plot with errorbars comparing two metrics for the different models. The plot will be saved as a PNG file.
@@ -1109,13 +1109,15 @@ class PlottingModule:
             save_path (str): The path to save the scatter plot. Default is '../figures/metrics/'.
             dpi (int): The resolution of the saved image. Default is 300.
             custom_name (str): A custom name for the saved file. Default is None.
+            legend_fontsize (int): The font size for the legend. Default is 25.
+            figsize (Tuple): The figure size. Default is (12,9).
             metrics (list): The metrics to display in the scatter plot. Default is ['average_precision','spearmanr'].
             met_labels (list): The labels for the metrics. Default is ['Average Precision','Absolute Spearman Correlation'].
             format (str): The format of the saved image. Default is 'png'.
         """
 
         # Initialize the figure and axes
-        fig, ax = plt.subplots(figsize=(12,9))
+        fig, ax = plt.subplots(figsize=figsize)
 
         ebar_list = []
         legends = []
@@ -1166,7 +1168,7 @@ class PlottingModule:
         ax.set_ylabel(met_labels[1], fontsize=30)
 
         # Create the legend and place it outside the plot
-        fig.legend(ebar_list,legends, loc='center left', bbox_to_anchor=(0.85, 0.5),fontsize=25)
+        fig.legend(ebar_list,legends, loc='center left', bbox_to_anchor=(0.85, 0.5),fontsize=legend_fontsize)
 
         plt.tight_layout()
 
@@ -1273,7 +1275,7 @@ class PlottingModule:
         plt.show()
     
     @staticmethod
-    def metrics_cat(zsm, dataset_name: str, custom_name: str = None, save_path: str = '../figures/metrics/', dpi: int = 300, format: str = 'png',
+    def metrics_cat(zsm, dataset_name: str, custom_name: str = None, save_path: str = '../figures/metrics/', dpi: int = 300, format: str = 'png', legend_fontsize: int = 20, figsize: Tuple = (12,9),
                          best_color: str = '#df9966', worst_color: str = '#516f84', metrics: list = ['average_precision','spearmanr'], met_labels = ['Average Precision','Absolute Spearman Correlation']):
         """
         Generate a scatter plot with errorbars comparing two metrics for the different models, coloring the best and worst models for each category.
@@ -1285,6 +1287,8 @@ class PlottingModule:
             save_path (str): The path to save the scatter plot. Default is '../figures/metrics/'.
             dpi (int): The resolution of the saved image. Default is 300.
             format (str): The format of the saved image. Default is 'png'.
+            legend_fontsize (int): The font size for the legend. Default is 20.
+            figsize (Tuple): The size of the figure. Default is (12,9).
             custom_name (str): A custom name for the saved file. Default is None.
             best_color (str): The color for the best models. Default is '#df9966' (persian orange).
             worst_color (str): The color for the worst models. Default is '#516f84' (slate gray).
@@ -1293,7 +1297,7 @@ class PlottingModule:
         """
 
         # Initialize the figure and axes
-        fig, ax = plt.subplots(figsize=(12, 9))
+        fig, ax = plt.subplots(figsize=figsize)
 
         # Initialize the lists to store the best and worst models and the legends
         ebar_best_list = []
@@ -1389,7 +1393,7 @@ class PlottingModule:
         ax.set_ylabel(met_labels[1], fontsize=30)
 
         # Create the legend and set the axis labels
-        ax.legend(ebar_best_list+ebar_worst_list,legends_best+legends_worst, loc=0,fontsize=15)
+        ax.legend(ebar_best_list+ebar_worst_list,legends_best+legends_worst, loc=0,fontsize=legend_fontsize)
 
         plt.tight_layout()
 
