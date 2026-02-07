@@ -9,6 +9,31 @@ models:
     category: sequence
     color: "#5DA8D4"
     score_column: "Ensemble_ESM1v"
+  - name: ESM1v_1
+    path: ESM1v
+    category: sequence
+    color: "#5DA8D4"
+    score_column: "esm1v_t33_650M_UR90S_1"
+  - name: ESM1v_2
+    path: ESM1v
+    category: sequence
+    color: "#5DA8D4"
+    score_column: "esm1v_t33_650M_UR90S_2"
+  - name: ESM1v_3
+    path: ESM1v
+    category: sequence
+    color: "#5DA8D4"
+    score_column: "esm1v_t33_650M_UR90S_3"
+  - name: ESM1v_4
+    path: ESM1v
+    category: sequence
+    color: "#5DA8D4"
+    score_column: "esm1v_t33_650M_UR90S_4"
+  - name: ESM1v_5
+    path: ESM1v
+    category: sequence
+    color: "#5DA8D4"
+    score_column: "esm1v_t33_650M_UR90S_5"
   - name: ESM-IF1
     path: ESM-IF1
     category: structure
@@ -34,11 +59,6 @@ models:
       - name: 3B
         path: ESM2/3B
         score_column: "esm2_t36_3B_UR50D"
-  - name: GEMME
-    path: GEMME
-    category: MSA
-    color: "#000000"
-    score_column: ""
   - name: EVE
     path: EVE
     category: MSA
@@ -47,7 +67,7 @@ models:
   - name: VESPA
     path: VESPA
     category: sequence
-    color: "#DE3163"
+    color: "#A52A2A"
     score_column: "VESPA"
   - name: EVmutation
     path: EVmutation
@@ -68,7 +88,7 @@ models:
       - name: L
         path: Tranception/Tranception_L
         score_column: "avg_score"
-  - name: TranceptionNoRet #Tranception_no_ret
+  - name: TranceptionNoRet
     path: Tranception_no_retrieval
     category: sequence
     color: "#F7A96A"
@@ -150,3 +170,120 @@ models:
     category: MSA
     color: "#cc70e6"
     score_column: "Unirep_score"
+  - name: CARP
+    path: CARP
+    category: sequence
+    color: "#f77189"
+    variants:
+      - name: 600K
+        path: CARP/600K
+        score_column: "carp_600k_score"
+      - name: 38M
+        path: CARP/38M
+        score_column: "carp_38M_score"
+      - name: 76M
+        path: CARP/76M
+        score_column: "carp_76M_score"
+      - name: 640M
+        path: CARP/640M
+        score_column: "carp_640M_score"
+  - name: ESCOTT
+    path: ESCOTT
+    category: all
+    color: "#97a431"
+    score_column: "ESCOTT_score"
+  - name: GEMME
+    path: GEMME
+    category: MSA
+    color: "#50b131"
+    score_column: "GEMME_score"
+  - name: MIF
+    path: MIF
+    category: structure
+    color: "#C2A04D"
+    score_column: "mif_score"
+  - name: MIFST
+    path: MIFST
+    category: structure
+    color: "#8C6E1C"
+    score_column: "mifst_score"
+  - name: MSATransformer
+    path: MSA_Transformer
+    category: MSA
+    color: "#4169E1"
+    score_column: "esm_msa1b_t12_100M_UR50S_ensemble"
+  - name: MULAN
+    path: MULAN
+    category: structure
+    color: "#FF1493"
+    variants:
+      - name: small
+        path: MULAN/MULAN_small
+        score_column: "MULAN_score"
+  - name: ProSST
+    path: ProSST
+    category: structure
+    color: "#3ba3ec"
+    variants:
+      - name: "20"
+        path: ProSST/20
+        score_column: "ProSST-20"
+      - name: "128"
+        path: ProSST/128
+        score_column: "ProSST-128"
+      - name: "512"
+        path: ProSST/512
+        score_column: "ProSST-512"
+      - name: "1024"
+        path: ProSST/1024
+        score_column: "ProSST-1024"
+      - name: "2048"
+        path: ProSST/2048
+        score_column: "ProSST-2048"
+      - name: "4096"
+        path: ProSST/4096
+        score_column: "ProSST-4096"
+  - name: ProtSSN
+    path: ProtSSN
+    category: structure
+    color: "#6A0DAD"
+    score_column: "ProtSSN_ensemble"
+  - name: RSALOR
+    path: RSALOR
+    category: all
+    color: "#DE3163"
+    score_column: "RSALOR"
+  - name: SaProt
+    path: SaProt
+    category: structure
+    color: "#D147D1"
+    variants:
+      - name: 650M_AF2
+        path: SaProt/SaProt_650M_AF2
+        score_column: "SaProt_score"
+  - name: VenusREM
+    path: VenusREM
+    category: all
+    color: "#2F8475"
+    variants:
+      - name: "20"
+        path: VenusREM/20
+        score_column: "VenusREM"
+      - name: "128"
+        path: VenusREM/128
+        score_column: "VenusREM"
+      - name: "512"
+        path: VenusREM/512
+        score_column: "VenusREM"
+      - name: "1024"
+        path: VenusREM/1024
+        score_column: "VenusREM"
+      - name: "2048"
+        path: VenusREM/2048
+        score_column: "VenusREM"
+      - name: "4096"
+        path: VenusREM/4096
+        score_column: "VenusREM"
+
+
+      

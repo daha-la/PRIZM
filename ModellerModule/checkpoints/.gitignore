@@ -1,8 +1,29 @@
-Progen2/
-ProtGPT2/
-RITA/
-Tranception/
-UniRep/
+# Progen2/
+# ProtGPT2/
+# RITA/
+# Tranception/
+# UniRep/
+# esm/esm1b_t33_650M_UR50S.pt
+# esm/esm1v_t33_650M_UR90S_1.pt
+# esm/esm1v_t33_650M_UR90S_2.pt
+# esm/esm1v_t33_650M_UR90S_3.pt
+# esm/esm1v_t33_650M_UR90S_4.pt
+# esm/esm1v_t33_650M_UR90S_5.pt
+# esm/esm_if1_gvp4_t16_142M_UR50.pt
+# esm/esm2_t6_8M_UR50D.pt
+# esm/esm2_t12_35M_UR50D.pt
+# esm/esm2_t30_150M_UR50D.pt
+# esm/esm2_t33_650M_UR50D.pt
+# esm/esm2_t36_3B_UR50D.pt
+# Progen2/
+# ProtGPT2/
+# RITA/
+# Tranception/
+# UniRep/
+# CARP/
+# MULAN/
+# ProtSSN/
+# SaProt/
 esm/esm1b_t33_650M_UR50S.pt
 esm/esm1v_t33_650M_UR90S_1.pt
 esm/esm1v_t33_650M_UR90S_2.pt
@@ -15,3 +36,5 @@ esm/esm2_t12_35M_UR50D.pt
 esm/esm2_t30_150M_UR50D.pt
 esm/esm2_t33_650M_UR50D.pt
 esm/esm2_t36_3B_UR50D.pt
+MSA_Transformer/esm_msa1b_t12_100M_UR50S.pt
+# MIF/

@@ -1,4 +1,5 @@
 #!/bin/bash 
+set -euo pipefail
 
 source ../zero_shot_config.sh
 
@@ -23,13 +24,16 @@ do
         --save_weights_dir $savedir \
         --initial_weights_dir $initial_weights_dir \
         --num_steps $steps \
-        --batch_size 128 \
+        --batch_size 1000 \
         --mapping_path $DMS_reference_file_path \
         --DMS_index $DMS_index \
         --max_seq_len 500
 
     end_time=$(date +%s.%N)
-    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
+    elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i: $elapsed_time seconds"
 done
 
+# default batch size is 128
+# default max_seq_len is 500
+# default num_steps is 13000

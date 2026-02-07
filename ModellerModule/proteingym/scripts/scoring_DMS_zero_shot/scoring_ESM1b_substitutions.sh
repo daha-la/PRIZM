@@ -22,6 +22,6 @@ do
     python baselines/esm/compute_fitness.py --model-location ${model_checkpoint} --model_type ${model_type} --dms_index ${DMS_index} --dms_mapping ${DMS_reference_file_path_subs} --dms-input ${DMS_data_folder_subs} --dms-output ${dms_output_folder} --scoring-strategy ${scoring_strategy} --scoring-window ${scoring_window}
     
     end_time=$(date +%s.%N)
-    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
+    elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i: $elapsed_time seconds"
 done

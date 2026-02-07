@@ -6,8 +6,12 @@ Source: https://github.com/churchlab/UniRep/blob/master/unirep.py
 import os
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
+tf.enable_resource_variables()
+
 import tensorflow_addons as tfa
 import tensorflow_probability as tfp
+
+from tensorflow import recompute_grad
 
 import numpy as np
 import pandas as pd
@@ -85,6 +89,8 @@ class mLSTMCell1900(tf.nn.rnn_cell.RNNCell):
 
         # Unpack the state tuple
         c_prev, h_prev = state
+        #c_prev = state[0]
+        #h_prev = state[1]
         with tf.variable_scope(self._scope):
             wx_init = np.load(os.path.join(self._model_path, "rnn_mlstm_mlstm_wx:0.npy"))
             wh_init = np.load(os.path.join(self._model_path, "rnn_mlstm_mlstm_wh:0.npy"))
@@ -319,7 +325,8 @@ class babbler1900():
 
     def __init__(self,
                  model_path="./pbab_weights",
-                 batch_size=256
+                 batch_size=256,
+                 use_gradient_checkpointing=True
                  ):
         self._rnn_size = 1900
         self._vocab_size = 26
@@ -359,13 +366,28 @@ class babbler1900():
             initializer=np.load(os.path.join(self._model_path, "embed_matrix:0.npy"))
         )
         embed_cell = tf.nn.embedding_lookup(embed_matrix, self._minibatch_x_placeholder)
-        self._output, self._final_state = tf.nn.dynamic_rnn(
-            rnn,
-            embed_cell,
-            initial_state=self._initial_state_placeholder,
-            swap_memory=True,
-            parallel_iterations=1
-        )
+        
+        def run_rnn_with_ckpt(embed_cell, init_state):
+            def rnn_body():
+                return tf.nn.dynamic_rnn(
+                    rnn,
+                    embed_cell,
+                    initial_state=init_state,
+                    swap_memory=True,
+                    parallel_iterations=1
+                )
+            return recompute_grad(rnn_body)()
+
+        self._output, self._final_state = run_rnn_with_ckpt(embed_cell, self._initial_state_placeholder)
+        
+        # self._output, self._final_state = tf.nn.dynamic_rnn(
+        #     rnn,
+        #     embed_cell,
+        #     initial_state=self._initial_state_placeholder,
+        #     swap_memory=True,
+        #     parallel_iterations=1
+        # )
+
         
         # If we are training a model on top of the rep model, we need to access
         # the final_hidden rep from output. Recall we are padding these sequences
@@ -549,6 +571,7 @@ class babbler1900():
                     shuffle_buffer=self._shuffle_buffer,
                     repeat=None
         ).make_one_shot_iterator().get_next()
+        #).make_initializable_iterator()
         
         return self._bucket_batch
     def split_to_tuple(self, seq_batch):

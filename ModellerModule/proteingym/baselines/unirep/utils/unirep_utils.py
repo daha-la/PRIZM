@@ -118,6 +118,66 @@ def bucketbatchpad(
         window_size=window_size)
     grouped_dataset = dataset.apply(group_fn)
     return grouped_dataset
+'''
+
+def bucketbatchpad(
+        batch_size=256,
+        path_to_data="./data/SwissProt/sprot_ints.fasta",
+        compressed="",
+        bounds=[128, 256],  # Bucket boundaries
+        window_size=256,
+        padding=0,  # Use 0-padding
+        shuffle_buffer=100,  # REDUCED from 10000
+        pad_shape=[None],
+        repeat=1,
+        filt=None
+):
+    """
+    Streams data from path_to_data and returns a padded, bucketed dataset.
+    Designed for memory safety (limits pinned memory usage).
+    """
+    batch_size = tf.constant(batch_size, tf.int64)
+    bounds = tf.constant(bounds)
+    window_size = tf.constant(window_size, tf.int64)
+
+    dataset = tf.data.TextLineDataset(path_to_data)
+    dataset = dataset.map(tf_seq_to_tensor, num_parallel_calls=1)  # Conservative parallelism
+
+    if filt is not None:
+        dataset = dataset.filter(filt)
+
+    if shuffle_buffer and shuffle_buffer > 0:
+        dataset = dataset.shuffle(buffer_size=shuffle_buffer)
+
+    if repeat and repeat > 1:
+        dataset = dataset.repeat(repeat)
+    else:
+        dataset = dataset.repeat(1)  # No infinite repeats!
+
+    # Define key function for bucketing
+    def bucket_key_func(seq):
+        return smart_length(tf_rank1_tensor_len(seq), bucket_bounds=bounds)
+
+    # Define padded batch reduce function
+    def reduce_func(key, windowed_data):
+        return windowed_data.padded_batch(
+            batch_size=batch_size,
+            padded_shapes=pad_shape,
+            padding_values=padding
+        )
+
+    dataset = dataset.apply(
+        tf.data.experimental.group_by_window(
+            key_func=bucket_key_func,
+            reduce_func=reduce_func,
+            window_size=window_size
+        )
+    )
+
+    dataset = dataset.apply(tf.data.experimental.prefetch_to_device("/cpu:0", buffer_size=0))
+
+    return dataset
+'''
 
 def shufflebatch(
         batch_size=256,

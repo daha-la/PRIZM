@@ -27,7 +27,7 @@ do
         --model_type ${model_type} 
 
     end_time=$(date +%s.%N)
-    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
+    elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i with 8M: $elapsed_time seconds"
     
     start_time=$(date +%s.%N)
@@ -43,7 +43,7 @@ do
         --scoring-strategy ${scoring_strategy} \
         --model_type ${model_type}
     end_time=$(date +%s.%N)
-    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
+    elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i with 35M: $elapsed_time seconds"
 
     start_time=$(date +%s.%N)
@@ -60,7 +60,7 @@ do
         --model_type ${model_type}
 
     end_time=$(date +%s.%N)
-    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
+    elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i with 150M: $elapsed_time seconds"
 
     start_time=$(date +%s.%N)
@@ -76,7 +76,7 @@ do
         --scoring-strategy ${scoring_strategy} \
         --model_type ${model_type}
     end_time=$(date +%s.%N)
-    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
+    elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i with 650M: $elapsed_time seconds"
 
     start_time=$(date +%s.%N)
@@ -92,7 +92,7 @@ do
         --scoring-strategy ${scoring_strategy} \
         --model_type ${model_type}
     end_time=$(date +%s.%N)
-    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
+    elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i with 3B: $elapsed_time seconds"
 
 done

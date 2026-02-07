@@ -22,11 +22,11 @@ do
                 --output_dir $output_dir \
                 --mapping_path $DMS_reference_file_path_subs \
                 --DMS_index $DMS_index \
-                --batch_size 32 \
+                --batch_size 8 \
                 --evotune
     
     end_time=$(date +%s.%N)
-    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
+    elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i: $elapsed_time seconds"
 
 done

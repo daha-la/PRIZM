@@ -1,5 +1,7 @@
+from os import name
 import numpy as np
 import pandas as pd
+import re
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpl_patches
 from matplotlib.colors import TwoSlopeNorm, LinearSegmentedColormap
@@ -8,9 +10,9 @@ from typing import Callable, Dict, List, Tuple
 import yaml
 import seaborn as sns
 import itertools
+import math
 from scipy.stats import spearmanr, pearsonr
 from sklearn.metrics import roc_auc_score, average_precision_score, ndcg_score
-
 
 # Import the necessary functions from PRIZM_helper_functions.py
 from .PRIZM_helper_functions import extract_mutant_info, varnumb, hit_rate, one_sided_ttest
@@ -19,6 +21,8 @@ from .PRIZM_helper_functions import extract_mutant_info, varnumb, hit_rate, one_
 amino_acids = ['A','R','N','D','C','E','Q','G','H','I','L','K','M','F','P','S','T','W','Y','V']
 aa_order = ['G', 'P', 'A', 'V', 'L', 'I', 'M', 'F', 'Y', 'W', 'K', 'R', 'D', 'E', 'C', 'S', 'T', 'N', 'Q', 'H']
 aa_to_index = {aa: idx for idx, aa in enumerate(aa_order)}
+
+tie_break_policy = "smallest"  # or "largest"
 
 # Define the metrics dictionary
 metric_dict = {
@@ -54,10 +58,17 @@ class ZeroShotModellerModule:
         self.datasets = {}  # Dictionary to hold dataset specific scores
         self.wildtype = {}  # Dictionary to hold wildtype scores
         self.metric_results = {}  # Dictionary for storing metric results
+        self.combined_metric = {}  # Dictionary for storing combined metric results
+        self.hit_rate_multi = {}  # Dictionary for storing hit rate results for multiple models
         self.threshold = {}  # Dictionary for storing thresholds
+        self.correct_signs = {}  # Dictionary for storing models with correct signs
+        self.wrong_signs = {}  # Dictionary for storing models with wrong signs
         self.best_variants = {}  # Dictionary for storing best variants
+        self.best_variants_correct = {}  # Dictionary for storing best variants with correct signs
         self.best_models = {}  # Dictionary for storing best models
         self.worst_models = {}  # Dictionary for storing worst models
+        self.best_models_correct = {}  # Dictionary for storing best models with correct signs
+        self.worst_models_correct = {}  # Dictionary for storing worst models with correct signs
         self.landscape = {}  # Dictionary for storing landscapes
 
 
@@ -176,7 +187,24 @@ class ZeroShotModellerModule:
         df = df.iloc[start:,:].reset_index(drop=True)
         return df
 
-    def load_scores(self, dataset_name: str, model_list: list, results_path: str = '../results/', wt = False, dict_name: str = None) -> None:
+    def extract_wildtype(self, dataset_name: str, results_path: str = '../results/') -> None:
+        """
+        Load wildtype scores for a specific dataset and save them in the class.
+
+        Args:
+            dataset_name (str): The name of the dataset to process.
+            model_name (str): The name of the model to process.
+            results_path (str): The path to the results folder. The default is '../results/'
+            dict_name (str): The name of the dictionary to store the scores in. If None, the dataset name is used. Default is None
+        """
+
+        # Load the wildtype data
+        wt_data = self.dataload(results_path, dataset_name + '_wildtype')
+
+        return wt_data
+
+    def load_scores(self, dataset_name: str, model_list: list, results_path: str = '../results/', wt = False,
+                    dict_name: str = None, wt_external = False) -> None:
         """
         Load scores for a specific dataset and models and save them in the class.
 
@@ -186,6 +214,7 @@ class ZeroShotModellerModule:
             results (str): The path to the results folder. The default is '../results/'
             wt (bool): Whether to include the wildtype score. Default is False
             dict_name (str): The name of the dictionary to store the scores in. If None, the dataset name is used. Default is None
+            wt_external (bool): Whether to use external wildtype data. Default is False
         """
 
         # Check if a dictionary name is provided. If not, use the dataset name
@@ -207,17 +236,16 @@ class ZeroShotModellerModule:
         exp_data_[['WT', 'Mut', 'Pos']] = exp_data_['mutant'].apply(extract_mutant_info)
 
         # Store the experimental data in the class
-        self.datasets[dict_name]['exp_data'] = exp_data_[:-1] if wt else exp_data_
+        self.datasets[dict_name]['exp_data'] = exp_data_[:-1] if wt and not wt_external else exp_data_
         
         # If wildtype is included, store the wildtype data in the class
-        if wt:
+        if wt and not wt_external:
             self.wildtype[dict_name]['exp_data'] = exp_data_.iloc[-1,:]
 
 
         # Load the scores for each model and store them in the class
         # First, iterate over all models in the config
         for model in self.config['models']:
-
             # Check if the model is in the list
             if model['name'] in self.model_list[dict_name]:
 
@@ -251,8 +279,14 @@ class ZeroShotModellerModule:
 
                         # If wildtype is included, store the wildtype score in the class and remove it from the dataset
                         if wt:
-                            self.wildtype[dict_name][model_name] = data_.iloc[-1,:]
-                            data_ = data_.iloc[:-1,:]
+                            if wt_external:
+                                wt_data = self.extract_wildtype(dataset_name,results_path+model_path)
+                                wt_data = wt_data[['mutant',variant['score_column']]] if 'mutant' in wt_data.columns else wt_data[['mutated_sequence',variant['score_column']]]
+                                wt_data = wt_data.rename(columns={variant['score_column']: model_name})
+                            else:
+                                wt_data = data_.iloc[-1,:]
+                            self.wildtype[dict_name][model_name] = wt_data
+                            data_ = data_.iloc[:-1,:] if not wt_external else data_
 
                         # Store the model data in the class
                         self.datasets[dict_name][model_name] = data_
@@ -285,9 +319,16 @@ class ZeroShotModellerModule:
                     data_ = data_.rename(columns={model['score_column']: model['name']})
 
                     # If wildtype is included, store the wildtype score in the class and remove it from the dataset
+                    # If the wildtype is external, instead extract it from the external source
                     if wt:
-                        self.wildtype[dict_name][model_name] = data_.iloc[-1,:]
-                        data_ = data_.iloc[:-1,:]
+                        if wt_external:
+                            wt_data = self.extract_wildtype(dataset_name,results_path+model_path)
+                            wt_data = wt_data[['mutant',model['score_column']]] if 'mutant' in wt_data.columns else wt_data[['mutated_sequence',model['score_column']]]
+                            wt_data = wt_data.rename(columns={model['score_column']: model_name})
+                        else:
+                            wt_data = data_.iloc[-1,:]
+                        self.wildtype[dict_name][model_name] = wt_data
+                        data_ = data_.iloc[:-1,:] if not wt_external else data_
 
                     # Store the model data in the class
                     self.datasets[dict_name][model_name] = data_
@@ -342,7 +383,7 @@ class ZeroShotModellerModule:
 
         return y_true_identical, y_true_class
 
-    def bootstrap_score(self, true: np.ndarray, true_bin: np.ndarray, pred: np.ndarray, metric_type: str,
+    def bootstrap_score(self, true: np.ndarray, true_bin: np.ndarray, pred: np.ndarray, metric_type: str, k: int = 10,
                         n_bootstrap: int = 1000, pre_reverse = None) -> Tuple[float, float, bool]:
         """
         A function to bootstrap the metric scores for a specific metric type. The function will return the overall value and standard deviation of the metric scores,
@@ -353,6 +394,7 @@ class ZeroShotModellerModule:
             true_bin (np.ndarray): The true binary labels.
             pred (np.ndarray): The predicted labels.
             metric_type (str): The metric type to calculate.
+            k (int): The number of top elements to consider for certain metrics. Default is 10.
             n_bootstrap (int): The number of bootstrap iterations. Default is 1000.
             pre_reverse (bool): A boolean indicating whether the scores should be reversed. Default is None.
 
@@ -363,16 +405,16 @@ class ZeroShotModellerModule:
         # If pre_reverse is provided, calculate the original score using the pre-defined order
         if pre_reverse is not None:
             reverse = pre_reverse
-            original_score = self.metric_val_func(metric_type, true,true_bin, pred)
+            original_score = self.metric_val_func(metric_type, true,true_bin, pred,k=k)
 
             # If reverse is True, calculate the score with the negative predictions
             if reverse:
-                original_score = self.metric_val_func(metric_type, true,true_bin, -pred)
+                original_score = self.metric_val_func(metric_type, true,true_bin, -pred,k=k)
 
         # Else, calculate the original score and the score with the negative predictions and determine the order based on the best score
         else:
-            score_with_pred = self.metric_val_func(metric_type, true,true_bin, pred)
-            score_with_neg_pred = self.metric_val_func(metric_type, true,true_bin, -pred)
+            score_with_pred = self.metric_val_func(metric_type, true,true_bin, pred,k=k)
+            score_with_neg_pred = self.metric_val_func(metric_type, true,true_bin, -pred,k=k)
             
             # If the score with the predicted labels is better, set the original score to the score with the predicted labels and set reverse to False
             if score_with_pred >= score_with_neg_pred:
@@ -399,7 +441,7 @@ class ZeroShotModellerModule:
             pred_bootstrap, true_bootstrap, true_bin_bootstrap = pred[new_index], true[new_index], true_bin[new_index]
 
             # Calculate the metric score and store it in the scores array
-            scores[i] = self.metric_val_func(metric_type, true_bootstrap, true_bin_bootstrap, pred_bootstrap if not reverse else -pred_bootstrap)
+            scores[i] = self.metric_val_func(metric_type, true_bootstrap, true_bin_bootstrap, pred_bootstrap if not reverse else -pred_bootstrap, k=k)
 
         return original_score, scores.std(), reverse
 
@@ -413,6 +455,7 @@ class ZeroShotModellerModule:
             dataset_name (str): The name of the dataset to process.
             n_bootstrap (int): The number of bootstrap iterations. Default is 1000.
             metrics (list): The metrics to calculate. Default is ['spearmanr', 'average_precision'].
+            k (int): The number of top entries to consider for hit rate. Default is 10.
             previous_metrics (pd.DataFrame): A DataFrame containing the previous metrics. Used to extract pre-determined order. Default is None.
             best_metrics (list): The best metrics to consider when selecting the best variants of a model. Default is ['spearmanr', 'average_precision'].
             best_met_extremas (list): The extremas for the best metrics. First list is the minimums, second list is the maximums. Default is [[0,0],[1,1]].
@@ -423,7 +466,6 @@ class ZeroShotModellerModule:
         exp_bin = self.datasets[dataset_name]['exp_data'].DMS_score_bin  # Binary data
         score_list = self.datasets[dataset_name] # Predicted scores for each model
 
-        
         # Define MultiIndex for columns
         index_tuples = [(met_name, stat) for met_name in metrics for stat in ['avg', 'std', 'reverse']]
         multi_index = pd.MultiIndex.from_tuples(index_tuples, names=['metric', 'stat'])
@@ -443,7 +485,15 @@ class ZeroShotModellerModule:
             for name in self.name_list[dataset_name]:
 
                 # Check if previous metrics are provided and extract the pre_reverse order. Else, set it to None
-                pre_reverse = previous_metrics.iloc[:,previous_metrics.columns.get_level_values('stat') == 'reverse'][met_name].mean(axis=1)[name] > 0.5 if previous_metrics is not None else None
+                # Default to spearmanr reverse order if metric is not found in previous metrics
+                if previous_metrics is not None:
+                    # If the metric is in the previous metrics, use its reverse order
+                    if met_name in previous_metrics.columns.get_level_values('metric'):
+                        pre_reverse = previous_metrics.iloc[:,previous_metrics.columns.get_level_values('stat') == 'reverse'][met_name].mean(axis=1)[name] > 0.5
+                    else:
+                        pre_reverse = previous_metrics.iloc[:,previous_metrics.columns.get_level_values('stat') == 'reverse']['spearmanr'].mean(axis=1)[name] > 0.5
+                else:
+                    pre_reverse = None
 
                 # Calculate the metric with bootstrap, capturing overall, std, and reverse order boolean
                 corr_, std_, reverse = self.bootstrap_score(exp_score,exp_bin, score_list[name].iloc[:,-1], met_name, n_bootstrap=n_bootstrap, pre_reverse=pre_reverse)
@@ -461,8 +511,210 @@ class ZeroShotModellerModule:
         # Save the DataFrame in the class for the specified dataset
         self.metric_results[dataset_name] = metric_results_df
 
+        #Identify the sign of the metric for the dataset
+        self.sign_identifier(dataset_name, sign_metric=best_metrics[0])
+
         # Compute the best variants for the dataset
         self.best_variants[dataset_name] = self.get_best_variants(dataset_name, best_metrics, best_met_extremas)
+        self.best_variants_correct[dataset_name] = self.get_best_variants(dataset_name, best_metrics, best_met_extremas, correct_models=self.correct_signs[dataset_name])
+
+    def compute_hit_rate(self, dataset_name: str, n_bootstrap: int = 1000, ks: List[int] = [10], previous_metrics: pd.DataFrame = None) -> None:
+        """
+        A function to compute the hit rate for a specific dataset and save results in a structured DataFrame within the class.
+        The hit rate is calculated for each model based on the experimental data.
+
+        Args:
+            dataset_name (str): The name of the dataset to process.
+            n_bootstrap (int): The number of bootstrap iterations. Default is 1000.
+            ks (List[int]): The number of top entries to consider for hit rate. Default is [10].
+            previous_metrics (pd.DataFrame): A DataFrame containing the previous metrics. Used to extract pre-determined order. Default is None.
+        """
+        
+        # Retrieve experimental data and score list for the specified dataset
+        exp_score = self.datasets[dataset_name]['exp_data'].DMS_score  # Experimental data
+        exp_bin = self.datasets[dataset_name]['exp_data'].DMS_score_bin  # Binary data
+        score_list = self.datasets[dataset_name] # Predicted scores for each model
+
+        met_names = [f'hit_rate_top{k}' for k in ks]  # Define hit rate metric names
+
+        # Ensure that the hit rate metrics are not already in the metric results DataFrame
+        if dataset_name in self.metric_results:
+            existing_metrics = self.metric_results[dataset_name].columns.get_level_values('metric')
+            met_names = [met_name for met_name in met_names if met_name not in existing_metrics]
+            ks = [k_ for k_ in ks if f'hit_rate_top{k_}' in met_names]
+        # If no hit rate metrics are left, return
+        if not met_names:
+            print(f"No new hit rate metrics to compute for dataset {dataset_name}.")
+            return
+
+        # Define MultiIndex for columns
+        index_tuples = [(met_name, stat) for met_name in met_names for stat in ['avg', 'std', 'reverse']]
+        multi_index = pd.MultiIndex.from_tuples(index_tuples, names=['metric', 'stat'])
+
+        # Initialize the DataFrame for storing results
+        hit_rate_results_df = pd.DataFrame(index=self.name_list[dataset_name], columns=multi_index)
+
+        # Iterate over all hit rate metrics
+        for k_, met_name in zip(ks, met_names):
+
+            # Initialize lists to store the metric scores
+            corr_list_ = []
+            std_list_ = []
+            reverse_list_ = []
+
+            # Iterate over all models initialized for the dataset
+            for name in self.name_list[dataset_name]:
+
+                # Check if previous metrics are provided and extract the pre_reverse order. Else, set it to None
+                # Default to spearmanr reverse order if metric is not found in previous metrics
+                if previous_metrics is not None:
+                    if met_name in previous_metrics.columns.get_level_values('metric'):
+                        pre_reverse = previous_metrics.iloc[:,previous_metrics.columns.get_level_values('stat') == 'reverse'][met_name].mean(axis=1)[name]
+                    else:
+                        pre_reverse = previous_metrics.iloc[:,previous_metrics.columns.get_level_values('stat') == 'reverse']['spearmanr'].mean(axis=1)[name]
+                else:
+                    pre_reverse = None
+                # Calculate the hit rate with bootstrap, capturing overall, std, and reverse order boolean
+                corr_, std_, reverse = self.bootstrap_score(exp_score,exp_bin, score_list[name].iloc[:,-1], 'hit_rate', n_bootstrap=n_bootstrap, pre_reverse=pre_reverse, k=k_)
+                
+                # Append results to lists
+                corr_list_.append(corr_)
+                std_list_.append(std_)
+                reverse_list_.append(reverse)
+
+            # Store results in the DataFrame
+            hit_rate_results_df[(met_name, 'avg')] = corr_list_
+            hit_rate_results_df[(met_name, 'std')] = std_list_
+            hit_rate_results_df[(met_name, 'reverse')] = reverse_list_
+
+        # Merge the hit rate results with the metric results DataFrame
+        if dataset_name in self.metric_results:
+            self.metric_results[dataset_name] = pd.concat([self.metric_results[dataset_name], hit_rate_results_df], axis=1)
+        else:
+            self.metric_results[dataset_name] = hit_rate_results_df
+
+    def compute_hit_rate_multi(self, dataset_name: str, models: list,
+                               n_bootstrap: int = 1000, ks: List[int] = [10], previous_metrics: pd.DataFrame = None, model_weighting: pd.DataFrame = None, weight_scaling: int = 1,
+                               above_wt: bool = True, previous_hitrate_multi: bool = False,custom_name: str = None) -> None:
+        """
+        A function to compute the hit rate for a specific dataset when combining multiple models.
+        Saves the results in a structured DataFrame within the class.
+        
+        Args:
+            dataset_name (str): The name of the dataset to process.
+            models (list): A list of model names to consider for the hit rate computation.
+            n_bootstrap (int): The number of bootstrap iterations. Default is 1000.
+            ks (List[int]): The number of top entries to consider for hit rate. Default is [10].
+            previous_metrics (pd.DataFrame): A DataFrame containing the previous metrics. Used to extract pre-determined order. Default is None.
+            model_weighting (pd.DataFrame): A DataFrame containing model weighting information. Default is None.
+            weight_scaling (int): A scaling factor for the model weights. Default is 1.
+            above_wt (bool): Whether to consider only variants predicted to be above wildtype. Default is False.
+            previous_hitrate_multi (bool): Whether to merge with previous hit rate metrics for multiple models. Default is True.
+        """
+
+        # Retrieve experimental data, score list, and wt_list for the specified dataset
+        exp_score = self.datasets[dataset_name]['exp_data'].DMS_score  # Experimental data
+        exp_bin = self.datasets[dataset_name]['exp_data'].DMS_score_bin  # Binary data
+        score_list = self.datasets[dataset_name] # Predicted scores for each model
+        wt_list = self.wildtype[dataset_name] # Wildtype scores for each model
+
+        # Initialize the scores selection dictionary for holding model-specific scores with rankings and the DataFrame for above wildtype scores
+        scores_selection = None
+        above_wt_multi = None
+
+        combined_name = 'Comb'
+        # Iterate over each model
+        for model in models:
+            
+            combined_name += f'_{model}'
+            # Extract pre-determined reverse ranking (reverse = ascending ranking)
+            pre_reverse = previous_metrics.iloc[:,previous_metrics.columns.get_level_values('stat') == 'reverse']['spearmanr'].mean(axis=1)[model]
+            
+            # Compute the rankings and save in dictionary
+            scores_ = score_list[model].copy()
+            scores_[f'Ranking_{model}'] = scores_.iloc[:,-1].rank(ascending=pre_reverse)
+            scores_selection = scores_ if scores_selection is None else pd.concat([scores_selection, scores_], axis=1)
+        
+            if above_wt:
+                # Identify variants better than wildtype
+                wt_val = wt_list[model][model].iloc[0]  # scalar
+                above_wt_model = scores_[model] > wt_val if not pre_reverse else scores_[model] < wt_val
+                above_wt_multi = above_wt_model if above_wt_multi is None else above_wt_multi & above_wt_model
+
+                if above_wt_multi.sum() == 0:
+                    print('No variants above wildtype found. Consider running with \'above_wt\' = False')
+                    return
+        
+        if model_weighting is None:
+            model_weighting = pd.Series(np.ones(len(models)), index=models)
+        else:
+            combined_name += '_weighted'
+            model_weighting = model_weighting.copy().loc[models]
+            model_weighting = model_weighting / model_weighting.max()  # Normalize weights
+            model_weighting = model_weighting ** weight_scaling  # Scale weights
+        ranking_df = scores_selection[[f'Ranking_{model}' for model in models]]
+
+        ranking_df.columns = models  # remove the 'Ranking_' prefix
+
+        # Ensure model_weighting index matches these
+        model_weighting = model_weighting.reindex(models)
+        
+        combined_ranking = model_weighting @ ranking_df.T
+
+        scores_selection['Combined_Ranking'] = combined_ranking
+        scores_selection = scores_selection.sort_values('Combined_Ranking')
+
+        exp_score = exp_score.loc[scores_selection.index]
+        exp_bin = exp_bin.loc[scores_selection.index]
+
+        ks_adjusted = ks
+
+        if above_wt:
+            combined_name += '_above_wt'
+            scores_selection = scores_selection.loc[above_wt_multi]
+            exp_score = exp_score.loc[scores_selection.index]
+            exp_bin = exp_bin.loc[scores_selection.index]
+
+            print('Number of variants above wildtype:', scores_selection.shape[0])
+            # Adjust ks to not exceed the number of available variants above wildtype
+            ks_adjusted = [k if k <= scores_selection.shape[0] else scores_selection.shape[0] for k in ks] 
+
+        met_names = [f'hit_rate_top{k}' for k in ks_adjusted]  # Define hit rate metric names
+
+        # Define MultiIndex for columns
+        index_tuples = [(met_name, stat) for met_name in met_names for stat in ['avg', 'std', 'reverse']]
+        multi_index = pd.MultiIndex.from_tuples(index_tuples, names=['metric', 'stat'])
+
+        # Initialize the DataFrame for storing results
+        if custom_name is not None:
+            combined_name = custom_name
+        hit_rate_results_df = pd.DataFrame(index=[combined_name], columns=multi_index)
+
+        # Iterate over all hit rate metrics
+        for k_, met_name in zip(ks_adjusted, met_names):
+
+            # Extract the previous order of the models. The inverse order is utilized to account for a lower rank value being better
+            if previous_metrics is not None:
+                if met_name in previous_metrics.columns.get_level_values('metric'):
+                    pre_reverse = not previous_metrics.iloc[:,previous_metrics.columns.get_level_values('stat') == 'reverse'][met_name].mean(axis=1)[model]
+                else:
+                    pre_reverse = not previous_metrics.iloc[:,previous_metrics.columns.get_level_values('stat') == 'reverse']['spearmanr'].mean(axis=1)[model]
+            else:
+                pre_reverse = None
+            # Calculate the hit rate with bootstrap, capturing overall, std, and reverse order boolean
+            corr_, std_, reverse = self.bootstrap_score(exp_score,exp_bin, scores_selection['Combined_Ranking'], 'hit_rate', n_bootstrap=n_bootstrap, pre_reverse=pre_reverse, k=k_)
+
+            # Store results in the DataFrame
+            hit_rate_results_df[(met_name, 'avg')] = corr_
+            hit_rate_results_df[(met_name, 'std')] = std_
+            hit_rate_results_df[(met_name, 'reverse')] = reverse
+
+        # Concatenate with previous hit rate results if available
+        if previous_hitrate_multi and dataset_name in self.hit_rate_multi:
+            hit_rate_results_df = pd.concat([self.hit_rate_multi[dataset_name], hit_rate_results_df], axis=0) if combined_name not in self.hit_rate_multi[dataset_name].index else hit_rate_results_df
+
+
+        self.hit_rate_multi[dataset_name] = hit_rate_results_df
 
     def compute_metrics_iterations(self, dataset_name: str, n_bootstrap: int = 1000, metrics: list = ['spearmanr', 'average_precision'], iterations: int = 10, ite_size: int = 40,
                                    best_metrics: list = ['spearmanr', 'average_precision'], best_met_extremas: list = [[0,0],[1,1]]) -> None:
@@ -521,11 +773,78 @@ class ZeroShotModellerModule:
 
         # Save the DataFrame in the class for the specified dataset
         self.metric_results[dataset_name] = metric_results_df
-        self.best_variants[dataset_name] = self.get_best_variants_iteration(dataset_name = dataset_name, metrics = best_metrics, met_extremas = best_met_extremas,iterations=iterations,ite_size=ite_size)
 
+        #Identify the sign of the metric for the dataset
+        self.sign_identifier_iterations(dataset_name, sign_metric=best_metrics[0], iterations=iterations)
+
+        self.best_variants[dataset_name] = self.get_best_variants_iteration(dataset_name = dataset_name, metrics = best_metrics, met_extremas = best_met_extremas,iterations=iterations,ite_n = ite_size)
+        self.best_variants_correct[dataset_name] = self.get_best_variants_iteration(dataset_name = dataset_name, metrics = best_metrics, met_extremas = best_met_extremas, correct_models=self.correct_signs[dataset_name],iterations=iterations,ite_n = ite_size)
+
+
+    def sign_identifier(self, dataset_name: str, sign_metric: str = 'spearmanr') -> None:
+        """
+        Function for identifying the sign of the metric for a specific dataset.
+
+        Args:
+            dataset_name (str): The name of the dataset to process.
+            sign_metric (str): The metric to use for identifying the sign. Default is 'spearmanr'.
+        """
+        # Initialize lists to store the correct and wrong signs
+        correct_sign_ = []
+        wrong_sign_ = []
+        df_ = self.metric_results[dataset_name]
+        df_ = df_.iloc[:,df_.columns.get_level_values('stat') == 'reverse'][sign_metric]
+        for model in df_.index:
+            if not df_.loc[model].reverse and model != 'EVE':
+                correct_sign_.append(model)
+            elif not df_.loc[model].reverse and model == 'EVE':
+                wrong_sign_.append(model)
+            elif df_.loc[model].reverse and model != 'EVE':
+                wrong_sign_.append(model)
+            else:
+                correct_sign_.append(model)
+
+        # Save the correct and wrong signs in the class
+        self.correct_signs[dataset_name] = correct_sign_
+        self.wrong_signs[dataset_name] = wrong_sign_
+
+    def sign_identifier_iterations(self, dataset_name: str, iterations: int = 10, sign_metric: str = 'spearmanr') -> None:
+        """
+        Function for identifying the sign of the metric for a specific iterations dataset.
+
+        Args:
+            dataset_name (str): The name of the dataset to process.
+            iterations (int): The number of iterations to perform. Default is 10.
+            sign_metric (str): The metric to use for identifying the sign. Default is 'spearmanr'.
+        """
+
+        df_ = self.metric_results[dataset_name]
+        df_ = df_.iloc[:,df_.columns.get_level_values('stat') == 'reverse'][sign_metric]
+        # Initialize dicts to store the correct and wrong signs
+        correct_sign_ = {}
+        wrong_sign_ = {}
+        for i in range(iterations):
+            correct_ = []
+            wrong_ = []
+            for model in df_.index:
+                if not df_.loc[model, ("ite0", "reverse")] and model != 'EVE':
+                    correct_.append(model)
+                elif not df_.loc[model, ("ite0", "reverse")] and model == 'EVE':
+                    wrong_.append(model)
+                elif df_.loc[model, ("ite0", "reverse")] and model != 'EVE':
+                    wrong_.append(model)
+                else:
+                    correct_.append(model)
+            correct_sign_[i] = correct_
+            wrong_sign_[i] = wrong_
+
+        # Save the correct and wrong signs in the class
+        self.correct_signs[dataset_name] = correct_sign_
+        self.wrong_signs[dataset_name] = wrong_sign_
 
     def get_best_variants(self, dataset_name: str,
-                          metrics: list = ['spearmanr', 'average_precision'], met_extremas: list = [[0,0],[1,1]]) -> List:
+                          metrics: list = ['spearmanr', 'average_precision'], met_extremas: list = [[0,0],[1,1]],
+                          correct_models: list = None) -> List[str]:
         """
         Select the best variant for each model based on normalized metrics and save them in the class.
         
@@ -533,6 +852,7 @@ class ZeroShotModellerModule:
             dataset_name (str): The name of the dataset to process.
             metrics (list): The metrics to use for determining the best and worst models. Default is ['spearmanr', 'average_precision'].
             met_extremas (list): The extremas for the metrics. First list is the minimums, second list is the maximums. Default is [[0,0],[1,1]].
+            correct_models (list): A list of models that should be considered as correct. If None, all models are considered. Default is None.
 
         Returns:
             List: A list of the best variants for each model.
@@ -542,6 +862,10 @@ class ZeroShotModellerModule:
 
         # Retrieve the metric results for the specified dataset
         metric_list = self.metric_results[dataset_name]
+
+        # If correct_models is provided, filter the metric_list to only include those models
+        if correct_models is not None:
+            metric_list = metric_list.loc[metric_list.index.isin(correct_models)]
 
         # Correct the minimum for average precision, as a random model would have an average precision equal to the mean of the binary scores
         if 'average_precision' == metrics[0]:
@@ -559,8 +883,12 @@ class ZeroShotModellerModule:
                
                 # Get the base model name without variant suffix
                 base_model = model.split('_')[0]
-                df_ = metric_list.iloc[metric_list.index.str.contains(base_model)]
+                df_ = metric_list.iloc[metric_list.index.str.contains(rf"^{base_model}_")]
                 
+                # If the DataFrame is empty, continue to the next model
+                if df_.empty:
+                    continue
+
                 # Extract the avg and std metrics for the variants
                 met1_avg = df_[(metrics[0], 'avg')]
                 met2_avg = df_[(metrics[1], 'avg')]
@@ -573,20 +901,54 @@ class ZeroShotModellerModule:
 
                 # Combine the normalized metrics and select the best variant
                 combined_avg = met1_norm + met2_norm
-                best_variant = combined_avg.idxmax()
+                #best_variant = combined_avg.idxmax()
+
+                # Compute the maximum combined metric value
+                max_val = combined_avg.max()
+                best_candidates = combined_avg[combined_avg == max_val].index.tolist()
+
+                if len(best_candidates) == 1:
+                    best_variant = best_candidates[0]
+                else:
+                    # Tie → resolve based on tie_break_policy and YAML order
+                    base_model_entry = next(m for m in self.config['models'] if m['name'] == base_model)
+                    if 'variants' not in base_model_entry:
+                        best_variant = best_candidates[0]  # fallback safety
+                    else:
+                        # Extract YAML variant order
+                        variant_order = [f"{base_model}_{v['name']}" for v in base_model_entry['variants']]
+                        if tie_break_policy == "smallest":
+                            # choose first that appears in YAML (smallest-first order)
+                            for v in variant_order:
+                                if v in best_candidates:
+                                    best_variant = v
+                                    break
+                        elif tie_break_policy == "largest":
+                            # choose last that appears in YAML (largest-last order)
+                            for v in reversed(variant_order):
+                                if v in best_candidates:
+                                    best_variant = v
+                                    break
+                        else:
+                            raise ValueError(f"Invalid tie_break_policy '{tie_break_policy}' (must be 'smallest' or 'largest')")
 
                 # Ensure the best variant is added only once
                 if best_variant not in best_variants:
                     best_variants.append(best_variant)
             
             # Add single-variant models directly
-            else: 
-                best_variants.append(model)
+            else:
+                # Check if the model is in the correct models list, if provided
+                if correct_models is None or model in correct_models:
+                    # Append the model to the best variants list
+                    if model not in best_variants:
+                        best_variants.append(model)
         
         return best_variants
     
-    def get_best_variants_iteration(self, dataset_name: str, iterations: int = 10,ite_size: int = 40,
-                          metrics: list = ['spearmanr', 'average_precision'], met_extremas: list = [[0,0],[1,1]]) -> dict:
+    def get_best_variants_iteration(self, dataset_name: str, iterations: int = 10,ite_n: int = 40,
+                          metrics: list = ['spearmanr', 'average_precision'], met_extremas: list = [[0,0],[1,1]],
+                          correct_models: dict = None) -> dict:
         """
         Select the best variant for each model based on normalized metrics and save them in the class.
         The function is used for datasets with multiple iterations.
@@ -594,9 +956,10 @@ class ZeroShotModellerModule:
         Args:
             dataset_name (str): The name of the dataset to process.
             iterations (int): The number of iterations for the dataset. Default is 10.
-            ite_size (int): The data size of each iteration. Default is 40.
+            ite_n (int): The data size of each iteration. Default is 40.
             metrics (list): The metrics to use for determining the best and worst models. Default is ['spearmanr', 'average_precision'].
             met_extremas (list): The extremas for the metrics. First list is the minimums, second list is the maximums. Default is [[0,0],[1,1]].
+            correct_models (dict): A dictionary of correct models for each iteration. Default is None.
 
         Returns:
             dict: A dictionary of the best variants for each iteration.
@@ -610,13 +973,19 @@ class ZeroShotModellerModule:
         # Initialize the dictionary to store the best variants
         for i in range(iterations):
             best_ite = []
+            
+            if correct_models is not None:
+                correct_ = correct_models[i]
+                metric_list_sub = metric_list.loc[metric_list.index.isin(correct_)]
+            else:
+                metric_list_sub = metric_list.copy()
 
             # Correct the minimum for average precision, as a random model would have an average precision equal to the mean of the binary scores
             if 'average_precision' == metrics[0]:
-                ap_random = self.datasets[dataset_name]['exp_data'].iloc[i*ite_size:(i+1)*ite_size].DMS_score_bin.mean()
+                ap_random = self.datasets[dataset_name]['exp_data'].iloc[i*ite_n:(i+1)*ite_n].DMS_score_bin.mean()
                 met_extremas[0] = [ap_random,0]
             if 'average_precision' == metrics[1]:
-                ap_random = self.datasets[dataset_name]['exp_data'].iloc[i*ite_size:(i+1)*ite_size].DMS_score_bin.mean()
+                ap_random = self.datasets[dataset_name]['exp_data'].iloc[i*ite_n:(i+1)*ite_n].DMS_score_bin.mean()
                 met_extremas[0] = [0,ap_random]
 
             # Iterate over all models initialized for the dataset
@@ -627,7 +996,11 @@ class ZeroShotModellerModule:
 
                     # Get the base model name without variant suffix
                     base_model = model.split('_')[0]
-                    df_ = metric_list.iloc[metric_list.index.str.contains(base_model)]
+                    df_ = metric_list_sub.iloc[metric_list_sub.index.str.contains(rf"^{base_model}_")]
+
+                    # If the DataFrame is empty, continue to the next model
+                    if df_.empty:
+                        continue
 
                     # Extract the avg and std metrics for the variants
                     met1_avg = df_[(metrics[0], f'ite{i}', 'avg')]
@@ -641,7 +1014,36 @@ class ZeroShotModellerModule:
 
                     # Combine the normalized metrics and select the best variant
                     combined_avg = met1_norm + met2_norm
-                    best_variant = combined_avg.idxmax()
+                    #best_variant = combined_avg.idxmax()
+
+                    # Compute the maximum combined metric value
+                    max_val = combined_avg.max()
+                    best_candidates = combined_avg[combined_avg == max_val].index.tolist()
+
+                    if len(best_candidates) == 1:
+                        best_variant = best_candidates[0]
+                    else:
+                        # Tie → resolve based on tie_break_policy and YAML order
+                        base_model_entry = next(m for m in self.config['models'] if m['name'] == base_model)
+                        if 'variants' not in base_model_entry:
+                            best_variant = best_candidates[0]  # fallback safety
+                        else:
+                            # Extract YAML variant order
+                            variant_order = [f"{base_model}_{v['name']}" for v in base_model_entry['variants']]
+                            if tie_break_policy == "smallest":
+                                # choose first that appears in YAML (smallest-first order)
+                                for v in variant_order:
+                                    if v in best_candidates:
+                                        best_variant = v
+                                        break
+                            elif tie_break_policy == "largest":
+                                # choose last that appears in YAML (largest-last order)
+                                for v in reversed(variant_order):
+                                    if v in best_candidates:
+                                        best_variant = v
+                                        break
+                            else:
+                                raise ValueError(f"Invalid tie_break_policy '{tie_break_policy}' (must be 'smallest' or 'largest')")
 
                     # Ensure the best variant is added only once
                     if best_variant not in best_variants:
@@ -649,15 +1051,19 @@ class ZeroShotModellerModule:
 
                 # Add single-variant models directly
                 else:
-                    best_ite.append(model)
+                    # Check if the model is in the correct models list, if provided
+                    if correct_models is None or model in correct_:
+                        # Append the model to the best variants list
+                        if model not in best_variants:
+                            best_ite.append(model)
 
             # Save the best variants for the iteration
             best_variants[f'ite{i}'] = best_ite
 
         return best_variants
     
-    def process_models(self, dataset_name: str, categories = True,
-                        metrics: list = ['spearmanr', 'average_precision'], met_extremas: list = [[0,0],[1,1]]) -> None:
+    def process_models(self, dataset_name: str, categories: bool = True,
+                    metrics: list = ['spearmanr', 'average_precision'], met_extremas: list = [[0, 0], [1, 1]]) -> None:
         '''
         A function to process the models and determine the best and worst models for each category and overall.
         The function will save the best and worst models in the class.
@@ -666,72 +1072,99 @@ class ZeroShotModellerModule:
             dataset_name (str): The name of the dataset to process.
             categories (bool): A boolean indicating whether to process the models for each category. Default is True.
             metrics (list): The metrics to use for determining the best and worst models. Default is ['spearmanr', 'average_precision'].
-            met_extremas (list): The extremas for the metrics to normalize the scores. Default is [[0,0],[1,1]].
+            met_extremas (list): The extremas for the metrics to normalize the scores. Default is [[0, 0], [1, 1]].
         '''
 
-        # Retrieve the metric results for the specified dataset and the best variants, and initialize the dictionaries to store the best and worst models
+        # Retrieve the metric results for the specified dataset and initialize dictionaries to store the best and worst models
         df = self.metric_results[dataset_name]
         best_variants = self.best_variants[dataset_name]
+        best_variants_correct = self.best_variants_correct[dataset_name]
         best_models = {}
         worst_models = {}
+        best_models_correct = {}
+        worst_models_correct = {}
 
-        # Extract the avg and std metrics for the best variants
-        met1_avg = df[(metrics[0], 'avg')].loc[best_variants]
-        met2_avg = df[(metrics[1], 'avg')].loc[best_variants]
+        # Extract the avg metrics for all models (no filtering)
+        met1_avg_all = df[(metrics[0], 'avg')]
+        met2_avg_all = df[(metrics[1], 'avg')]
 
         # Correct the minimum for average precision, as a random model would have an average precision equal to the mean of the binary scores
         if 'average_precision' == metrics[0]:
             ap_random = self.datasets[dataset_name]['exp_data'].DMS_score_bin.mean()
-            met_extremas[0] = [ap_random,0]
+            met_extremas[0] = [ap_random, 0]
         if 'average_precision' == metrics[1]:
             ap_random = self.datasets[dataset_name]['exp_data'].DMS_score_bin.mean()
-            met_extremas[0] = [0,ap_random]
+            met_extremas[0] = [0, ap_random]
 
-        # Normalize the metrics and combine them
+        # Normalize the metrics and combine them for all models
         met1_min, met2_min = met_extremas[0]
         met1_max, met2_max = met_extremas[1]
-        met1_norm = (met1_avg - met1_min) / (met1_max - met1_min)
-        met2_norm = (met2_avg - met2_min) / (met2_max - met2_min)
-        combined_avg = met1_norm + met2_norm
+        met1_norm_all = (met1_avg_all - met1_min) / (met1_max - met1_min)
+        met2_norm_all = (met2_avg_all - met2_min) / (met2_max - met2_min)
+        combined_avg_all = met1_norm_all + met2_norm_all
+
+        # Save the combined metrics for all models
+        self.combined_metric[dataset_name] = combined_avg_all
+
+        # Extract the combined metrics for the best variants
+        combined_avg = combined_avg_all.loc[best_variants]
+
+        # Extract the combined metrics for the best variants with correct signs
+        combined_avg_correct = combined_avg_all.loc[best_variants_correct]
 
         # Determine the indices of the best and worst models
-        best_model_idx = combined_avg.idxmax()
-        worst_model_idx = combined_avg.idxmin()
-        best_models['overall'] = best_model_idx
-        worst_models['overall'] = worst_model_idx
+        best_models['overall'] = combined_avg.idxmax()
+        worst_models['overall'] = combined_avg.idxmin()
 
-        # Determine best and worst models for all three categories if categories is True
+        # Determine the indices of the best and worst models for the correct signs
+        best_models_correct['overall'] = combined_avg_correct.idxmax()
+        worst_models_correct['overall'] = combined_avg_correct.idxmin()
+
+        # Determine best and worst models for all categories if categories is True
         if categories:
-            for cat in ['sequence', 'structure', 'MSA']:
+            for cat in ['sequence', 'structure', 'MSA', 'all']:
 
                 # Load the models for the specific category, making sure only to use the best variants
-                models_cat = self.load_specific_models(model_names=self.name_list[dataset_name],categories=[cat])
+                models_cat = self.load_specific_models(model_names=self.name_list[dataset_name], categories=[cat])
                 models_cat = [model for model in models_cat if model in best_variants]
-                
+                models_cat_correct = [model for model in models_cat if model in best_variants_correct]
+
                 # Skip the category if no models are found
-                if models_cat == []:
+                if not models_cat:
                     print(f'No models found for {cat} for {dataset_name}.')
                     continue
 
-                # Extract the avg and std metrics for the models in the category. Currently does not consider best variants.
-                met1_avg = df[(metrics[0], 'avg')].loc[models_cat]
-                met2_avg = df[(metrics[1], 'avg')].loc[models_cat]
+                # Extract the combined metrics for the models in the category
+                combined_avg_cat = combined_avg_all.loc[models_cat]
 
-                # Normalize the metrics and combine them
-                met1_norm = (met1_avg - met1_min) / (met1_max - met1_min)
-                met2_norm = (met2_avg - met2_min) / (met2_max - met2_min)
-                combined_avg = met1_norm + met2_norm
+                # Determine the indices of the best and worst models for the category
+                best_models[cat] = combined_avg_cat.idxmax()
+                worst_models[cat] = combined_avg_cat.idxmin()
 
-                # Determine the indices of the best and worst models
-                best_model_idx = combined_avg.idxmax()
-                worst_model_idx = combined_avg.idxmin()
-                best_models[cat] = best_model_idx
-                worst_models[cat] = worst_model_idx
+                # Skip if no models with correct signs were found
+                if not models_cat_correct:
+                    print(f'No models with correct signs found for {cat} for {dataset_name}.')
+                    continue
 
+                # Extract the combined metrics for the models in the category with correct signs
+                combined_avg_cat_correct = combined_avg_all.loc[models_cat_correct]
+
+                # Determine the indices of the best and worst models for the category with correct signs
+                best_models_correct[cat] = combined_avg_cat_correct.idxmax()
+                worst_models_correct[cat] = combined_avg_cat_correct.idxmin()
+
+        # Save the best and worst models for the dataset
         self.best_models[dataset_name] = best_models
         self.worst_models[dataset_name] = worst_models
+        self.best_models_correct[dataset_name] = best_models_correct
+        self.worst_models_correct[dataset_name] = worst_models_correct
 
-    def process_models_iteration(self, dataset_name: str, metrics: list = ['spearmanr', 'average_precision'], met_extremas: list = [[0,0],[1,1]]) -> None:
+
+    def process_models_iteration(self, dataset_name: str, 
+                                metrics: list = ['spearmanr', 'average_precision'], 
+                                met_extremas: list = [[0, 0], [1, 1]],
+                                iterations: int = 10,
+                                ite_size: int = 40) -> None:
         '''
         A function to process the models and determine the best and worst models for each category and overall.
         The function will save the best and worst models in the class.
@@ -740,80 +1173,107 @@ class ZeroShotModellerModule:
         Args:
             dataset_name (str): The name of the dataset to process.
             metrics (list): The metrics to use for determining the best and worst models. Default is ['spearmanr', 'average_precision'].
-            met_extremas (list): The extremas for the metrics to normalize the scores. Default is [[0,0],[1,1]].
+            met_extremas (list): The extremas for the metrics to normalize the scores. Default is [[0, 0], [1, 1]].
+            iterations (int): The number of iterations for the dataset. Default is 10.
+            ite_size (int): The data size of each iteration. Default is 40.
         '''
 
         # Retrieve the metric results for the specified dataset, and initialize the dictionaries to store the best and worst models
         df = self.metric_results[dataset_name]
         best_models = {}
         worst_models = {}
-        
-        # Initialize the extremas for the metrics
-        met1_min, met2_min = met_extremas[0]
-        met1_max, met2_max = met_extremas[1]
+        best_models_correct = {}
+        worst_models_correct = {}
+
+        # Initialize the combined metrics dictionary for all iterations
+        self.combined_metric[dataset_name] = {}
 
         # Iterate over all iterations
-        for i in range(10):
+        for i in range(iterations):
 
             # Correct the minimum for average precision, as a random model would have an average precision equal to the mean of the binary scores
             if 'average_precision' == metrics[0]:
-                ap_random = self.datasets[dataset_name]['exp_data'].DMS_score_bin.mean()
-                met_extremas[0] = [ap_random,0]
+                ap_random = self.datasets[dataset_name]['exp_data'].iloc[i*ite_size:(i+1)*ite_size].DMS_score_bin.mean()
+                met_extremas[0] = [ap_random, 0]
             if 'average_precision' == metrics[1]:
-                ap_random = self.datasets[dataset_name]['exp_data'].DMS_score_bin.mean()
-                met_extremas[0] = [0,ap_random]
-            
-            # Initialize the dictionaries to store the best and worst models for the iteration, and retrieve the best variants
+                ap_random = self.datasets[dataset_name]['exp_data'].iloc[i*ite_size:(i+1)*ite_size].DMS_score_bin.mean()
+                met_extremas[0] = [0, ap_random]
+
+            # Initialize dictionaries to store the best and worst models for the iteration
             best_models[f'ite{i}'] = {}
             worst_models[f'ite{i}'] = {}
+            best_models_correct[f'ite{i}'] = {}
+            worst_models_correct[f'ite{i}'] = {}
+
+            # Retrieve the best variants and the best variants with correct signs
             best_variants = self.best_variants[dataset_name][f'ite{i}']
+            best_variants_correct = self.best_variants_correct[dataset_name][f'ite{i}']
 
-            # Extract the avg and std metrics for the best variants
-            met1_avg = df[(metrics[0], f'ite{i}', 'avg')].loc[best_variants]
-            met2_avg = df[(metrics[1], f'ite{i}', 'avg')].loc[best_variants]
+            # Extract the avg metrics for all models (no filtering)
+            met1_avg_all = df[(metrics[0], f'ite{i}', 'avg')]
+            met2_avg_all = df[(metrics[1], f'ite{i}', 'avg')]
 
-            # Normalize the metrics and combine them
-            met1_norm = (met1_avg - met1_min) / (met1_max - met1_min)
-            met2_norm = (met2_avg - met2_min) / (met2_max - met2_min)
-            combined_avg = met1_norm + met2_norm
+            # Normalize the metrics and combine them for all models
+            met1_min, met2_min = met_extremas[0]
+            met1_max, met2_max = met_extremas[1]
+            met1_norm_all = (met1_avg_all - met1_min) / (met1_max - met1_min)
+            met2_norm_all = (met2_avg_all - met2_min) / (met2_max - met2_min)
+            combined_avg_all = met1_norm_all + met2_norm_all
+
+            # Save the combined metrics for all models for the iteration
+            self.combined_metric[dataset_name][f'ite{i}'] = combined_avg_all
+
+            # Extract the combined metrics for the best variants and for the correct variants
+            combined_avg = combined_avg_all.loc[best_variants]
+            combined_avg_correct = combined_avg_all.loc[best_variants_correct]
 
             # Determine the indices of the best and worst models
-            best_model_idx = combined_avg.idxmax()
-            worst_model_idx = combined_avg.idxmin()
-            best_models[f'ite{i}']['overall'] = best_model_idx
-            worst_models[f'ite{i}']['overall'] = worst_model_idx
+            best_models[f'ite{i}']['overall'] = combined_avg.idxmax()
+            worst_models[f'ite{i}']['overall'] = combined_avg.idxmin()
 
+            # Determine the indices of the best and worst models for the correct signs
+            best_models_correct[f'ite{i}']['overall'] = combined_avg_correct.idxmax()
+            worst_models_correct[f'ite{i}']['overall'] = combined_avg_correct.idxmin()
 
-            # Determine best and worst models for all three categories if categories is True
-            for cat in ['sequence', 'structure', 'MSA']:
+            # Determine best and worst models for all categories
+            for cat in ['sequence', 'structure', 'MSA', 'all']:
 
                 # Load the models for the specific category, making sure only to use the best variants
-                models_cat = self.load_specific_models(model_names=self.name_list[dataset_name],categories=[cat])
+                models_cat = self.load_specific_models(model_names=self.name_list[dataset_name], categories=[cat])
                 models_cat = [model for model in models_cat if model in best_variants]
+                models_cat_correct = [model for model in models_cat if model in best_variants_correct]
 
                 # Skip the category if no models are found
-                if models_cat == []:
+                if not models_cat:
                     if i == 0:
                         print(f'No models found for {cat} for {dataset_name}.')
                     continue
 
-                # Extract the avg and std metrics for the models in the category. Currently does not consider best variants.
-                met1_avg = df[(metrics[0], f'ite{i}', 'avg')].loc[models_cat]
-                met2_avg = df[(metrics[1], f'ite{i}', 'avg')].loc[models_cat]
+                # Extract the combined metrics for the models in the category
+                combined_avg_cat = combined_avg_all.loc[models_cat]
 
-                # Normalize the metrics and combine them
-                met1_norm = (met1_avg - met1_min) / (met1_max - met1_min)
-                met2_norm = (met2_avg - met2_min) / (met2_max - met2_min)
-                combined_avg = met1_norm + met2_norm
+                # Determine the indices of the best and worst models for the category
+                best_models[f'ite{i}'][cat] = combined_avg_cat.idxmax()
+                worst_models[f'ite{i}'][cat] = combined_avg_cat.idxmin()
 
-                # Determine the indices of the best and worst models
-                best_model_idx = combined_avg.idxmax()
-                worst_model_idx = combined_avg.idxmin()
-                best_models[f'ite{i}'][cat] = best_model_idx
-                worst_models[f'ite{i}'][cat] = worst_model_idx
+                # Skip if no models with correct signs were found
+                if not models_cat_correct:
+                    print(f'No models with correct signs found for {cat} for {dataset_name}.')
+                    continue
 
+                # Extract the combined metrics for the models in the category with correct signs
+                combined_avg_cat_correct = combined_avg_all.loc[models_cat_correct]
+
+                # Determine the indices of the best and worst models for the category with correct signs
+                best_models_correct[f'ite{i}'][cat] = combined_avg_cat_correct.idxmax()
+                worst_models_correct[f'ite{i}'][cat] = combined_avg_cat_correct.idxmin()
+
+        # Save the best and worst models for the dataset
         self.best_models[dataset_name] = best_models
         self.worst_models[dataset_name] = worst_models
+        self.best_models_correct[dataset_name] = best_models_correct
+        self.worst_models_correct[dataset_name] = worst_models_correct
+
 
     def sm_landscape(self, dataset_name: str, model_name: str, wt: bool = False):
         """
@@ -892,13 +1352,16 @@ class ZeroShotModellerModule:
             rankings = model_res.rank(ascending=reverse_)
             df[f'{name}_rank'] = rankings
             if wt:
-                binary = (model_res >= self.wildtype[dataset_name][model_name][model_name]).astype(int)
+                if reverse_:
+                    binary = (model_res <= self.wildtype[dataset_name][model_name][model_name]).astype(int)
+                else:
+                    binary = (model_res >= self.wildtype[dataset_name][model_name][model_name]).astype(int)
                 df[f'{name}_bin'] = binary
 
         # Sort the DataFrame based on the specified model
         # First, determine the order of the modelbased on the previous metrics. If no previous metrics are provided, set reverse to False
         reverse_ = previous_metrics.iloc[:,previous_metrics.columns.get_level_values('stat') == 'reverse'][previous_metric].mean(axis=1)[sort_by_model] > 0.5 if previous_metrics is not None else False
-        df = df.sort_values(by=sort_by_model,ascending=reverse_)
+        df = df.sort_values(by=sort_by_model.split('_')[0],ascending=reverse_)
 
         # Save the sorted DataFrame in a CSV and Excel file using the model names as part of the file name
         names = '&'.join(names)
@@ -1020,10 +1483,10 @@ class PlottingModule:
     """
 
     # Dictionary to define the shapes for the different categories
-    shape_dict = {'sequence':'o','MSA':'s','structure':'^'}
+    shape_dict = {'sequence':'o','MSA':'s','structure':'^','all':'*'}
 
     @staticmethod
-    def zs_vs_exp_scatter(zsm, dataset_name: str, model_name: str, custom_zsname: str = None, custom_expname: str = None,
+    def zs_vs_exp_scatter(zsm, dataset_name: str, model_name: str, custom_zsname: str = None, custom_expname: str = None, reg_plot: bool = True,
                           metrics: list = ['spearmanr', 'average_precision'], met1_corr_decimal: int = 2, met1_std_decimal: int = 2, met2_corr_decimal: int = 2, met2_std_decimal: int = 2,
                       color: str = '#df9966', figsize: Tuple = (9,9),size: int = 300, save_path: str = '../figures/scatter/', dpi: int = 300, format: str = 'png'):
         """
@@ -1036,6 +1499,7 @@ class PlottingModule:
             model_name (str): The name of the model to generate the scatter plot for.
             custom_zsname (str): A custom name for the predicted score. Default is None.
             custom_expname (str): A custom name for the experimental score. Default is None.
+            reg_plot (bool): Whether to include a regression line in the scatter plot. Default is True.
             metrics (list): The metrics to display in the legend. Default is ['spearmanr', 'average_precision'].
             met1_corr_decimal (int): The number of decimal places for the first metric correlation. Default is 2.
             met1_std_decimal (int): The number of decimal places for the first metric standard deviation. Default is 2.
@@ -1063,7 +1527,8 @@ class PlottingModule:
         labels = []
         
         # Create a regression line for the scatter plot
-        sns.regplot(x=exp_,y=zs_score_,color='darkgrey',scatter_kws={'s':0},order=2,ci=50)
+        if reg_plot:
+            sns.regplot(x=exp_,y=zs_score_,color='darkgrey',scatter_kws={'s':0},order=2,ci=50)
 
         # Extract the metrics and add them to the legend
         corr = zsm.metric_results[dataset_name][(metrics[0],'avg')][model_name]
@@ -1098,8 +1563,9 @@ class PlottingModule:
         plt.show()
 
     @staticmethod
-    def metrics(zsm, dataset_name: str, save_path: str = '../figures/metrics/', dpi: int = 300, custom_name: str = None, legend_fontsize: int = 25, figsize: Tuple = (12,9),
-                     metrics: list = ['average_precision','spearmanr'], met_labels = ['Average Precision','Absolute Spearman Correlation'], format: str = 'png'):
+    def metrics(zsm, dataset_name: str, save_path: str = '../figures/metrics/', dpi: int = 300, custom_name: str = None, legend_fontsize: int = 20, figsize: Tuple = (12,9),
+                     metrics: list = ['average_precision','spearmanr'], met_labels = ['Average Precision','Absolute Spearman Correlation'],
+                     use_correct: bool = False, format: str = 'png'):
         """
         Generate a scatter plot with errorbars comparing two metrics for the different models. The plot will be saved as a PNG file.
 
@@ -1109,10 +1575,11 @@ class PlottingModule:
             save_path (str): The path to save the scatter plot. Default is '../figures/metrics/'.
             dpi (int): The resolution of the saved image. Default is 300.
             custom_name (str): A custom name for the saved file. Default is None.
-            legend_fontsize (int): The font size for the legend. Default is 25.
             figsize (Tuple): The figure size. Default is (12,9).
+            legend_fontsize (int): The fontsize of the legend. Default is 20.
             metrics (list): The metrics to display in the scatter plot. Default is ['average_precision','spearmanr'].
             met_labels (list): The labels for the metrics. Default is ['Average Precision','Absolute Spearman Correlation'].
+            use_correct (bool): Whether to use the best variants with correct signs. Default is False.
             format (str): The format of the saved image. Default is 'png'.
         """
 
@@ -1128,7 +1595,10 @@ class PlottingModule:
         metx_std = data_df[(metrics[0], 'std')]
         mety_avg = data_df[(metrics[1], 'avg')]
         mety_std = data_df[(metrics[1], 'std')]
-        best_variants = zsm.best_variants[dataset_name]
+        if use_correct:
+            best_variants = zsm.best_variants_correct[dataset_name]
+        else:
+            best_variants = zsm.best_variants[dataset_name]
 
         # Iterate over the best variants
         for model_name in best_variants:
@@ -1173,16 +1643,19 @@ class PlottingModule:
         plt.tight_layout()
 
         # Save the scatter plot, using the custom name if provided
+        if use_correct:
+            custom_name = custom_name + '_correct' if custom_name is not None else 'correct'
         if custom_name is not None:
             output_path = save_path+f'{dataset_name}_{custom_name}_corr.{format}'
         else:
             output_path = save_path+f'{dataset_name}_corr.{format}'
-        plt.savefig(output_path, dpi=dpi)
+        plt.savefig(output_path, dpi=dpi, bbox_inches='tight')
         plt.show()
     
     @staticmethod
-    def metrics_iteration(zsm, dataset_name: str, custom_name: str = None, save_path: str = '../figures/metrics/', dpi: int = 300,
-                               metrics: list = ['average_precision','spearmanr'], met_labels = ['Average Precision','Absolute Spearman Correlation'],format: str = 'png'):
+    def metrics_iteration(zsm, dataset_name: str, custom_name: str = None, save_path: str = '../figures/metrics/', dpi: int = 300, legend_fontsize: int = 20, figsize: Tuple = (30, 12),
+                               metrics: list = ['average_precision','spearmanr'], met_labels = ['Average Precision','Absolute Spearman Correlation'],
+                               use_correct: bool = False,format: str = 'png'):
         """
         Generate a scatter plot with errorbars comparing two metrics for the different models for each iteration. The plot will be saved as a PNG file.
         Currently only supports 10 iterations.
@@ -1192,13 +1665,16 @@ class PlottingModule:
             save_path (str): The path to save the scatter plot. Default is '../figures/metrics/'.
             dpi (int): The resolution of the saved image. Default is 300.
             custom_name (str): A custom name for the saved file. Default is None.
+            figsize (Tuple): The figure size. Default is (30,12).
+            legend_fontsize (int): The fontsize of the legend. Default is 20.
             metrics (list): The metrics to display in the scatter plot. Default is ['average_precision','spearmanr'].
             met_labels (list): The labels for the metrics. Default is ['Average Precision','Absolute Spearman Correlation'].
+            use_correct (bool): Whether to use the correct variants for the metrics. Default is False.
             format (str): The format of the saved image. Default is 'png'.
         """
         
         # Initialize the figure and axes
-        fig, axes = plt.subplots(nrows=2, ncols=5, figsize=(30, 12),sharey=True,sharex=True)
+        fig, axes = plt.subplots(nrows=2, ncols=5, figsize=figsize,sharey=True,sharex=True)
         axes = axes.flatten()
         ebar_list = []
         legends = []
@@ -1213,7 +1689,10 @@ class PlottingModule:
             metx_std = data_df[(metrics[0], f'ite{i}', 'std')]
             mety_avg = data_df[(metrics[1], f'ite{i}', 'avg')]
             mety_std = data_df[(metrics[1], f'ite{i}', 'std')]
-            best_variants = zsm.best_variants[dataset_name][f'ite{i}']
+            if use_correct:
+                best_variants = zsm.best_variants_correct[dataset_name][f'ite{i}']
+            else:
+                best_variants = zsm.best_variants[dataset_name][f'ite{i}']
 
             # Iterate over the best variants
             for model_name in best_variants:
@@ -1262,21 +1741,24 @@ class PlottingModule:
         axes[5].yaxis.set_label_coords(-0.15, 1.05)
 
         # Create the legend and place it outside the plot
-        fig.legend(ebar_list,legends, loc='center left', bbox_to_anchor=(1, 0.5),fontsize=30)
+        fig.legend(ebar_list,legends, loc='center left', bbox_to_anchor=(1, 0.5),fontsize=legend_fontsize)
 
         plt.tight_layout()
 
         # Save the scatter plot, using the custom name if provided
+        if use_correct:
+            custom_name = custom_name + '_correct' if custom_name is not None else 'correct'
         if custom_name is not None:
             output_path = save_path+f'{dataset_name}_{custom_name}_corr.{format}'
         else:
             output_path = save_path+f'{dataset_name}_corr.{format}'
-        plt.savefig(output_path, dpi=dpi)
+        plt.savefig(output_path, dpi=dpi, bbox_inches='tight')
         plt.show()
     
     @staticmethod
-    def metrics_cat(zsm, dataset_name: str, custom_name: str = None, save_path: str = '../figures/metrics/', dpi: int = 300, format: str = 'png', legend_fontsize: int = 20, figsize: Tuple = (12,9),
-                         best_color: str = '#df9966', worst_color: str = '#516f84', metrics: list = ['average_precision','spearmanr'], met_labels = ['Average Precision','Absolute Spearman Correlation']):
+    def metrics_cat(zsm, dataset_name: str, custom_name: str = None, save_path: str = '../figures/metrics/', dpi: int = 300, format: str = 'png', figsize: Tuple = (12,9), legend_fontsize: int = 15,
+                         best_color: str = '#df9966', worst_color: str = '#516f84', metrics: list = ['average_precision','spearmanr'],
+                         met_labels = ['Average Precision','Absolute Spearman Correlation'], use_correct: bool = False):
         """
         Generate a scatter plot with errorbars comparing two metrics for the different models, coloring the best and worst models for each category.
         The plot will be saved as a PNG file.
@@ -1286,14 +1768,15 @@ class PlottingModule:
             dataset_name (str): The name of the dataset to process.
             save_path (str): The path to save the scatter plot. Default is '../figures/metrics/'.
             dpi (int): The resolution of the saved image. Default is 300.
+            figsize (Tuple): The figure size. Default is (12,9).
             format (str): The format of the saved image. Default is 'png'.
-            legend_fontsize (int): The font size for the legend. Default is 20.
-            figsize (Tuple): The size of the figure. Default is (12,9).
             custom_name (str): A custom name for the saved file. Default is None.
+            legend_fontsize (int): The fontsize of the legend. Default is 15.
             best_color (str): The color for the best models. Default is '#df9966' (persian orange).
             worst_color (str): The color for the worst models. Default is '#516f84' (slate gray).
             metrics (list): The metrics to display in the scatter plot. Default is ['average_precision','spearmanr'].
             met_labels (list): The labels for the metrics. Default is ['Average Precision','Absolute Spearman Correlation'].
+            use_correct (bool): Whether to use the best variants with correct signs. Default is False.
         """
 
         # Initialize the figure and axes
@@ -1311,7 +1794,10 @@ class PlottingModule:
         metx_std = data_df[(metrics[0], 'std')]
         mety_avg = data_df[(metrics[1], 'avg')]
         mety_std = data_df[(metrics[1], 'std')]
-        best_variants = zsm.best_variants[dataset_name]
+        if use_correct:
+            best_variants = zsm.best_variants_correct[dataset_name]
+        else:
+            best_variants = zsm.best_variants[dataset_name]
 
         # Iterate over the best variants
         for model_name in best_variants:
@@ -1340,29 +1826,21 @@ class PlottingModule:
             )
 
         # Iterate over the categories
-        for cat in ['sequence','MSA','structure']:
+        for cat in ['sequence','MSA','structure','all']:
 
             # Extract the shape, best model, and worst model for the category
             shape = PlottingModule.shape_dict[cat]
-            best_model = zsm.best_models[dataset_name][cat]
-            worst_model = zsm.worst_models[dataset_name][cat]
+            if use_correct:
+                if cat in list(zsm.best_models_correct[dataset_name].keys()):
+                    best_model = zsm.best_models_correct[dataset_name][cat]
+                    worst_model = zsm.worst_models_correct[dataset_name][cat]
+                else:
+                    continue  # Skip if the category is not present in the best models
+            else:
+                best_model = zsm.best_models[dataset_name][cat]
+                worst_model = zsm.worst_models[dataset_name][cat]
 
             # Create the scatter plot with errorbars for the best (green) and worst (red) models
-            ebar_best = ax.errorbar(
-                np.absolute(metx_avg.loc[best_model]),
-                mety_avg.loc[best_model],
-                xerr=metx_std.loc[best_model],
-                yerr=mety_std.loc[best_model],
-                markersize=20,
-                ecolor='lightgrey',
-                elinewidth=1,
-                marker=shape,
-                lw=0,
-                capsize=5,
-                color=best_color,
-                markeredgecolor='k',
-                zorder=1
-            )
             ebar_worst = ax.errorbar(
                 np.absolute(metx_avg.loc[worst_model]),
                 mety_avg.loc[worst_model],
@@ -1375,6 +1853,21 @@ class PlottingModule:
                 lw=0,
                 capsize=5,
                 color=worst_color,
+                markeredgecolor='k',
+                zorder=1
+            )
+            ebar_best = ax.errorbar(
+                np.absolute(metx_avg.loc[best_model]),
+                mety_avg.loc[best_model],
+                xerr=metx_std.loc[best_model],
+                yerr=mety_std.loc[best_model],
+                markersize=20,
+                ecolor='lightgrey',
+                elinewidth=1,
+                marker=shape,
+                lw=0,
+                capsize=5,
+                color=best_color,
                 markeredgecolor='k',
                 zorder=1
             )
@@ -1398,17 +1891,19 @@ class PlottingModule:
         plt.tight_layout()
 
         # Save the scatter plot, using the custom name if provided
+        if use_correct:
+            custom_name = custom_name + '_correct' if custom_name is not None else 'correct'
         if custom_name is not None:
             output_path = save_path+f'corr_cat_{dataset_name}_{custom_name}.{format}'
         else:
             output_path = save_path+'corr_cat_'+dataset_name+f'.{format}'
-        plt.savefig(output_path, dpi=dpi)
+        plt.savefig(output_path, dpi=dpi, bbox_inches='tight')
         plt.show()
 
     @staticmethod
-    def metrics_cat_iteration(zsm, dataset_name: str, custom_name: str = None, save_path: str = '../figures/metrics/', dpi: int = 300, format: str = 'png',
+    def metrics_cat_iteration(zsm, dataset_name: str, custom_name: str = None, save_path: str = '../figures/metrics/', dpi: int = 300, format: str = 'png', figsize: Tuple = (30, 12),
                                    best_color: str = '#df9966', worst_color: str = '#516f84',metrics: list = ['average_precision','spearmanr'],
-                                   met_labels = ['Average Precision','Absolute Spearman Correlation']):
+                                   met_labels = ['Average Precision','Absolute Spearman Correlation'], use_correct: bool = False):
         """
         Generate a scatter plot with errorbars comparing two metrics for the different models for each iteration, coloring the best and worst models for each category.
         The plot will be saved as a PNG file.
@@ -1421,14 +1916,16 @@ class PlottingModule:
             save_path (str): The path to save the scatter plot. Default is '../figures/metrics/'.
             dpi (int): The resolution of the saved image. Default is 300.
             format (str): The format of the saved image. Default is 'png'.
+            figsize (Tuple): The figure size. Default is (30,12).
             best_color (str): The color for the best models. Default is '#df9966' (persian orange).
             worst_color (str): The color for the worst models. Default is '#516f84' (slate gray).
             metrics (list): The metrics to display in the scatter plot. Default is ['average_precision','spearmanr'].
             met_labels (list): The labels for the metrics. Default is ['Average Precision','Absolute Spearman Correlation'].
+            use_correct (bool): Whether to use the correct variants for the metrics. Default is False.
         """
 
         # Initialize the figure and axes
-        fig, axes = plt.subplots(nrows=2, ncols=5, figsize=(30, 12),sharey=True,sharex=True)
+        fig, axes = plt.subplots(nrows=2, ncols=5, figsize=figsize,sharey=True,sharex=True)
         axes = axes.flatten()
         
         # Iterate over the 10 iterations
@@ -1445,7 +1942,11 @@ class PlottingModule:
             metx_std = data_df[(metrics[0], f'ite{i}', 'std')]
             mety_avg = data_df[(metrics[1], f'ite{i}', 'avg')]
             mety_std = data_df[(metrics[1], f'ite{i}', 'std')]
-            best_variants = zsm.best_variants[dataset_name][f'ite{i}']
+
+            if use_correct:
+                best_variants = zsm.best_variants_correct[dataset_name][f'ite{i}']
+            else:
+                best_variants = zsm.best_variants[dataset_name][f'ite{i}']
 
             # Iterate over the best variants
             for model_name in best_variants:
@@ -1474,7 +1975,7 @@ class PlottingModule:
                 )
 
             # Iterate over the categories
-            for cat in ['sequence','MSA','structure']:
+            for cat in ['sequence','MSA','structure','all']:
 
                 # Extract the shape, best model, and worst model for the category
                 shape = PlottingModule.shape_dict[cat]
@@ -1537,17 +2038,20 @@ class PlottingModule:
         plt.tight_layout()
 
         # Save the scatter plot, using the custom name if provided
+        if use_correct:
+            custom_name = custom_name + '_correct' if custom_name is not None else 'correct'
         if custom_name is not None:
             output_path = save_path+f'corr_cat_ite_{dataset_name}_{custom_name}.{format}'
         else:
             output_path = save_path+'corr_cat_ite_'+dataset_name+f'.{format}'
-        plt.savefig(output_path, dpi=dpi)
+        plt.savefig(output_path, dpi=dpi, bbox_inches='tight')
         plt.show()
 
     @staticmethod
     def bar_metrics(zsm,dataset_names: list, metric: str, ylabel: str, xlabel: str, alternative_names: list = None, suffix: str = '_selection',iteration_names: str = None,
                     cat: str='overall', ylimit: float = 1.135, figsize: Tuple = (12,9), best_color: str = '#df9966', worst_color: str = '#516f84',
-                    save_path: str = '../figures/metrics/', dpi: int = 300, custom_name: str = None, format: str = 'png'):
+                    save_path: str = '../figures/metrics/', dpi: int = 300, custom_name: str = None, format: str = 'png',
+                    use_correct_best: bool = False, use_correct_worst: bool = False):
         """
         Generate a bar plot comparing the full metrics of the best and worst models from the 10 iterations for different datasets.
         Require that the iteration datasets are named 'dataset_name_{suffix}'.
@@ -1573,6 +2077,8 @@ class PlottingModule:
             dpi (int): The resolution of the saved image. Default is 300.
             custom_name (str): A custom name for the saved file. Default is None.
             format (str): The format of the saved image. Default is 'png'.
+            use_correct_best (bool): Whether to use the correct variants for the best models. Default is False.
+            use_correct_worst (bool): Whether to use the correct variants for the worst models. Default is False.
         """
 
         # Initialize the figure and axes
@@ -1593,8 +2099,8 @@ class PlottingModule:
                 
             # Iterate over the 10 iterations
             for j in range(10):
-                best_model = zsm.best_models[iteration_name][f'ite{j}'][cat]
-                worst_model = zsm.worst_models[iteration_name][f'ite{j}'][cat]
+                best_model = zsm.best_models_correct[iteration_name][f'ite{j}'][cat] if use_correct_best else zsm.best_models[iteration_name][f'ite{j}'][cat]
+                worst_model = zsm.worst_models_correct[iteration_name][f'ite{j}'][cat] if use_correct_worst else zsm.worst_models[iteration_name][f'ite{j}'][cat]
                 scatter_best[j] = zsm.metric_results[name][(f'{metric}','avg')][best_model]
                 scatter_worst[j] = zsm.metric_results[name][(f'{metric}','avg')][worst_model]
             
@@ -1649,6 +2155,10 @@ class PlottingModule:
         plt.tight_layout()
 
         # Save the bar plot, using the custom name if provided
+        if use_correct_best:
+            custom_name = custom_name + '_cor_best' if custom_name is not None else 'cor_best'
+        if use_correct_worst:
+            custom_name = custom_name + '_cor_worst' if custom_name is not None else 'cor_worst'
         if custom_name is not None:
             suffix = custom_name
         else:
@@ -1657,9 +2167,9 @@ class PlottingModule:
         plt.show()
 
     @staticmethod
-    def heatmap(zsm, dataset_name: str, model_name: str, rows: str, cbar_label: str,
+    def heatmap(zsm, dataset_name: str, model_name: str, rows: str, cbar_label: str, landscape: pd.DataFrame = None, wt_score: float = None,
                 save_path: str = '../figures/landscapes/', figsize: Tuple = (60, 25), colors: list = ['#516f84', 'white', '#df9966'], normalize = False,
-                 alpha: float = 0.5, dpi: int = 300, format: str = 'png'):
+                 alpha: float = 0.5, dpi: int = 300, format: str = 'png',landscape_name: str = None):
         """
         Generate a heatmap of the landscape for a specific model and dataset. The plot will be saved as a PNG file.
 
@@ -1669,6 +2179,7 @@ class PlottingModule:
             model_name (str): The name of the model to generate the heatmap for.
             rows (int): The number of rows to split the protein sequence into.
             cbar_label (str): The label for the colorbar.
+            landscape (DataFrame): The landscape DataFrame. Default is None.
             save_path (str): The path to save the heatmap. Default is '../figures/landscapes'.
             figsize (Tuple): The figure size. Default is (60, 25).
             colors (list): The colors for the custom colormap. Default is ['#516f84', 'white', '#df9966'].
@@ -1676,14 +2187,21 @@ class PlottingModule:
             alpha (float): The transparency of the heatmap. Default is 0.5.
             dpi (int): The resolution of the saved image. Default is 300.
             format (str): The format of the saved image. Default is 'png'.
+            landscape_name (str): The name of the landscape. Default is None.
         """
 
         # Create the custom colormap
         diverging_cmap = LinearSegmentedColormap.from_list("custom_diverging", colors)
 
-        # Extract the landscape and wildtype score
-        landscape = zsm.landscape[dataset_name][model_name]
-        wt_score = zsm.wildtype[dataset_name][model_name][model_name]
+        # Extract the landscape and wildtype score if not provided
+        if landscape is None:
+            landscape = zsm.landscape[dataset_name][model_name]
+            wt_score = zsm.wildtype[dataset_name][model_name][model_name]
+        elif wt_score is None:
+            print('Please provide the wildtype score if the landscape is provided.')
+            return
+        else:
+            pass
 
         # Initialize the figure and axes
         fig, axes = plt.subplots(figsize=figsize, nrows=rows, ncols=1)
@@ -1749,14 +2267,18 @@ class PlottingModule:
         cbar_ax.tick_params(labelsize=40)
 
         # Add figure labels and adjust y-axis label position
+        ylabel_axis = math.floor((rows - 1) / 2)
         axes[rows-1].set_xlabel('WT/Position', fontsize=50, labelpad=55)
-        axes[rows-2].set_ylabel('Mutant', fontsize=50)
-        if (rows-2) % 2 == 0:
-            axes[0].yaxis.set_label_coords(-0.015, -0.1)
+        axes[ylabel_axis].set_ylabel('Mutant', fontsize=50)
+        if (rows) % 2 == 0:
+            axes[ylabel_axis].yaxis.set_label_coords(-0.015, -0.1)
 
 
         # Save the heatmap
-        output_name = save_path+f'landscape_{dataset_name}_{model_name}.{format}'
+        if landscape_name is not None:
+            output_name = save_path+f'landscape_{dataset_name}_{landscape_name}.{format}'
+        else:
+            output_name = save_path+f'landscape_{dataset_name}_{model_name}.{format}'
         plt.savefig(output_name, dpi=dpi, bbox_inches='tight')
         plt.show()
 

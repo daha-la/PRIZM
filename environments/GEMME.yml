@@ -1,0 +1,16 @@
+name: GEMME
+channels:
+  - conda-forge
+  - nvidia
+  - pytorch
+  - defaults
+  - bioconda
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
+dependencies:
+  - python=2.7
+  - pandas
+  - r-base
+  - clustalw
+  - muscle=3.8.31
+prefix: /data/miniconda3/envs/GEMME

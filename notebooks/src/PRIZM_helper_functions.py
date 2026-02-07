@@ -12,18 +12,23 @@ def hit_rate(true_bin: np.ndarray, predicted_labels: np.ndarray, k: int = 10) ->
         true_bin (np.ndarray): Binary labels indicating hits (1 for hit, 0 for miss).
         predicted_labels (np.ndarray): Model-predicted scores used to rank the top k entries.
         k (int): The number of top entries to consider.
-        
+
     Returns:
         float: The hit rate as the ratio of hits in the top k entries.
     """
-
+    
     # Ensure we are working with pure NumPy arrays for indexing
     true_bin = np.asarray(true_bin)
     predicted_labels = np.asarray(predicted_labels)
 
+    # Ensure that k is not greater than the number of samples
+    if k > true_bin.size:
+        print(f"Warning: k ({k}) is greater than the number of samples ({true_bin.size}). Adjusting k.")
+        k = true_bin.size
+
     # Get the top k positions in the predicted_labels array
     top_k_positions = np.argsort(predicted_labels)[-k:]
-    
+
     # Select elements in true_bin based on positions, not index labels
     hits_in_top_k = true_bin.take(top_k_positions)
     
@@ -62,8 +67,8 @@ def varnumb(n: int,k: int) -> int:
     numb=combi*(20**k-1)
     return numb
 
-def reference_builder(numb_prot: list[str], protein_name: list[str], wt_sequence: list[str], DMS_binarization_cutoff: list[float], MSA_name: list[str], MSA_num_seqs: list[float], pdb_file: list[str],
-                      reference_name: list[str], custom_identifier: list[str]):
+def reference_builder(numb_prot: list[str], protein_name: list[str], wt_sequence: list[str], MSA_name: list[str], MSA_num_seqs: list[float], pdb_file: list[str],
+                      reference_name: list[str], custom_identifier: list[str], msa_weights: list[str] = None) -> pd.DataFrame:
     """
     This function builds a reference file that contains all relevant information about the proteins of interest. This reference file
     is used to pass information to the other functions in the pipeline.
@@ -72,13 +77,13 @@ def reference_builder(numb_prot: list[str], protein_name: list[str], wt_sequence
         numb_prot (list[str]): The number of the proteins
         protein_name (list[str]): The names of the proteins of interest
         wt_sequence (list[str]): The wild-type sequences of the proteins of interest
-        DMS_binarization_cutoff (list[float]): The cutoffs for binarizing DMS data, often just WT experimental value
         MSA_name (list[str]): The names of the MSA files without the file extension
         MSA_num_seqs (list[float]): The numbers of sequences in the MSAs
         pdb_file (list[str]): The names of the pdb files
         custom_identifier (list[str]): Custom identifiers for the proteins of interest
         reference_name (str): The name of the reference file.
-    
+        msa_weights (list[str]): The names of the MSA weight files. The default is None.
+
     Returns:
         reference_df (pd.DataFrame): The reference file in a pandas DataFrame format
     """
@@ -95,9 +100,9 @@ def reference_builder(numb_prot: list[str], protein_name: list[str], wt_sequence
         else:
             DMS_id = protein_name[i]
 
-        # Initializing and save weights for MSA if they do not already exist. Will be changed in future pipelines to use weight file if provided
+        # Initializing and save weights for MSA if they do not already exist. If msa_weights is provided, use those instead
         msa_ = MSA_name[i]
-        if f"{msa_}_weights.npy" not in os.listdir("../data/protein_information/msa/weights/"):
+        if f"{msa_}_weights.npy" not in os.listdir("../data/protein_information/msa/weights/") and msa_weights is None:
             weights = np.ones(len(wt_sequence[i]))
             np.save(f"../data/protein_information/msa/weights/{msa_}_weights.npy", weights)
         
@@ -107,14 +112,14 @@ def reference_builder(numb_prot: list[str], protein_name: list[str], wt_sequence
             'DMS_filename': f'{DMS_id}.csv',
             'target_seq': wt_sequence[i],
             'seq_len': len(wt_sequence[i]),
-            'DMS_binarization_cutoff': DMS_binarization_cutoff[i],
             'MSA_filename': MSA_name[i]+'.a2m',
             'MSA_start': 1,
             'MSA_end': len(wt_sequence[i]),
             'MSA_len': len(wt_sequence[i]),
             'MSA_num_seqs': MSA_num_seqs[i],
-            'weight_file_name': f"{msa_}_weights.npy",
-            'pdb_file': pdb_file[i]
+            'weight_file_name': f"{msa_}_weights.npy" if msa_weights is None else msa_weights[i],
+            'pdb_file': pdb_file[i],
+            'pdb_range': f'1-{len(wt_sequence[i])}'
         }
 
     reference_df = pd.DataFrame.from_dict(reference, orient='index')
@@ -167,6 +172,38 @@ def one_sided_ttest_grouped(
     return pd.DataFrame(results)
 
 
+def one_sided_ttest_paired_1samp(
+    sample: np.ndarray,
+    popmean: float = 1.0,
+    sig_threshold: float = 0.05,
+    alternative: Literal["greater", "less"] = "greater"
+) -> bool:
+    """
+    Perform a one-sided one-sample t-test.
+
+    Args:
+        sample (np.ndarray): Sample data
+        popmean (float): Population mean to test against (default 1.0)
+        sig_threshold (float): Significance threshold (default 0.05)
+        alternative (str): 'greater' or 'less', direction of test: 
+                           - 'greater': sample > popmean
+                           - 'less': sample < popmean
+    Returns:
+        bool: True if difference is statistically significant in specified direction
+        float: p-value for the test
+    """
+    t_stat, p_val_two_sided = ttest_1samp(sample, popmean=popmean)
+
+    if alternative == "greater":
+        p_val = p_val_two_sided / 2 if t_stat > 0 else 1.0
+    elif alternative == "less":
+        p_val = p_val_two_sided / 2 if t_stat < 0 else 1.0
+    else:
+        raise ValueError("alternative must be 'greater' or 'less'")
+
+    return p_val < sig_threshold, p_val
+
+
 def one_sided_ttest(
     sample1: np.ndarray,
     sample2: np.ndarray,
@@ -188,6 +225,7 @@ def one_sided_ttest(
 
     Returns:
         bool: True if difference is statistically significant in specified direction
+        float: p-value for the test
     """
     t_stat, p_val_two_sided = ttest_ind(sample1, sample2, equal_var=equal_var)
 

@@ -22,7 +22,7 @@ do
                 --output_scores_folder ${output_scores_folder}
 
     end_time=$(date +%s.%N)
-    elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
+    elapsed_time=$(echo "$end_time - $start_time" | bc)
     echo "Time taken for $i: $elapsed_time seconds"
     
 done

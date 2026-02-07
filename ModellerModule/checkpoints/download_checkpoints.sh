@@ -23,14 +23,21 @@ echo "Saving checkpoints under: $CHECKPOINT_ROOT"
 mkdir -p "$CHECKPOINT_ROOT"
 
 ESM_DIR="$CHECKPOINT_ROOT/esm"
+MIF_DIR="$CHECKPOINT_ROOT/MIF"
 PROGEN2_DIR="$CHECKPOINT_ROOT/Progen2"
 PROTGPT2_DIR="$CHECKPOINT_ROOT/ProtGPT2"
 RITA_DIR="$CHECKPOINT_ROOT/RITA"
 TRANCEPTION_DIR="$CHECKPOINT_ROOT/Tranception"
 UNIREP_DIR="$CHECKPOINT_ROOT/UniRep"
+CARP_DIR="$CHECKPOINT_ROOT/CARP"
+MSA_TRANSFORMER_DIR="$CHECKPOINT_ROOT/MSA_Transformer"
+MULAN_DIR="$CHECKPOINT_ROOT/MULAN"
+PROTSSN_DIR="$CHECKPOINT_ROOT/ProtSSN"
+SAPROT_DIR="$CHECKPOINT_ROOT/SaProt"
 
 mkdir -p "$ESM_DIR" "$PROGEN2_DIR" \
-         "$PROTGPT2_DIR" "$RITA_DIR" "$TRANCEPTION_DIR" "$UNIREP_DIR"
+         "$PROTGPT2_DIR" "$RITA_DIR" "$TRANCEPTION_DIR" "$UNIREP_DIR" \
+         "$CARP_DIR" "$MSA_TRANSFORMER_DIR" "$MULAN_DIR" "$PROTSSN_DIR" "$SAPROT_DIR"
 
 # -------- helper functions --------
 have_cmd() {
@@ -55,6 +62,23 @@ download() {
         exit 1
     fi
 }
+
+# -------- CARP --------
+echo ""
+echo "== Downloading CARP checkpoints =="
+
+CARP_BASE="https://zenodo.org/records/6564798/files"
+
+CARP_MODELS=(
+  "carp_600K.pt"
+  "carp_38M.pt"
+  "carp_76M.pt"
+  "carp_640M.pt"
+)
+
+for f in "${CARP_MODELS[@]}"; do
+    download "${CARP_BASE}/${f}" "$CARP_DIR/${f}"
+done
 
 # -------- ESM --------
 echo ""
@@ -81,6 +105,44 @@ for model in "${ESM_MODELS[@]}"; do
     dest="$ESM_DIR/${model}.pt"
     download "${ESM_BASE}/${model}.pt" "$dest"
 done
+
+# -------- MIF / MIFST --------
+echo ""
+echo "== Downloading MIF / MIFST checkpoints =="
+
+MIF_BASE="https://zenodo.org/records/6573779/files"
+
+download "${MIF_BASE}/mif.pt"   "$MIF_DIR/mif.pt"
+download "${MIF_BASE}/mifst.pt" "$MIF_DIR/mifst.pt"
+
+# -------- MSA Transformer --------
+echo ""
+echo "== Downloading MSA Transformer checkpoint =="
+
+MSA_MODEL="esm_msa1b_t12_100M_UR50S"
+download \
+  "https://dl.fbaipublicfiles.com/fair-esm/models/${MSA_MODEL}.pt" \
+  "$MSA_TRANSFORMER_DIR/${MSA_MODEL}.pt"
+
+# -------- MULAN --------
+echo ""
+echo "== Downloading MULAN-small checkpoint =="
+
+MULAN_REPO="DFrolova/MULAN-small"
+MULAN_MODEL_DIR="$MULAN_DIR/MULAN-small"
+mkdir -p "$MULAN_MODEL_DIR"
+
+MULAN_FILES=(
+  "config.json"
+  "model.safetensors"
+)
+
+for f in "${MULAN_FILES[@]}"; do
+    url="https://huggingface.co/${MULAN_REPO}/resolve/main/${f}"
+    dest="$MULAN_MODEL_DIR/${f}"
+    download "$url" "$dest"
+done
+
 
 # -------- ProGen2 --------
 echo ""
@@ -136,6 +198,33 @@ for f in "${PROTGPT2_FILES[@]}"; do
     download "$url" "$dest"
 done
 
+# -------- ProtSSN --------
+echo ""
+echo "== Downloading ProtSSN checkpoints (direct HF download) =="
+
+PROTSSN_MODEL_DIR="$PROTSSN_DIR/model"
+mkdir -p "$PROTSSN_MODEL_DIR"
+
+PROTSSN_BASE="https://huggingface.co/tyang816/ProtSSN/resolve/main"
+
+PROTSSN_FILES=(
+  "protssn_k10_h512.pt"
+  "protssn_k10_h768.pt"
+  "protssn_k10_h1280.pt"
+  "protssn_k20_h512.pt"
+  "protssn_k20_h768.pt"
+  "protssn_k20_h1280.pt"
+  "protssn_k30_h512.pt"
+  "protssn_k30_h768.pt"
+  "protssn_k30_h1280.pt"
+)
+
+for f in "${PROTSSN_FILES[@]}"; do
+    url="${PROTSSN_BASE}/${f}"
+    dest="${PROTSSN_MODEL_DIR}/${f}"
+    download "$url" "$dest"
+done
+
 # -------- RITA --------
 echo ""
 echo "== Downloading RITA models (s / m / l / xl) =="
@@ -159,6 +248,28 @@ else
         fi
     done
 fi
+
+# -------- SaProt --------
+echo ""
+echo "== Downloading SaProt_650M_AF2 checkpoint (Hugging Face direct download) =="
+
+SAPROT_MODEL_DIR="$SAPROT_DIR/SaProt_650M_AF2"
+mkdir -p "$SAPROT_MODEL_DIR"
+
+SAPROT_FILES=(
+  "SaProt_650M_AF2.pt"
+  "config.json"
+  "pytorch_model.bin"
+  "special_tokens_map.json"
+  "tokenizer_config.json"
+  "vocab.txt"
+)
+
+for f in "${SAPROT_FILES[@]}"; do
+    url="https://huggingface.co/westlake-repl/SaProt_650M_AF2/resolve/main/${f}"
+    dest="$SAPROT_MODEL_DIR/${f}"
+    download "$url" "$dest"
+done
 
 # -------- Tranception --------
 echo ""
@@ -202,6 +313,12 @@ UNIREP_FILES=(
   "rnn_mlstm_mlstm_wmh_norm:0.npy"
   "rnn_mlstm_mlstm_wmx:0.npy"
   "rnn_mlstm_mlstm_wmx_norm:0.npy"
+  "rnn_mlstm_mlstm_wx:0.npy"
+  "rnn_mlstm_mlstm_wh:0.npy"
+  "rnn_mlstm_mlstm_gx:0.npy"
+  "rnn_mlstm_mlstm_gh:0.npy"
+  "rnn_mlstm_mlstm_gmx:0.npy"
+  "rnn_mlstm_mlstm_gmh:0.npy"
 )
 
 download_unirep_folder() {
@@ -232,6 +349,11 @@ CHECKPOINT_DIRS=(
   "RITA/"
   "Tranception/"
   "UniRep/"
+  "CARP/"
+  "MULAN/"
+  "MIF/"
+  "ProtSSN/"
+  "SaProt/"
 )
 
 # ESM: ignore only the large model checkpoints downloaded by this script,
@@ -249,6 +371,10 @@ ESM_CHECKPOINTS=(
   "esm/esm2_t30_150M_UR50D.pt"
   "esm/esm2_t33_650M_UR50D.pt"
   "esm/esm2_t36_3B_UR50D.pt"
+)
+
+MSA_TRANSFORMER_CHECKPOINTS=(
+  "MSA_Transformer/esm_msa1b_t12_100M_UR50S.pt"
 )
 
 echo ""
@@ -272,8 +398,13 @@ for dir in "${CHECKPOINT_DIRS[@]}"; do
     add_pattern_if_missing "$dir"
 done
 
-# Add ESM checkpoint file patterns (but not contact-regression)
+# Add ESM checkpoints (but not contact-regression)
 for f in "${ESM_CHECKPOINTS[@]}"; do
+    add_pattern_if_missing "$f"
+done
+
+# Add MSA Transformer checkpoints (but not contact-regression)
+for f in "${MSA_TRANSFORMER_CHECKPOINTS[@]}"; do
     add_pattern_if_missing "$f"
 done
 

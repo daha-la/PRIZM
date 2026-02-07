@@ -2,3 +2,6 @@ finetuned_models/eUniRep/*
 !finetuned_models/eUniRep/README.md
 finetuned_models/EVE/*
 !finetuned_models/eUniRep/README.md
+ModellerModule/submission/logfiles/*
+!ModellerModule/submission/logfiles/README.md
+data/protein_information/msa/files/*.txt

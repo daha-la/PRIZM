@@ -17,12 +17,7 @@ from torch.cuda.amp import autocast
 torch.cuda.init()
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-sys.path.append('/home/projects/dtu_00007/people/dahala/ZeroShot/ProteinGym_code/proteingym/utils')
-# Add the parent directory of the current script to sys.path
-#script_dir = os.path.dirname(os.path.abspath(__file__))
-#parent_dir = os.path.abspath(os.path.join(script_dir, '..', '..'))
-#sys.path.append(parent_dir)
-#print(sys.path)
+
 from baselines.esm import esm
 from esm import Alphabet, FastaBatchedDataset, ProteinBertModel, pretrained, MSATransformer
 
