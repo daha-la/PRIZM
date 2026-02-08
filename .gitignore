@@ -5,3 +5,4 @@ finetuned_models/EVE/*
 ModellerModule/submission/logfiles/*
 !ModellerModule/submission/logfiles/README.md
 data/protein_information/msa/files/*.txt
+.DS_Store
